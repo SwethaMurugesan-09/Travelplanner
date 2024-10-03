@@ -1,0 +1,151 @@
+/* Container */
+.container {
+    margin-top: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Heading */
+  h2 {
+    color: #333;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center; /* Ensure it's centered */
+  }
+  
+  /* Carousel styling */
+  .carousel img {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+/* Dropdown styling */
+.dropdown-section-container {
+    display: flex;
+    flex-direction: column; /* Ensures column-wise stacking */
+    align-items: flex-start; /* Align to the start of the container */
+    gap: 20px; /* Space between each dropdown */
+    margin-bottom: 30px;
+    width: 100%; /* Full width of the container */
+  }
+  
+  .dropdown-section {
+    display: flex;
+    flex-direction: column; /* Ensure label and dropdown are stacked vertically */
+    width: 100%;
+    max-width: 400px; /* Set max width to each dropdown section */
+  }
+  
+  .dropdown-section label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%; /* Ensure the select dropdown takes full width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  }
+  
+  
+  /* Button styling */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #5a78ca;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Suggested places */
+  .suggested-places-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .place-container {
+    flex: 1 1 calc(33.33% - 20px); /* Three places in a row */
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ccc; /* Optional: border for clarity */
+  }
+  
+  .place-image {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling for places */
+  .place-container h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Responsive styling for mobile */
+  @media (max-width: 768px) {
+    .place-container {
+      flex: 1 1 calc(50% - 20px); /* Two places per row */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .place-container {
+      flex: 1 1 100%; /* Full width for mobile */
+    }
+  }
+  
