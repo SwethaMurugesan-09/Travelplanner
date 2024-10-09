@@ -1,34 +1,25 @@
-const port = 5000;
 const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db');
+
+// Initialize environment variables
+dotenv.config();
+
 const app = express();
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const multer = require("multer");
-const path = require("path");
-const cors = require("cors");
-require('dotenv').config();  
-app.use(express.json());
 app.use(cors());
+app.use(express.json()); // Middleware to parse incoming JSON requests
 
-mongoose.connect(process.env.MONGODB_URL, {
-    dbName: 'travelplanner', 
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 50000
-})
-.then(() => console.log("Database connected successfully"))
-.catch(err => console.error("Database connection error:", err));
+// Database connection
+connectDB();
 
-app.get("/", (req, res) => {
-    res.send("Express app is running");
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message });
 });
 
+const PORT = process.env.PORT || 5000;
 
-
-app.listen(port, (error) => {
-    if (!error) {
-        console.log("Server running on port " + port);
-    } else {
-        console.log("Server connection error: " + error);
-    }
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
