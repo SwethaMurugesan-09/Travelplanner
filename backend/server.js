@@ -2,22 +2,19 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const travelRoutes = require('./routes/travelRoutes'); // Import the correct travelRoutes
-
+const travelRoutes = require('./routes/travelRoutes'); 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Middleware for parsing JSON
+app.use(express.json()); 
 
-connectDB(); // Connect to the database
+connectDB(); 
 
-// Middleware for handling errors
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
 });
 
-// Use the travel routes
 app.use('/api', travelRoutes);
 
 const PORT = process.env.PORT || 5000;
