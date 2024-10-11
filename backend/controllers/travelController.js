@@ -34,7 +34,6 @@ const createTravelPlan = async (req, res) => {
       city,
       startTravelDate,
       endTravelDate,
-      notes,
     });
 
     const savedTravelPlan = await newTravelPlan.save(); 
@@ -56,7 +55,6 @@ const updateTravelPlan = async (req, res) => {
         city,
         startTravelDate,
         endTravelDate,
-        notes,
       },
       { new: true, runValidators: true } 
     );
@@ -85,10 +83,40 @@ const deleteTravelPlan = async (req, res) => {
   }
 };
 
+const getAllCountries = async (req, res) => {
+  try {
+    const countries = await Travel.distinct('country');
+    res.status(200).json(countries);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error });
+  }
+};
+
+const getStatesByCountry = async (req, res) => {
+  try {
+    const states = await Travel.distinct('state', { country: req.query.country });
+    res.status(200).json(states);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error });
+  }
+};
+
+const getCitiesByState = async (req, res) => {
+  try {
+    const cities = await Travel.distinct('city', { state: req.query.state });
+    res.status(200).json(cities);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error });
+  }
+};
+
 module.exports = {
   getAllTravelPlans,
   getTravelPlanById,
   createTravelPlan,
   updateTravelPlan,
   deleteTravelPlan,
+  getAllCountries,
+  getStatesByCountry,
+  getCitiesByState,
 };

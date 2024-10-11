@@ -1,15 +1,18 @@
 const express = require('express');
 const travelRouter = express.Router();
 const travelController = require('../controllers/travelController'); 
-travelRouter.get('/travel-plans', travelController.getAllTravelPlans);
+travelRouter.get('/travelplans', travelController.getAllTravelPlans);
 
-travelRouter.get('/travel-plans/:id', travelController.getTravelPlanById);
+travelRouter.get('/travelplans/:id', travelController.getTravelPlanById);
 
-travelRouter.post('/travel-plans', travelController.createTravelPlan);
+travelRouter.post('/travelplans', travelController.createTravelPlan);
 
-travelRouter.put('/travel-plans/:id', travelController.updateTravelPlan);
+travelRouter.put('/travelplans/:id', travelController.updateTravelPlan);
 
-travelRouter.delete('/travel-plans/:id', travelController.deleteTravelPlan);
+travelRouter.delete('/travelplans/:id', travelController.deleteTravelPlan);
+travelRouter.get('/countries', travelController.getAllCountries);
+travelRouter.get('/states', travelController.getStatesByCountry);
+travelRouter.get('/cities', travelController.getCitiesByState);
 
 
 module.exports = travelRouter;

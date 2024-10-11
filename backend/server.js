@@ -6,13 +6,16 @@ const travelRoutes = require('./routes/travelRoutes');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({}));
 app.use(express.json()); 
 
 connectDB(); 
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
+});
+app.get('/', (req, res) => {
+  res.send("Express app is running");
 });
 
 app.use('/api', travelRoutes);

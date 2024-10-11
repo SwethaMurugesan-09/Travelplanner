@@ -1,196 +1,183 @@
-import React, { useState } from "react";
-import { Carousel } from 'react-bootstrap'; 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import image1 from './assets/image1.jpg';
-import image2 from './assets/image2.jpg';
-import image3 from './assets/image3.jpg';
-import placeImage1 from './assets/place1.jpg'; 
-import placeImage2 from './assets/place2.jpg';
-import placeImage3 from './assets/place3.jpg';
-import './Home.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const countryData = {
-  USA: {
-    states: {
-      California: ["Los Angeles", "San Francisco", "San Diego"],
-      Illinois: ["Chicago", "Springfield", "Peoria"],
-      NewYork: ["New York City", "Buffalo", "Rochester"]
-    }
-  },
-  India: {
-    states: {
-      Maharashtra: ["Mumbai", "Pune", "Nagpur"],
-      Karnataka: ["Bangalore", "Mysore", "Mangalore"],
-      TamilNadu: ["Chennai", "Coimbatore", "Madurai"]
-    }
-  },
-  Australia: {
-    states: {
-      NewSouthWales: ["Sydney", "Newcastle", "Wollongong"],
-      Victoria: ["Melbourne", "Geelong", "Ballarat"],
-      Queensland: ["Brisbane", "Gold Coast", "Cairns"]
-    }
-  },
-  Brazil: {
-    states: {
-      RioDeJaneiro: ["Rio de Janeiro", "Niterói", "Angra dos Reis"],
-      SaoPaulo: ["São Paulo", "Campinas", "Santos"],
-      Bahia: ["Salvador", "Ilhéus", "Porto Seguro"]
-    }
-  },
-  Canada: {
-    states: {
-      Ontario: ["Toronto", "Ottawa", "Niagara Falls"],
-      BritishColumbia: ["Vancouver", "Victoria", "Whistler"],
-      Quebec: ["Montreal", "Quebec City", "Gatineau"]
-    }
-  },
-  Japan: {
-    states: {
-      Tokyo: ["Tokyo", "Shibuya", "Shinjuku"],
-      Kyoto: ["Kyoto", "Fushimi", "Gion"],
-      Hokkaido: ["Sapporo", "Otaru", "Hakodate"]
-    }
-  },
-  Germany: {
-    states: {
-      Bavaria: ["Munich", "Nuremberg", "Regensburg"],
-      Berlin: ["Berlin"],
-      Hesse: ["Frankfurt", "Wiesbaden", "Kassel"]
-    }
-  },
-  France: {
-    states: {
-      IleDeFrance: ["Paris", "Versailles"],
-      Provence: ["Marseille", "Nice", "Cannes"],
-      Normandy: ["Rouen", "Caen", "Le Havre"]
-    }
-  }
-};
+function Home() {
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [formData, setFormData] = useState({
+    country: '',
+    state: '',
+    city: '',
+    startTravelDate: '',
+    endTravelDate: '',
+    notes: ''
+  });
 
-const suggestedPlaces = [
-  { name: 'Los Angeles', image: placeImage1 },
-  { name: 'San Francisco', image: placeImage2 },
-  { name: 'Chicago', image: placeImage3 },
-];
+  // Fetch countries on component mount
+  useEffect(() => {
+    async function fetchCountries() {
+      try {
+        const response = await axios.get('/api/countries');
+        console.log('Countries fetched:', response.data);  // Debugging line
+        setCountries(response.data);  // Ensure it's an array
+      } catch (error) {
+        console.error('Error fetching countries:', error.response?.data || error.message);
+      }
+    }
+    fetchCountries();
+  }, []);
 
-const CarouselComponent = () => {
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedPlace, setSelectedPlace] = useState("");
+  // Fetch states when the country changes
+  useEffect(() => {
+    async function fetchStates() {
+      if (formData.country) {
+        try {
+          const response = await axios.get(`/api/states?country=${formData.country}`);
+          console.log(`States fetched for ${formData.country}:`, response.data); // Debugging line
+          setStates(response.data);  // Ensure it's an array
+        } catch (error) {
+          console.error("Error fetching states:", error.response?.data || error.message);
+        }
+      }
+    }
+    fetchStates();
+  }, [formData.country]);
 
-  const handleCountryChange = (e) => {
-    setSelectedCountry(e.target.value);
-    setSelectedState(""); // Reset state when country changes
-    setSelectedPlace(""); // Reset place when country changes
+  // Fetch cities when the state changes
+  useEffect(() => {
+    async function fetchCities() {
+      if (formData.state) {
+        try {
+          const response = await axios.get(`/api/cities?state=${formData.state}`);
+          console.log(`Cities fetched for ${formData.state}:`, response.data); // Debugging line
+          setCities(response.data);  // Ensure it's an array
+        } catch (error) {
+          console.error("Error fetching cities:", error.response?.data || error.message);
+        }
+      }
+    }
+    fetchCities();
+  }, [formData.state]);
+
+  // Handle input changes for the form
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    console.log('Form data updated:', { ...formData, [e.target.name]: e.target.value });  // Debugging line
   };
 
-  const handleStateChange = (e) => {
-    setSelectedState(e.target.value);
-    setSelectedPlace(""); // Reset place when state changes
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Submitting form with data:', formData);  // Debugging line
+    try {
+      const response = await axios.post('/api/travelplans', formData);
+      alert('Travel Plan created successfully!');
+      console.log('Travel Plan creation response:', response.data);  // Debugging line
+    } catch (error) {
+      console.error('Error creating travel plan:', error.response?.data || error.message);
+    }
   };
 
-  const handlePlaceChange = (e) => {
-    setSelectedPlace(e.target.value);
-  };
-
+  // Rendering logic
   return (
-    <div className="container">
-      <h2><center>Travel Planner</center></h2>
-
-      <Carousel>
-        <Carousel.Item>
-          <img src={image2} alt="Los Angeles" style={{ width: "100%" }} />
-          <Carousel.Caption>
-            <h3>Enjoy every beautiful place</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-
-        <Carousel.Item>
-          <img src={image3} alt="Chicago" style={{ width: "100%" }} />
-          <Carousel.Caption>
-            <h3>Let’s enjoy the beauty of nature</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-
-        <Carousel.Item>
-          <img src={image1} alt="New York" style={{ width: "100%" }} />
-          <Carousel.Caption>
-            <h3>Love and peace</h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-
-      {/* Dropdowns Section */}
-      <div className="dropdown-section-container">
-        <div className="dropdown-section">
-          <label htmlFor="country">Select Country:</label>
-          <select id="country" value={selectedCountry} onChange={handleCountryChange}>
-            <option value="">-- Select Country --</option>
-            {Object.keys(countryData).map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="dropdown-section">
-          <label htmlFor="state">Select State:</label>
+    <div className="Home">
+      <h1>Create Travel Plan</h1>
+      <form onSubmit={handleSubmit}>
+        {/* Country Dropdown */}
+        <label>
+          Country:
           <select
-            id="state"
-            value={selectedState}
-            onChange={handleStateChange}
-            disabled={!selectedCountry}
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
           >
-            <option value="">-- Select State --</option>
-            {selectedCountry &&
-              Object.keys(countryData[selectedCountry].states).map((state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              ))}
+            <option value="">Select Country</option>
+            {countries.length > 0 ? countries.map((country) => (
+              <option key={country} value={country}>{country}</option>
+            )) : (
+              <option disabled>Loading countries...</option>
+            )}
           </select>
-        </div>
+        </label>
 
-        <div className="dropdown-section">
-          <label htmlFor="place">Select Tourist Place:</label>
+        {/* State Dropdown */}
+        <label>
+          State:
           <select
-            id="place"
-            value={selectedPlace}
-            onChange={handlePlaceChange}
-            disabled={!selectedState}
+            name="state"
+            value={formData.state}
+            onChange={handleInputChange}
+            disabled={!formData.country}  // Only enabled when a country is selected
           >
-            <option value="">-- Select Place --</option>
-            {selectedState &&
-              countryData[selectedCountry].states[selectedState].map((place) => (
-                <option key={place} value={place}>
-                  {place}
-                </option>
-              ))}
+            <option value="">Select State</option>
+            {states.length > 0 ? states.map((state) => (
+              <option key={state} value={state}>{state}</option>
+            )) : (
+              formData.country && <option disabled>Loading states...</option>
+            )}
           </select>
-        </div>
-      </div>
+        </label>
 
-      {/* Button Section */}
-      <div className="button-container">
-        <button>Search Your Favourite Place</button>
-      </div>
+        {/* City Dropdown */}
+        <label>
+          City:
+          <select
+            name="city"
+            value={formData.city}
+            onChange={handleInputChange}
+            disabled={!formData.state}  // Only enabled when a state is selected
+          >
+            <option value="">Select City</option>
+            {cities.length > 0 ? cities.map((city) => (
+              <option key={city} value={city}>{city}</option>
+            )) : (
+              formData.state && <option disabled>Loading cities...</option>
+            )}
+          </select>
+        </label>
 
-      {/* Suggested Places Section */}
-      <div className="best-place">
-        <h3>Suggested Places</h3>
-        <div className="suggested-places-container">
-          {suggestedPlaces.map((place, index) => (
-            <div className="place-container" key={index}>
-              <img src={place.image} alt={place.name} className="place-image" />
-              <h4>{place.name}</h4>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Start Travel Date */}
+        <label>
+          Start Travel Date:
+          <input
+            type="date"
+            name="startTravelDate"
+            value={formData.startTravelDate}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+
+        {/* End Travel Date */}
+        <label>
+          End Travel Date:
+          <input
+            type="date"
+            name="endTravelDate"
+            value={formData.endTravelDate}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+
+        {/* Notes */}
+        <label>
+          Notes:
+          <textarea
+            name="notes"
+            value={formData.notes}
+            onChange={handleInputChange}
+          ></textarea>
+        </label>
+
+        <button type="submit">Create Travel Plan</button>
+      </form>
     </div>
   );
-};
+}
 
-export default CarouselComponent;
+export default Home;
