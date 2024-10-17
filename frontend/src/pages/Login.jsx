@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CSS/login.css'; 
+import '../styles/Login.css'
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
         console.log('Login attempted with:', formData);
 
         let responseData;
-        await fetch('http://localhost:5000/login', {
+        await fetch('http://localhost:5000/signup/login', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -40,7 +40,7 @@ const Login = () => {
         console.log("Signup attempted with:", formData);
 
         let responseData;
-        await fetch('http://localhost:5000/signup', {
+        await fetch('http://localhost:5000/signup/signup', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
