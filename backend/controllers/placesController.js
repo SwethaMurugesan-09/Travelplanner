@@ -2,14 +2,13 @@ const Place = require('../models/Place');
 const Travel = require('../models/Travel'); 
 
 const createPlace = async (req, res) => {
-  const { placeName, cityName, imageUrl } = req.body; // Use cityName instead of cityId
+  const { placeName, cityName, imageUrl } = req.body; 
 
   if (!placeName || !cityName || !imageUrl) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    // Find the city by name
     const cityExists = await Travel.findOne({ city: cityName });
     
     if (!cityExists) {
@@ -18,7 +17,7 @@ const createPlace = async (req, res) => {
 
     const newPlace = new Place({
       placeName,
-      city: cityExists._id, // Store the city ID as a reference
+      city: cityExists._id, 
       imageUrl,
     });
 

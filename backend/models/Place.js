@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the Place schema
 const placeSchema = mongoose.Schema(
   {
     placeName: {
@@ -8,8 +7,8 @@ const placeSchema = mongoose.Schema(
       required: true,
     },
     city: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to the Travel collection
-      ref: 'Travel', // Foreign key to the Travel collection
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Travel', 
       required: true,
     },
     imageUrl: {
