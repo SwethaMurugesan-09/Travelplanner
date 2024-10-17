@@ -11,16 +11,15 @@ function Home() {
     city: '',
     startTravelDate: '',
     endTravelDate: '',
-    notes: ''
   });
+  const today = new Date().toISOString().split('T')[0];
 
-  // Fetch countries on component mount
   useEffect(() => {
     async function fetchCountries() {
       try {
         const response = await axios.get('/api/countries');
-        console.log('Countries fetched:', response.data);  // Debugging line
-        setCountries(response.data);  // Ensure it's an array
+        console.log('Countries fetched:', response.data); 
+        setCountries(response.data)
       } catch (error) {
         console.error('Error fetching countries:', error.response?.data || error.message);
       }
@@ -28,14 +27,13 @@ function Home() {
     fetchCountries();
   }, []);
 
-  // Fetch states when the country changes
   useEffect(() => {
     async function fetchStates() {
       if (formData.country) {
         try {
-          const response = await axios.get(`/api/states?country=${formData.country}`);
-          console.log(`States fetched for ${formData.country}:`, response.data); // Debugging line
-          setStates(response.data);  // Ensure it's an array
+          const response = await axios.get(`/api/states?country=${formData.country}`); 
+          console.log(`States fetched for ${formData.country}:`, response.data); 
+          setStates(response.data); 
         } catch (error) {
           console.error("Error fetching states:", error.response?.data || error.message);
         }
@@ -44,14 +42,13 @@ function Home() {
     fetchStates();
   }, [formData.country]);
 
-  // Fetch cities when the state changes
   useEffect(() => {
     async function fetchCities() {
       if (formData.state) {
         try {
           const response = await axios.get(`/api/cities?state=${formData.state}`);
-          console.log(`Cities fetched for ${formData.state}:`, response.data); // Debugging line
-          setCities(response.data);  // Ensure it's an array
+          console.log(`Cities fetched for ${formData.state}:`, response.data); 
+          setCities(response.data);  
         } catch (error) {
           console.error("Error fetching cities:", error.response?.data || error.message);
         }
@@ -60,34 +57,30 @@ function Home() {
     fetchCities();
   }, [formData.state]);
 
-  // Handle input changes for the form
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log('Form data updated:', { ...formData, [e.target.name]: e.target.value });  // Debugging line
+    console.log('Form data updated:', { ...formData, [e.target.name]: e.target.value }); 
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting form with data:', formData);  // Debugging line
+    console.log('Submitting form with data:', formData);  
     try {
       const response = await axios.post('/api/travelplans', formData);
       alert('Travel Plan created successfully!');
-      console.log('Travel Plan creation response:', response.data);  // Debugging line
+      console.log('Travel Plan creation response:', response.data);  
     } catch (error) {
       console.error('Error creating travel plan:', error.response?.data || error.message);
     }
   };
 
-  // Rendering logic
   return (
     <div className="Home">
       <h1>Create Travel Plan</h1>
       <form onSubmit={handleSubmit}>
-        {/* Country Dropdown */}
         <label>
           Country:
           <select
@@ -104,14 +97,13 @@ function Home() {
           </select>
         </label>
 
-        {/* State Dropdown */}
         <label>
           State:
           <select
             name="state"
             value={formData.state}
             onChange={handleInputChange}
-            disabled={!formData.country}  // Only enabled when a country is selected
+            disabled={!formData.country} 
           >
             <option value="">Select State</option>
             {states.length > 0 ? states.map((state) => (
@@ -122,14 +114,13 @@ function Home() {
           </select>
         </label>
 
-        {/* City Dropdown */}
         <label>
           City:
           <select
             name="city"
             value={formData.city}
             onChange={handleInputChange}
-            disabled={!formData.state}  // Only enabled when a state is selected
+            disabled={!formData.state} 
           >
             <option value="">Select City</option>
             {cities.length > 0 ? cities.map((city) => (
@@ -140,7 +131,6 @@ function Home() {
           </select>
         </label>
 
-        {/* Start Travel Date */}
         <label>
           Start Travel Date:
           <input
@@ -149,10 +139,11 @@ function Home() {
             value={formData.startTravelDate}
             onChange={handleInputChange}
             required
+            min={today} 
+
           />
         </label>
 
-        {/* End Travel Date */}
         <label>
           End Travel Date:
           <input
@@ -161,19 +152,11 @@ function Home() {
             value={formData.endTravelDate}
             onChange={handleInputChange}
             required
+            min={formData.startTravelDate || today}
           />
         </label>
 
-        {/* Notes */}
-        <label>
-          Notes:
-          <textarea
-            name="notes"
-            value={formData.notes}
-            onChange={handleInputChange}
-          ></textarea>
-        </label>
-
+       
         <button type="submit">Create Travel Plan</button>
       </form>
     </div>
