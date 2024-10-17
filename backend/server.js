@@ -3,27 +3,22 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const travelRoutes = require('./routes/travelRoutes');
+const placesRoutes =require('./routes/placesRoutes');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Load environment variables
 dotenv.config();
 
-// Initialize the app
 const app = express();
-
-// Middleware for CORS and JSON parsing
 app.use(cors({}));
 app.use(express.json());
 
-// Ensure the 'upload/images' directory exists
 const uploadDir = './upload/images';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Multer storage configuration for file uploads
 const storage = multer.diskStorage({
   destination: uploadDir,
   filename: (req, file, cb) => {
@@ -58,27 +53,24 @@ app.post("/upload", upload.single('Travel'), (req, res) => {
   res.json({
     success: 1,
     message: "File uploaded successfully",
-    image_url: `${process.env.BASE_URL}/images/${req.file.filename}` // Use environment variable for base URL
+    image_url: `${process.env.BASE_URL}/images/${req.file.filename}` 
   });
 });
 
 
-// Serve static files from the 'upload/images' directory
 app.use('/images', express.static('upload/images'));
 
-// Connect to the database
 connectDB();
 
-// Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Log the error stack
+  console.error(err.stack); 
   res.status(500).json({ message: err.message });
 });
 
-// Travel API routes
 app.use('/api', travelRoutes);
+app.use('/api', placesRoutes );
 
-// Start the server on a port defined in the environment variables
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

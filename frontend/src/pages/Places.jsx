@@ -17,16 +17,16 @@ const Places = () => {
   useEffect(() => {
     if (city) {
       axios
-        .get(`/api/touristplaces?city=${city}`) 
+        .get(`/api/places/${city}`) 
         .then((response) => {
           setTouristPlaces(response.data);
         })
         .catch((error) => {
           console.error('Error fetching places:', error);
-          setError('Could not fetch tourist places.');
         });
     }
   }, [city]);
+  
   
 
   return (
@@ -38,7 +38,7 @@ const Places = () => {
           {touristPlaces.map((place) => (
             <div key={place._id} className="place-card">
               <img src={place.imageUrl} alt={place.touristPlace} className="place-image" />
-              <h3>{place.touristPlace}</h3>
+              <h3>{place.placeName}</h3>
             </div>
           ))}
         </div>
