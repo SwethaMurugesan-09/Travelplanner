@@ -21,9 +21,8 @@ const getTravelPlanById = async (req, res) => {
 };
 
 const createTravelPlan = async (req, res) => {
-  const { country, state, city, startTravelDate, endTravelDate, notes } = req.body;
-
-  if (!country || !state || !city || !startTravelDate || !endTravelDate) {
+  const { country, state, city, touristPlace} = req.body; 
+  if (!country || !state || !city || !touristPlace) {
     return res.status(400).json({ message: 'All required fields must be provided' });
   }
 
@@ -32,8 +31,7 @@ const createTravelPlan = async (req, res) => {
       country,
       state,
       city,
-      startTravelDate,
-      endTravelDate,
+      touristPlace,
     });
 
     const savedTravelPlan = await newTravelPlan.save(); 
@@ -43,8 +41,9 @@ const createTravelPlan = async (req, res) => {
   }
 };
 
+
 const updateTravelPlan = async (req, res) => {
-  const { country, state, city, startTravelDate, endTravelDate, notes } = req.body;
+  const { country, state, city, touristPlace} = req.body;
 
   try {
     const updatedTravelPlan = await Travel.findByIdAndUpdate(
@@ -53,8 +52,7 @@ const updateTravelPlan = async (req, res) => {
         country,
         state,
         city,
-        startTravelDate,
-        endTravelDate,
+        touristPlace,
       },
       { new: true, runValidators: true } 
     );
@@ -109,6 +107,26 @@ const getCitiesByState = async (req, res) => {
     res.status(500).json({ message: 'Server Error', error });
   }
 };
+const getTouristPlacesByCity = async (req, res) => {
+  try {
+    const { city } = req.query;
+
+    if (!city) {
+      return res.status(400).json({ message: 'City is required' });
+    }
+
+    const touristPlaces = await Travel.find({ city });
+
+    if (touristPlaces.length === 0) {
+      return res.status(404).json({ message: 'No tourist places found for this city' });
+    }
+
+    res.status(200).json(touristPlaces);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error });
+  }
+};
+
 
 module.exports = {
   getAllTravelPlans,
@@ -119,4 +137,5 @@ module.exports = {
   getAllCountries,
   getStatesByCountry,
   getCitiesByState,
+  getTouristPlacesByCity ,
 };

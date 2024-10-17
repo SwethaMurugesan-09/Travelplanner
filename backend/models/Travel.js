@@ -14,12 +14,8 @@ const travelSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    startTravelDate: {
-      type: Date,
-      required: true,
-    },
-    endTravelDate: {
-      type: Date,
+    touristPlace: {
+      type: String,
       required: true,
     },
   },

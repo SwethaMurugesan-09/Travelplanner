@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Home() {
@@ -13,13 +14,13 @@ function Home() {
     endTravelDate: '',
   });
   const today = new Date().toISOString().split('T')[0];
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCountries() {
       try {
         const response = await axios.get('/api/countries');
-        console.log('Countries fetched:', response.data); 
-        setCountries(response.data)
+        setCountries(response.data);
       } catch (error) {
         console.error('Error fetching countries:', error.response?.data || error.message);
       }
@@ -31,9 +32,8 @@ function Home() {
     async function fetchStates() {
       if (formData.country) {
         try {
-          const response = await axios.get(`/api/states?country=${formData.country}`); 
-          console.log(`States fetched for ${formData.country}:`, response.data); 
-          setStates(response.data); 
+          const response = await axios.get(`/api/states?country=${formData.country}`);
+          setStates(response.data);
         } catch (error) {
           console.error("Error fetching states:", error.response?.data || error.message);
         }
@@ -47,8 +47,7 @@ function Home() {
       if (formData.state) {
         try {
           const response = await axios.get(`/api/cities?state=${formData.state}`);
-          console.log(`Cities fetched for ${formData.state}:`, response.data); 
-          setCities(response.data);  
+          setCities(response.data);
         } catch (error) {
           console.error("Error fetching cities:", error.response?.data || error.message);
         }
@@ -58,22 +57,18 @@ function Home() {
   }, [formData.state]);
 
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
-    console.log('Form data updated:', { ...formData, [e.target.name]: e.target.value }); 
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting form with data:', formData);  
-    try {
-      const response = await axios.post('/api/travelplans', formData);
-      alert('Travel Plan created successfully!');
-      console.log('Travel Plan creation response:', response.data);  
-    } catch (error) {
-      console.error('Error creating travel plan:', error.response?.data || error.message);
+    if (formData.city) {
+      // Navigate to the Places page with the selected city
+      navigate(`/places?city=${formData.city}`);
     }
   };
 
@@ -139,8 +134,7 @@ function Home() {
             value={formData.startTravelDate}
             onChange={handleInputChange}
             required
-            min={today} 
-
+            min={today}
           />
         </label>
 
@@ -156,7 +150,6 @@ function Home() {
           />
         </label>
 
-       
         <button type="submit">Create Travel Plan</button>
       </form>
     </div>
