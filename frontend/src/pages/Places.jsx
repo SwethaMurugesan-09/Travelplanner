@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import '../styles/Places.css'; 
 const Places = () => {
   const [touristPlaces, setTouristPlaces] = useState([]);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const Places = () => {
   useEffect(() => {
     if (city) {
       axios
-        .get(`/api/touristplaces?city=${city}`)  // Ensure this matches the backend route
+        .get(`/api/touristplaces?city=${city}`) 
         .then((response) => {
           setTouristPlaces(response.data);
         })
@@ -27,17 +27,21 @@ const Places = () => {
         });
     }
   }, [city]);
+  
 
   return (
-    <div>
+    <div className="places-container">
       <h1>Tourist Places in {city}</h1>
       {error && <p>{error}</p>}
       {touristPlaces.length > 0 ? (
-        <ul>
+        <div className="places-grid">
           {touristPlaces.map((place) => (
-            <li key={place._id}>{place.touristPlace}</li>
+            <div key={place._id} className="place-card">
+              <img src={place.imageUrl} alt={place.touristPlace} className="place-image" />
+              <h3>{place.touristPlace}</h3>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No tourist places found.</p>
       )}
@@ -46,4 +50,3 @@ const Places = () => {
 };
 
 export default Places;
-

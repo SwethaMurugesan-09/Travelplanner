@@ -1,16 +1,19 @@
-const Travel = require( "../models/travel");
+const Travel = require("../models/Travel");
+
+// Fetch all travel plans
 const getAllTravelPlans = async (req, res) => {
   try {
-    const travelPlans = await Travel.find(); 
+    const travelPlans = await Travel.find();
     res.status(200).json(travelPlans);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }
 };
 
+// Fetch travel plan by ID
 const getTravelPlanById = async (req, res) => {
   try {
-    const travelPlan = await Travel.findById(req.params.id); 
+    const travelPlan = await Travel.findById(req.params.id);
     if (!travelPlan) {
       return res.status(404).json({ message: 'Travel plan not found' });
     }
@@ -20,9 +23,11 @@ const getTravelPlanById = async (req, res) => {
   }
 };
 
+// Create a new travel plan
 const createTravelPlan = async (req, res) => {
-  const { country, state, city, touristPlace} = req.body; 
-  if (!country || !state || !city || !touristPlace) {
+  const { country, state, city, imageUrl } = req.body;
+
+  if (!country || !state || !city || !imageUrl) {
     return res.status(400).json({ message: 'All required fields must be provided' });
   }
 
@@ -31,30 +36,25 @@ const createTravelPlan = async (req, res) => {
       country,
       state,
       city,
-      touristPlace,
+      imageUrl,
     });
 
-    const savedTravelPlan = await newTravelPlan.save(); 
+    const savedTravelPlan = await newTravelPlan.save();
     res.status(201).json(savedTravelPlan);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }
 };
 
-
+// Update an existing travel plan
 const updateTravelPlan = async (req, res) => {
-  const { country, state, city, touristPlace} = req.body;
+  const { country, state, city, imageUrl } = req.body;
 
   try {
     const updatedTravelPlan = await Travel.findByIdAndUpdate(
       req.params.id,
-      {
-        country,
-        state,
-        city,
-        touristPlace,
-      },
-      { new: true, runValidators: true } 
+      { country, state, city, imageUrl },
+      { new: true, runValidators: true }
     );
 
     if (!updatedTravelPlan) {
@@ -67,6 +67,7 @@ const updateTravelPlan = async (req, res) => {
   }
 };
 
+// Delete a travel plan
 const deleteTravelPlan = async (req, res) => {
   try {
     const deletedTravelPlan = await Travel.findByIdAndDelete(req.params.id);
@@ -81,6 +82,7 @@ const deleteTravelPlan = async (req, res) => {
   }
 };
 
+// Fetch all unique countries
 const getAllCountries = async (req, res) => {
   try {
     const countries = await Travel.distinct('country');
@@ -90,6 +92,7 @@ const getAllCountries = async (req, res) => {
   }
 };
 
+// Fetch all unique states by country
 const getStatesByCountry = async (req, res) => {
   try {
     const states = await Travel.distinct('state', { country: req.query.country });
@@ -101,12 +104,14 @@ const getStatesByCountry = async (req, res) => {
 
 const getCitiesByState = async (req, res) => {
   try {
-    const cities = await Travel.distinct('city', { state: req.query.state });
+    const cities = await Travel.find({ state: req.query.state }).select('city imageUrl');
     res.status(200).json(cities);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }
 };
+
+
 const getTouristPlacesByCity = async (req, res) => {
   try {
     const { city } = req.query;
@@ -127,7 +132,6 @@ const getTouristPlacesByCity = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getAllTravelPlans,
   getTravelPlanById,
@@ -137,5 +141,5 @@ module.exports = {
   getAllCountries,
   getStatesByCountry,
   getCitiesByState,
-  getTouristPlacesByCity ,
+  getTouristPlacesByCity,
 };

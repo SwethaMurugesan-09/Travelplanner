@@ -14,7 +14,7 @@ const travelSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    touristPlace: {
+    imageUrl: { 
       type: String,
       required: true,
     },

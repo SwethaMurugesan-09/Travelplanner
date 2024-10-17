@@ -14,7 +14,6 @@ travelRouter.delete('/travelplans/:id', travelController.deleteTravelPlan);
 travelRouter.get('/countries', travelController.getAllCountries);
 travelRouter.get('/states', travelController.getStatesByCountry);
 travelRouter.get('/cities', travelController.getCitiesByState);
-travelRouter.get('/touristplaces', travelController.getTouristPlacesByCity); 
 
 
 module.exports = travelRouter;

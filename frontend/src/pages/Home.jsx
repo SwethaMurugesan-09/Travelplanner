@@ -5,11 +5,9 @@ import axios from 'axios';
 function Home() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
   const [formData, setFormData] = useState({
     country: '',
     state: '',
-    city: '',
     startTravelDate: '',
     endTravelDate: '',
   });
@@ -42,20 +40,6 @@ function Home() {
     fetchStates();
   }, [formData.country]);
 
-  useEffect(() => {
-    async function fetchCities() {
-      if (formData.state) {
-        try {
-          const response = await axios.get(`/api/cities?state=${formData.state}`);
-          setCities(response.data);
-        } catch (error) {
-          console.error("Error fetching cities:", error.response?.data || error.message);
-        }
-      }
-    }
-    fetchCities();
-  }, [formData.state]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -66,9 +50,11 @@ function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.city) {
-      // Navigate to the Places page with the selected city
-      navigate(`/places?city=${formData.city}`);
+    // Navigate to the Cities page, passing the selected state as a query parameter
+    if (formData.state) {
+      navigate(`/cities?state=${formData.state}`);
+    } else {
+      console.error("State is not selected.");
     }
   };
 
@@ -105,23 +91,6 @@ function Home() {
               <option key={state} value={state}>{state}</option>
             )) : (
               formData.country && <option disabled>Loading states...</option>
-            )}
-          </select>
-        </label>
-
-        <label>
-          City:
-          <select
-            name="city"
-            value={formData.city}
-            onChange={handleInputChange}
-            disabled={!formData.state} 
-          >
-            <option value="">Select City</option>
-            {cities.length > 0 ? cities.map((city) => (
-              <option key={city} value={city}>{city}</option>
-            )) : (
-              formData.state && <option disabled>Loading cities...</option>
             )}
           </select>
         </label>
