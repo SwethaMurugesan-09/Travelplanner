@@ -4,6 +4,7 @@ import Places from './pages/Places';
 import Home from './pages/Home';
 import Cities from './pages/Cities';
 import Login from './pages/Login';
+import Explore from './pages/Explore';
 function App() {
   return (
     <Router>
@@ -13,7 +14,8 @@ function App() {
           <Route path="/cities" element={<Cities/>}/>
           <Route path="/places" element={<Places/>}/>
           <Route path="/login" element={<Login/>}/>
-        </Routes>
+          <Route path="/explore/:placeName" element={<Explore />} />
+          </Routes>
       </div>
     </Router>
   );

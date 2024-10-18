@@ -21,6 +21,7 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+
 const storage = multer.diskStorage({
   destination: uploadDir,
   filename: (req, file, cb) => {
@@ -43,7 +44,6 @@ const upload = multer({
   }
 });
 
-
 app.post("/upload", upload.single('Travel'), (req, res) => {
   if (!req.file) {
     console.error("No file uploaded.");
@@ -51,13 +51,14 @@ app.post("/upload", upload.single('Travel'), (req, res) => {
   }
   
   console.log("File uploaded successfully:", req.file);
-
   res.json({
     success: 1,
     message: "File uploaded successfully",
     image_url: `${process.env.BASE_URL}/images/${req.file.filename}` 
   });
 });
+
+
 
 
 app.use('/images', express.static('upload/images'));
@@ -72,8 +73,7 @@ app.use((err, req, res, next) => {
 app.use('/api', travelRoutes);
 app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
-app.use('/specificplace',specificRoutes);
-
+app.use('/api/specificplace', specificRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

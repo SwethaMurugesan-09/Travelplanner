@@ -1,0 +1,98 @@
+/* Login.css */
+
+* {
+    box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Change font for better readability */
+    background-color: #f7f9fc; /* Soft background color */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.authContainer {
+    background-color: #ffffff; /* White background for the form */
+    padding: 2rem; /* Inner padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 400px; /* Fixed width for better alignment */
+    transition: transform 0.3s; /* Transition effect */
+}
+
+.authContainer:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+.login-heading {
+    text-align: center; /* Center the heading */
+    margin-bottom: 1.5rem; /* Space below heading */
+    font-size: 28px; /* Larger heading */
+    color: #333; /* Darker text for contrast */
+}
+
+.login-inputGroup {
+    margin-bottom: 1.5rem; /* Space between input groups */
+}
+
+.login-label {
+    margin-bottom: 0.5rem; /* Space below label */
+    font-weight: bold; /* Bold labels */
+    color: #555; /* Lighter text color */
+}
+
+.login-input {
+    width: 100%; /* Full width inputs */
+    padding: 12px; /* More padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    font-size: 16px; /* Larger text for better readability */
+    transition: border-color 0.3s; /* Transition for border color */
+}
+
+.login-input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus shadow */
+}
+
+.login-button {
+    width: 100%; /* Full width button */
+    padding: 12px; /* Padding inside button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    font-size: 16px; /* Larger button text */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.login-footer {
+    text-align: center; /* Center the footer text */
+    margin-top: 1rem; /* Space above footer */
+}
+
+.login-footer a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* No underline */
+    transition: color 0.3s; /* Transition for link color */
+}
+
+.login-footer a:hover {
+    color: #0056b3; /* Darker link color on hover */
+    text-decoration: underline; /* Underline on hover */
+}

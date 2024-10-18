@@ -31,7 +31,7 @@ const Cities = () => {
 
   return (
     <div className="Cities">
-      <h1>Available Cities in {state}</h1>
+      <h3>Best Tourist places in {state}</h3>
       <div className="city-container">
         {cities.length > 0 ? (
           cities.map((cityData) => (

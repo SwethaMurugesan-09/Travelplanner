@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import '../styles/Explore.css'
 const Explore = () => {
   const { placeName } = useParams(); // Get placeName from URL
   const [specificPlace, setSpecificPlace] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Fetch details for the specific place based on placeName
     axios
-      .post(`/api/specificplace/explore/${placeName}`) // Adjust the endpoint as necessary
+      .get(`/api/specificplace/explore/${placeName}`) // Adjust the endpoint as necessary
       .then((response) => {
-        setSpecificPlace(response.data);
+        setSpecificPlace(response.data); // Expecting data about the specific place
       })
       .catch((error) => {
         console.error('Error fetching specific place:', error);
@@ -27,10 +28,13 @@ const Explore = () => {
     return <p>Loading...</p>; // Or a loading spinner
   }
 
+  // Assuming `placeName` is an object, you should extract the appropriate field (like `placeName.name` or `placeName.placeName`)
+  const displayPlaceName = typeof specificPlace.placeName === 'object' ? specificPlace.placeName.placeName : specificPlace.placeName;
+
   return (
     <div className="explore-container">
-      <h1>Details for {specificPlace.placeName}</h1>
-      <img src={specificPlace.imageUrl} alt={specificPlace.placeName} className="place-image" />
+      <h3>Details for {displayPlaceName}</h3>
+      <img src={specificPlace.imageUrl} alt={displayPlaceName} className="place-image" />
       <h2>Hotels:</h2>
       <p>{specificPlace.hotels}</p>
       <h2>Trip Places:</h2>

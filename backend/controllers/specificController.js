@@ -29,29 +29,29 @@ const createSpecificPlace = async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
-
 const getSpecificPlaceByPlaceName = async (req, res) => {
-  const { placeName } = req.params;
-
-  try {
-    const place = await Place.findOne({ placeName });
-
-    if (!place) {
-      return res.status(404).json({ message: 'Place not found' });
+    const { placeName } = req.params;
+  
+    try {
+      const place = await Place.findOne({ placeName });
+  
+      if (!place) {
+        return res.status(404).json({ message: 'Place not found' });
+      }
+  
+      // Get specific places linked to the place by its _id
+      const specificPlaces = await SpecificPlace.find({ placeName: place._id }).populate('placeName'); 
+  
+      if (specificPlaces.length === 0) {
+        return res.status(404).json({ message: 'No specific places found for this place' });
+      }
+  
+      res.status(200).json(specificPlaces[0]); // Return the first matching specific place
+    } catch (error) {
+      res.status(500).json({ message: 'Server error', error });
     }
-
-    const specificPlaces = await SpecificPlace.find({ placeName: place._id }).populate('placeName');
-
-    if (specificPlaces.length === 0) {
-      return res.status(404).json({ message: 'No specific places found for this place' });
-    }
-
-    res.status(200).json(specificPlaces);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
-  }
-};
-
+  };
+  
 module.exports = {
   createSpecificPlace,
   getSpecificPlaceByPlaceName,

@@ -3,6 +3,6 @@ const specificRoutes = express.Router();
 const { createSpecificPlace, getSpecificPlaceByPlaceName } = require('../controllers/specificController'); // Check this path
 
 specificRoutes.post('/specificplaces', createSpecificPlace); 
-specificRoutes.post('/explore/:placeName', getSpecificPlaceByPlaceName);
+specificRoutes.get('/explore/:placeName', getSpecificPlaceByPlaceName); // This matches /explore/:placeName in Explore.jsx
 
 module.exports = specificRoutes;

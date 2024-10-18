@@ -1,0 +1,69 @@
+/* Explore.css */
+
+body {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    min-height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f0f0f0; /* Light background for the body */
+}
+
+.explore-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items */
+    padding: 2rem; /* Add padding */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 800px; /* Max width for container */
+    width: 100%; /* Ensure it uses full width on smaller screens */
+    margin: 2rem; /* Margin for spacing on small screens */
+}
+
+.explore-container h3 {
+    font-size: 2.5rem; /* Larger font size for main title */
+    color: #333; /* Dark color for contrast */
+    margin-bottom: 1rem; /* Space below heading */
+    align-self: flex-start; /* Align h3 to the top of the container */
+}
+
+.place-image {
+    width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners for image */
+    margin-bottom: 1.5rem; /* Space below image */
+}
+
+h2 {
+    font-size: 1.8rem; /* Subheading size */
+    color: #007bff; /* Primary color for subheadings */
+    margin: 1rem 0; /* Space above and below subheadings */
+}
+
+p {
+    font-size: 1.1rem; /* Text size for paragraphs */
+    color: #555; /* Lighter text for less contrast */
+    line-height: 1.6; /* Better readability */
+    margin-bottom: 1.5rem; /* Space below paragraphs */
+}
+
+@media (max-width: 600px) {
+    .explore-container {
+        padding: 1rem; /* Less padding on small screens */
+        margin: 1rem; /* Less margin */
+    }
+
+    .explore-container h3 {
+        font-size: 2rem; /* Smaller title on small screens */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Smaller subheading on small screens */
+    }
+
+    p {
+        font-size: 1rem; /* Smaller text on small screens */
+    }
+}

@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const specificplaceSchema = mongoose.Schema(
   {
     placeName: {
-      type: String, 
-      ref: 'Place', 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Place', 
       required: true,
     },
     hotels: {

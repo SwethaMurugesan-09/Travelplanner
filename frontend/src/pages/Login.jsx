@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/Login.css'
+import '../styles/Login.css';
+
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
@@ -25,6 +26,7 @@ const Login = () => {
         .catch((error) => {
             console.error("Error during login:", error);
         });
+
         if (responseData && responseData.success) {
             localStorage.setItem('auth-token', responseData.token);
             console.log("Token in localStorage:", localStorage.getItem('auth-token'));
@@ -68,69 +70,69 @@ const Login = () => {
             <div className="authContainer">
                 {isLogin ? (
                     <>
-                        <h2>Login</h2>
+                        <h2 className="login-heading">Login</h2>
                         <form onSubmit={handleLogin}>
-                            <div className="inputGroup">
-                                <label htmlFor="email">Email:</label>
+                            <div className="login-inputGroup">
+                                <label htmlFor="email" className="login-label">Email:</label>
                                 <input
                                     type="email"
                                     id="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="input"
+                                    className="login-input"
                                 />
                             </div>
-                            <div className="inputGroup">
-                                <label htmlFor="password">Password:</label>
+                            <div className="login-inputGroup">
+                                <label htmlFor="password" className="login-label">Password:</label>
                                 <input
                                     type="password"
                                     id="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="input"
+                                    className="login-input"
                                 />
                             </div>
-                            <button type="submit" className="button">Login</button>
+                            <button type="submit" className="login-button">Login</button>
                         </form>
-                        <span>Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a></span>
+                        <span className="login-footer">Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a></span>
                     </>
                 ) : (
                     <>
-                        <h2>Sign Up</h2>
+                        <h2 className="login-heading">Sign Up</h2>
                         <form onSubmit={handleSignup}>
-                            <div className="inputGroup">
-                                <label htmlFor="username">Username:</label>
+                            <div className="login-inputGroup">
+                                <label htmlFor="username" className="login-label">Username:</label>
                                 <input
                                     type="text"
                                     id="username"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="input"
+                                    className="login-input"
                                 />
                             </div>
-                            <div className="inputGroup">
-                                <label htmlFor="email">Email:</label>
+                            <div className="login-inputGroup">
+                                <label htmlFor="email" className="login-label">Email:</label>
                                 <input
                                     type="email"
                                     id="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="input"
+                                    className="login-input"
                                 />
                             </div>
-                            <div className="inputGroup">
-                                <label htmlFor="password">Password:</label>
+                            <div className="login-inputGroup">
+                                <label htmlFor="password" className="login-label">Password:</label>
                                 <input
                                     type="password"
                                     id="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="input"
+                                    className="login-input"
                                 />
                             </div>
-                            <button type="submit" className="button">Sign Up</button>
+                            <button type="submit" className="login-button">Sign Up</button>
                         </form>
-                        <span>Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login here</a></span>
+                        <span className="login-footer">Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login here</a></span>
                     </>
                 )}
             </div>
