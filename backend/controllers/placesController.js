@@ -1,33 +1,28 @@
 const Place = require('../models/Place'); 
 const Travel = require('../models/Travel'); 
 
-const createSpecificPlace = async (req, res) => {
-  const { placeName, hotels, tripplaces, restaurant, imageUrl } = req.body;
+const createPlace = async (req, res) => {
+  const { placeName, cityName, imageUrl } = req.body; 
 
-  if (!placeName || !hotels || !tripplaces || !restaurant || !imageUrl) {
+  if (!placeName || !cityName || !imageUrl) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    // Check if the place (Place) exists, not Travel
-    const place = await Place.findOne({ placeName }); // Change here to find by placeName directly
-
-    if (!place) {
-      return res.status(404).json({ message: 'Place not found' });
+    const cityExists = await Travel.findOne({ city: cityName });
+    
+    if (!cityExists) {
+      return res.status(404).json({ message: 'City not found' });
     }
 
-    // Create the new SpecificPlace object
-    const newSpecificPlace = new SpecificPlace({
-      placeName: place._id,  // This now correctly references the Place document
-      hotels,
-      tripplaces,
-      restaurant,
-      imageUrl
+    const newPlace = new Place({
+      placeName,
+      city: cityExists._id, 
+      imageUrl,
     });
 
-    // Save the SpecificPlace document
-    const savedSpecificPlace = await newSpecificPlace.save();
-    res.status(201).json(savedSpecificPlace);
+    const savedPlace = await newPlace.save();
+    res.status(201).json(savedPlace);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
@@ -35,26 +30,25 @@ const createSpecificPlace = async (req, res) => {
 
 
 
-
-const getSpecificPlaceByPlaceName = async (req, res) => {
-  const { placeName } = req.params;
+const getTouristPlacesByCity = async (req, res) => {
+  const { cityName } = req.params; // Change to cityName
 
   try {
-    // Find the Place by its name
-    const place = await Place.findOne({ placeName });
-
-    if (!place) {
-      return res.status(404).json({ message: 'Place not found' });
+    // Find the city by its name
+    const city = await Travel.findOne({ city: cityName });
+    
+    if (!city) {
+      return res.status(404).json({ message: 'City not found' });
     }
 
-    // Now fetch SpecificPlace entries based on the place ID
-    const specificPlaces = await SpecificPlace.find({ placeName: place._id }).populate('placeName');
-
-    if (specificPlaces.length === 0) {
-      return res.status(404).json({ message: 'No specific places found for this place' });
+    // Fetch places by the city ID
+    const places = await Place.find({ city: city._id }).populate('city');
+    
+    if (places.length === 0) {
+      return res.status(404).json({ message: 'No tourist places found for this city' });
     }
 
-    res.status(200).json(specificPlaces);
+    res.status(200).json(places);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
@@ -62,6 +56,6 @@ const getSpecificPlaceByPlaceName = async (req, res) => {
 
 
 module.exports = {
-  createSpecificPlace,
-    getSpecificPlaceByPlaceName,
+    createPlace,
+    getTouristPlacesByCity,
 };

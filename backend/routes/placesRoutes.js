@@ -1,8 +1,8 @@
 const express = require('express');
 const placesRoutes = express.Router();
-const { createSpecificPlace, getSpecificPlaceByPlaceName } = require('../controllers/placesController'); // Ensure this path is correct
+const { createPlace, getTouristPlacesByCity } = require('../controllers/placesController'); // Ensure this path is correct
 
-placesRoutes.post('/places', createSpecificPlace);
-placesRoutes.get('/places/:cityName', getSpecificPlaceByPlaceName);
+placesRoutes.post('/places', createPlace);
+placesRoutes.get('/places/:cityName', getTouristPlacesByCity);
 
 module.exports = placesRoutes;
