@@ -1,6 +1,5 @@
 const Travel = require("../models/Travel");
 
-// Fetch all travel plans
 const getAllTravelPlans = async (req, res) => {
   try {
     const travelPlans = await Travel.find();

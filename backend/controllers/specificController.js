@@ -1,6 +1,5 @@
-const Place = require('../models/Place'); 
-const Travel = require('../models/Travel'); 
-
+const SpecificPlace = require('../models/SpecificPlace'); // Make sure this path is correct
+const Place=require('../models/Place');
 const createSpecificPlace = async (req, res) => {
   const { placeName, hotels, tripplaces, restaurant, imageUrl } = req.body;
 
@@ -9,23 +8,21 @@ const createSpecificPlace = async (req, res) => {
   }
 
   try {
-    // Check if the place (Place) exists, not Travel
-    const place = await Place.findOne({ placeName }); // Change here to find by placeName directly
+    // Assuming you have a method to find a Place by its name
+    const place = await Place.findOne({ placeName }); // Adjust based on your Place schema
 
     if (!place) {
       return res.status(404).json({ message: 'Place not found' });
     }
 
-    // Create the new SpecificPlace object
     const newSpecificPlace = new SpecificPlace({
-      placeName: place._id,  // This now correctly references the Place document
+      placeName: place._id,  // This references the Place document
       hotels,
       tripplaces,
       restaurant,
-      imageUrl
+      imageUrl,
     });
 
-    // Save the SpecificPlace document
     const savedSpecificPlace = await newSpecificPlace.save();
     res.status(201).json(savedSpecificPlace);
   } catch (error) {
@@ -33,21 +30,16 @@ const createSpecificPlace = async (req, res) => {
   }
 };
 
-
-
-
 const getSpecificPlaceByPlaceName = async (req, res) => {
   const { placeName } = req.params;
 
   try {
-    // Find the Place by its name
     const place = await Place.findOne({ placeName });
 
     if (!place) {
       return res.status(404).json({ message: 'Place not found' });
     }
 
-    // Now fetch SpecificPlace entries based on the place ID
     const specificPlaces = await SpecificPlace.find({ placeName: place._id }).populate('placeName');
 
     if (specificPlaces.length === 0) {
@@ -60,8 +52,7 @@ const getSpecificPlaceByPlaceName = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createSpecificPlace,
-    getSpecificPlaceByPlaceName,
+  getSpecificPlaceByPlaceName,
 };

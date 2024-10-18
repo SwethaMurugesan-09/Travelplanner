@@ -8,6 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
+const specificRoutes = require('./routes/specificRoutes');
 
 dotenv.config();
 
@@ -70,7 +71,8 @@ app.use((err, req, res, next) => {
 
 app.use('/api', travelRoutes);
 app.use('/api', placesRoutes );
-app.use('/signup' ,userRouter)
+app.use('/signup' ,userRouter);
+app.use('/specificplace',specificRoutes);
 
 
 const PORT = process.env.PORT || 5000;
