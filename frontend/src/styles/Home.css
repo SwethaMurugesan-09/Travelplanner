@@ -1,89 +1,105 @@
 /* Home.css */
-.Home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f5f5f5;
-    padding: 20px;
-  }
+.famous-places {
+  padding: 5rem 5%;
+}
+
+/* Assuming this is your main container */
+.form-image-container {
+  position: relative; /* Ensures child elements with absolute positioning use this as a reference */
+  text-align: center;
+}
+
+.background-image {
+  width: 100%;
+  height: 700px; /* or whatever size you need */
+  display: block;
+  object-fit: cover; 
+  position: relative;
+  z-index: 1; /* Ensure image is layered below the navbar */
+}
+
+.navbar {
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 3;
+}
+
+
+.form-overlay {
+  position: absolute;
+  top: 55%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8); 
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px; 
+  z-index: 2; /* Ensure form is layered above the image */
+}
+
+.form-overlay h3 {
+  position: absolute;
+  top: -115px;  
+  padding-left: 10%;
+  color: rgb(31, 0, 0);
+  font-size: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px; /* Add this to increase the gap */
+}
+
+.form-overlay label {
+  display: block;  
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-overlay input,
+.form-overlay select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-overlay button {
+  padding: 10px;
+  background-color: #010911;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-overlay button:hover {
+  background-color: #081729;
+}
+
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
   
-  h1 {
-    color: #333;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-  }
+.navbar ul li {
+  margin-left: 20px; /* Space between the menu items */
+}
   
-  form {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    max-width: 400px;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-  }
+.navbar ul li a {
+  text-decoration: none;
+  color: rgb(3, 3, 3); /* Change to white for better visibility */
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
   
-  label {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #555;
-    font-weight: 500;
-  }
-  
-  select, input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-  }
-  
-  select:focus, input[type="date"]:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  select:disabled {
-    background-color: #e9e9e9;
-    cursor: not-allowed;
-  }
-  
-  button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  @media (max-width: 500px) {
-    form {
-      padding: 20px;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    button[type="submit"] {
-      font-size: 1rem;
-    }
-  }
-  
+.navbar ul li a:hover {
+  background-color: #081729;
+}

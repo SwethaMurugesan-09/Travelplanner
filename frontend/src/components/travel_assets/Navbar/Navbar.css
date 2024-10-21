@@ -1,0 +1,25 @@
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar ul li {
+    margin-left: 20px; /* Space between the menu items */
+  }
+  
+  .navbar ul li a {
+    text-decoration: none;
+    color: rgb(17, 16, 16);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar ul li a:hover {
+    background-color: #969da7;
+  }
+  

@@ -24,7 +24,7 @@ const getTravelPlanById = async (req, res) => {
 
 // Create a new travel plan
 const createTravelPlan = async (req, res) => {
-  const { country, state, city, imageUrl } = req.body;
+  const { state, city, imageUrl } = req.body;
 
   if (!country || !state || !city || !imageUrl) {
     return res.status(400).json({ message: 'All required fields must be provided' });
@@ -32,7 +32,6 @@ const createTravelPlan = async (req, res) => {
 
   try {
     const newTravelPlan = new Travel({
-      country,
       state,
       city,
       imageUrl,
@@ -47,12 +46,12 @@ const createTravelPlan = async (req, res) => {
 
 // Update an existing travel plan
 const updateTravelPlan = async (req, res) => {
-  const { country, state, city, imageUrl } = req.body;
+  const { state, city, imageUrl } = req.body;
 
   try {
     const updatedTravelPlan = await Travel.findByIdAndUpdate(
       req.params.id,
-      { country, state, city, imageUrl },
+      {  state, city, imageUrl },
       { new: true, runValidators: true }
     );
 
@@ -81,21 +80,10 @@ const deleteTravelPlan = async (req, res) => {
   }
 };
 
-// Fetch all unique countries
-const getAllCountries = async (req, res) => {
+const getAllState = async (req, res) => {
   try {
-    const countries = await Travel.distinct('country');
-    res.status(200).json(countries);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error', error });
-  }
-};
-
-// Fetch all unique states by country
-const getStatesByCountry = async (req, res) => {
-  try {
-    const states = await Travel.distinct('state', { country: req.query.country });
-    res.status(200).json(states);
+    const states = await Travel.distinct('state');
+    res.status(200).json(states);  
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }
@@ -116,7 +104,6 @@ module.exports = {
   createTravelPlan,
   updateTravelPlan,
   deleteTravelPlan,
-  getAllCountries,
-  getStatesByCountry,
+  getAllState,
   getCitiesByState,
 };

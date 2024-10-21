@@ -3,16 +3,15 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Explore.css'
 const Explore = () => {
-  const { placeName } = useParams(); // Get placeName from URL
+  const { placeName } = useParams(); 
   const [specificPlace, setSpecificPlace] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch details for the specific place based on placeName
     axios
-      .get(`/api/specificplace/explore/${placeName}`) // Adjust the endpoint as necessary
+      .get(`/api/specificplace/explore/${placeName}`) 
       .then((response) => {
-        setSpecificPlace(response.data); // Expecting data about the specific place
+        setSpecificPlace(response.data);
       })
       .catch((error) => {
         console.error('Error fetching specific place:', error);
@@ -25,10 +24,9 @@ const Explore = () => {
   }
 
   if (!specificPlace) {
-    return <p>Loading...</p>; // Or a loading spinner
+    return <p>Loading...</p>; 
   }
 
-  // Assuming `placeName` is an object, you should extract the appropriate field (like `placeName.name` or `placeName.placeName`)
   const displayPlaceName = typeof specificPlace.placeName === 'object' ? specificPlace.placeName.placeName : specificPlace.placeName;
 
   return (

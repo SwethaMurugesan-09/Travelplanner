@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const travelSchema = mongoose.Schema(
   {
-    country: {
-      type: String,
-      required: true,
-    },
     state: {
       type: String,
       required: true,

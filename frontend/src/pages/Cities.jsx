@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Cities.css';
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]); // State for filtered cities
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
   const [searchParams] = useSearchParams();
   const state = searchParams.get('state');
   const navigate = useNavigate(); // Hook to navigate to Places page
@@ -15,6 +17,7 @@ const Cities = () => {
         try {
           const response = await axios.get(`/api/cities?state=${state}`);
           setCities(response.data);
+          setFilteredCities(response.data); // Initially, all cities are shown
         } catch (error) {
           console.error('Error fetching cities:', error.response?.data || error.message);
         }
@@ -24,6 +27,17 @@ const Cities = () => {
     fetchCities();
   }, [state]);
 
+  // Handle search input changes
+  const handleSearchChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+    // Filter cities based on the search term
+    const filtered = cities.filter(cityData =>
+      cityData.city.toLowerCase().includes(value)
+    );
+    setFilteredCities(filtered);
+  };
+
   // Function to handle city click
   const handleCityClick = (city) => {
     navigate(`/places?city=${city}`); // Navigate to the Places page with the city as a query parameter
@@ -32,9 +46,16 @@ const Cities = () => {
   return (
     <div className="Cities">
       <h3>Best Tourist places in {state}</h3>
+      <input
+        type="text"
+        placeholder="Search for a city..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+        className="city-search-input"
+      />
       <div className="city-container">
-        {cities.length > 0 ? (
-          cities.map((cityData) => (
+        {filteredCities.length > 0 ? (
+          filteredCities.map((cityData) => (
             <div
               key={cityData.city}
               className="city-card"

@@ -66,7 +66,7 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
+        <div className="auth-container">
             <div className="authContainer">
                 {isLogin ? (
                     <>

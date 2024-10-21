@@ -11,8 +11,7 @@ travelRouter.put('/travelplans/:id', travelController.updateTravelPlan);
 
 travelRouter.delete('/travelplans/:id', travelController.deleteTravelPlan);
 
-travelRouter.get('/countries', travelController.getAllCountries);
-travelRouter.get('/states', travelController.getStatesByCountry);
+travelRouter.get('/states', travelController.getAllState);
 travelRouter.get('/cities', travelController.getCitiesByState);
 
 
