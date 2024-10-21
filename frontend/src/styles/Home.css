@@ -1,43 +1,30 @@
-/* Home.css */
 .famous-places {
   padding: 5rem 5%;
 }
-
-/* Assuming this is your main container */
 .form-image-container {
-  position: relative; /* Ensures child elements with absolute positioning use this as a reference */
+  position: relative; /* Necessary to make the navbar and form appear on top of the image */
   text-align: center;
 }
 
 .background-image {
   width: 100%;
-  height: 700px; /* or whatever size you need */
-  display: block;
+  height: 900px;
   object-fit: cover; 
+  display: block;
   position: relative;
-  z-index: 1; /* Ensure image is layered below the navbar */
+  z-index: 1;
 }
-
-.navbar {
-  position: absolute; 
-  top: 20px; 
-  right: 20px; 
-  padding: 10px 20px;
-  border-radius: 8px;
-  z-index: 3;
-}
-
 
 .form-overlay {
   position: absolute;
-  top: 55%; 
+  top: 65%; 
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.8); 
   padding: 20px;
   border-radius: 10px;
   width: 300px; 
-  z-index: 2; /* Ensure form is layered above the image */
+  z-index: 2;
 }
 
 .form-overlay h3 {
@@ -79,27 +66,3 @@
   background-color: #081729;
 }
 
-
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-  
-.navbar ul li {
-  margin-left: 20px; /* Space between the menu items */
-}
-  
-.navbar ul li a {
-  text-decoration: none;
-  color: rgb(3, 3, 3); /* Change to white for better visibility */
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-  
-.navbar ul li a:hover {
-  background-color: #081729;
-}

@@ -13,6 +13,7 @@ travelRouter.delete('/travelplans/:id', travelController.deleteTravelPlan);
 
 travelRouter.get('/states', travelController.getAllState);
 travelRouter.get('/cities', travelController.getCitiesByState);
+travelRouter.get('/randomstates', travelController.getRandomStatesWithImages);
 
 
 module.exports = travelRouter;

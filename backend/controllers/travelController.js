@@ -24,9 +24,9 @@ const getTravelPlanById = async (req, res) => {
 
 // Create a new travel plan
 const createTravelPlan = async (req, res) => {
-  const { state, city, imageUrl } = req.body;
+  const { state, city, imageUrl ,notes} = req.body;
 
-  if (!country || !state || !city || !imageUrl) {
+  if (!notes || !state || !city || !imageUrl) {
     return res.status(400).json({ message: 'All required fields must be provided' });
   }
 
@@ -35,6 +35,7 @@ const createTravelPlan = async (req, res) => {
       state,
       city,
       imageUrl,
+      notes,
     });
 
     const savedTravelPlan = await newTravelPlan.save();
@@ -46,12 +47,12 @@ const createTravelPlan = async (req, res) => {
 
 // Update an existing travel plan
 const updateTravelPlan = async (req, res) => {
-  const { state, city, imageUrl } = req.body;
+  const { state, city, imageUrl,notes } = req.body;
 
   try {
     const updatedTravelPlan = await Travel.findByIdAndUpdate(
       req.params.id,
-      {  state, city, imageUrl },
+      {  state, city, imageUrl ,notes},
       { new: true, runValidators: true }
     );
 
@@ -91,12 +92,33 @@ const getAllState = async (req, res) => {
 
 const getCitiesByState = async (req, res) => {
   try {
-    const cities = await Travel.find({ state: req.query.state }).select('city imageUrl');
+    const cities = await Travel.find({ state: req.query.state }).select('city imageUrl notes');
     res.status(200).json(cities);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }
 };
+
+
+const getRandomStatesWithImages = async (req, res) => {
+  try {
+    // Fetch all distinct states with their images
+    const states = await Travel.aggregate([
+      { $group: { _id: "$state", imageUrl: { $first: "$imageUrl" } } }
+    ]);
+
+    if (states.length < 10) {
+      return res.status(200).json(states); // If less than 10 states, return all
+    }
+
+    const randomStates = [states[0], states[1]]; // Make sure there are at least 10 states
+    res.status(200).json(randomStates);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error });
+  }
+};
+
+
 
 module.exports = {
   getAllTravelPlans,
@@ -106,4 +128,5 @@ module.exports = {
   deleteTravelPlan,
   getAllState,
   getCitiesByState,
+  getRandomStatesWithImages,
 };

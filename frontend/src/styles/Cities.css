@@ -1,56 +1,57 @@
-/* Container for the Cities component */
 .Cities {
   text-align: center;
   padding: 20px;
-  background-color: #f5f5f5;
+  margin-top: 20px;
 }
-
-/* Search bar styling */
+.Cities h3{
+  font-family:'Times New Roman', Times, serif;
+  font-weight:500;
+  font-size: 30px;
+}
 .city-search-input {
   width: 50%;
-  max-width: 500px;
+  max-width: 350px;
   padding: 10px 15px;
   font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 20px;
+  border: 2px solid #dbd5d5;
+  border-radius: 10px;
   outline: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .city-search-input:focus {
-  border-color: #007bff; /* Blue border on focus */
+  border-color: #989ca0; /* Blue border on focus */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling for the city container (flexbox for layout) */
 .city-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 70px;
   margin-top: 20px;
 }
 
 /* Each city card styling */
 .city-card {
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
   width: 300px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .city-card:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  transform: scale(1.05); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
-/* Image within the city card */
 .city-image {
   width: 100%;
   height: 200px;
@@ -60,7 +61,7 @@
 /* City name styling */
 .city-card h2 {
   margin: 15px 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #333;
 }
 

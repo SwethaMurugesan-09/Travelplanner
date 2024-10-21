@@ -1,0 +1,32 @@
+.navbar {
+  position: absolute;
+  top: 0;  
+  left: 0; 
+  width: 100%; 
+  padding: 10px 20px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  z-index: 3; 
+}
+
+.navbar-elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.navbar ul li {
+  margin-left: 20px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: rgb(17, 16, 16);  
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+  background-color: #969da7;  
+}

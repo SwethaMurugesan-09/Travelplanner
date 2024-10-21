@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Cities.css';
-
+import Navbar from '../components/Navbar/Navbar.jsx';
 const Cities = () => {
   const [cities, setCities] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]); // State for filtered cities
@@ -27,7 +27,6 @@ const Cities = () => {
     fetchCities();
   }, [state]);
 
-  // Handle search input changes
   const handleSearchChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
@@ -37,14 +36,13 @@ const Cities = () => {
     );
     setFilteredCities(filtered);
   };
-
-  // Function to handle city click
   const handleCityClick = (city) => {
     navigate(`/places?city=${city}`); // Navigate to the Places page with the city as a query parameter
   };
 
   return (
     <div className="Cities">
+      <Navbar />
       <h3>Best Tourist places in {state}</h3>
       <input
         type="text"
@@ -67,6 +65,7 @@ const Cities = () => {
                 className="city-image"
               />
               <h2>{cityData.city}</h2>
+              <p>{cityData.notes}</p>
             </div>
           ))
         ) : (

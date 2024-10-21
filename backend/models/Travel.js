@@ -14,6 +14,10 @@ const travelSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    notes:{
+      type:String,
+      required:true,
+    }
   },
   {
     timestamps: true, 

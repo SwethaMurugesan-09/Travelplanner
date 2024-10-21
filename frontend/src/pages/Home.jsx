@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Home.css';
-import image1 from '../components/travel_assets/image1.jpg';
-import Navbar from '../components/travel_assets/Navbar/Navbar';
+import image1 from '../components/travel_assets/image1.jpg'; // Replace with appropriate image if needed
+import Navbar from '../components/Navbar/Navbar';
 
 function Home() {
   const [states, setStates] = useState([]);
+  const [randomStates, setRandomStates] = useState([]); // For recommended places
   const [formData, setFormData] = useState({
     state: '',
     startTravelDate: '',
@@ -24,7 +25,18 @@ function Home() {
         console.error("Error fetching states:", error.response?.data || error.message);
       }
     }
+
+    async function fetchRandomStates() {
+      try {
+        const response = await axios.get(`/api/randomstates`);
+        setRandomStates(response.data);
+      } catch (error) {
+        console.error("Error fetching random states:", error.response?.data || error.message);
+      }
+    }
+
     fetchStates();
+    fetchRandomStates(); // Fetch random states for recommended places
   }, []);
 
   const handleInputChange = (e) => {
@@ -44,64 +56,74 @@ function Home() {
     }
   };
 
-  return (
-    <>
-    <div className="Home-container">
-         <Navbar />
-      <div className="form-image-container">
-        <img src={image1} alt="Travel" className="background-image" />
-
-        <form onSubmit={handleSubmit} className="form-overlay">
-          <label>
-            State:
-            <select
-              name="state"
-              value={formData.state}
-              onChange={handleInputChange}
-            >
-              <option value="">Select State</option>
-              {states.length > 0 ? states.map((state) => (
-                <option key={state} value={state}>{state}</option>
-              )) : (
-                <option disabled>Loading states...</option>
-              )}
-            </select>
-          </label>
-
-          <label>
-            Start Travel Date:
-            <input
-              type="date"
-              name="startTravelDate"
-              value={formData.startTravelDate}
-              onChange={handleInputChange}
-              required
-              min={today}
-            />
-          </label>
-
-          <label>
-            End Travel Date:
-            <input
-              type="date"
-              name="endTravelDate"
-              value={formData.endTravelDate}
-              onChange={handleInputChange}
-              required
-              min={formData.startTravelDate || today}
-            />
-          </label>
-
-          <button type="submit">Start Journey</button>
-        </form>
-      </div>
-
-      <div className="famous-places">
-        <h3>Recommended Places</h3>
+  return (<>
+      <div className="Home-container">
         
-      </div>
-    </div>
-    </>
+        <div className="form-image-container">
+        <Navbar />
+          <img src={image1} alt="Travel" className="background-image" />
+
+          <form onSubmit={handleSubmit} className="form-overlay">
+            <label>
+              State:
+              <select
+                name="state"
+                value={formData.state}
+                onChange={handleInputChange}
+              >
+                <option value="">Select State</option>
+                {states.length > 0 ? states.map((state) => (
+                  <option key={state} value={state}>{state}</option>
+                )) : (
+                  <option disabled>Loading states...</option>
+                )}
+              </select>
+            </label>
+
+            <label>
+              Start Travel Date:
+              <input
+                type="date"
+                name="startTravelDate"
+                value={formData.startTravelDate}
+                onChange={handleInputChange}
+                required
+                min={today}
+              />
+            </label>
+
+            <label>
+              End Travel Date:
+              <input
+                type="date"
+                name="endTravelDate"
+                value={formData.endTravelDate}
+                onChange={handleInputChange}
+                required
+                min={formData.startTravelDate || today}
+              />
+            </label>
+
+            <button type="submit">Start Journey</button>
+          </form>
+        </div>
+        <div className="famous-places">
+          <h3>Famous Places</h3>
+          <div className="places-grid">
+            {randomStates.length > 0 ? (
+              randomStates.map((state) => (
+                <div key={state._id} className="place-card">
+                  <img src={state.imageUrl} alt={state._id} />
+                  <h4>{state._id}</h4>
+                </div>
+              ))
+            ) : (
+              <p>Loading recommended places...</p>
+            )}
+          </div>
+        </div>
+      </div>        </>
+
   );
 }
 
