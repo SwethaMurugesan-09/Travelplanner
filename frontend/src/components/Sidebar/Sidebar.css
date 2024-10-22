@@ -1,26 +1,51 @@
+/* Sidebar container styling */
 .sidebar {
-    width: 220px;
-    padding: 20px;
-    height: 100vh;
-    position: fixed; 
-    padding-left: 60px;
-    overflow-y: auto; /* Enable scroll if the content overflows */
-  }
-  
-  .sidebar-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar-item {
-    margin-bottom: 20px;
-    font-size: 18px;
+  width: 220px;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto; /* Enable scroll if the content overflows */
 }
-  .sidebar-item input {
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  .sidebar-list
-{
-  
+
+/* Sidebar list styling */
+.sidebar-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  padding-left: 30px;
+}
+
+/* Styling for list items */
+.sidebar-lists {
+  margin-bottom: 10px;
+}
+
+/* Heading for categories and ratings */
+.sidebar h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(69, 69, 122);
+}
+
+/* Styling for individual sidebar items */
+.sidebar-item {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.sidebar-checkbox {
+  margin-right: 10px; /* Add space between checkbox and label */
+  cursor: pointer;
+}
+
+/* Additional margin between checkbox and label text */
+.sidebar-lists label {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-lists label .sidebar-checkbox {
+  margin-right: 10px; /* Gap between checkbox and label text */
 }

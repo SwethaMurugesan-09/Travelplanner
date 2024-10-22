@@ -61,29 +61,29 @@
     border-radius: 20px;
   }
   
-  .place-card p {
-    margin-top: 10px;
-    font-size: 18px;
-  }
   .place-card {
     cursor: pointer;
-    max-width: 300px; /* Control width */
+    max-width: 300px;
   }
   
   .place-info {
-    display: flex; /* Use flex to align name and stars */
+    display: flex; 
     justify-content: space-between; /* Space out name and stars */
     align-items: center; /* Vertically center align */
-    margin-top: 10px; /* Space above */
+    margin-top: 10px; 
   }
   
   .place-name {
-    font-size: 18px; /* Font size for the place name */
     flex-grow: 1; /* Allow name to grow and take available space */
+    color: #0020d2;
+    padding-left: 10px;
   }
   
   .place-details {
-    margin-top: 10px; /* Space above details */
-    font-size: 16px; /* Font size for the details */
+    font-size: 1.0 rem ; 
+    padding: 10px 10px;
+    justify-content: center;
   }
-  
+  .place-ratings{
+    padding-right: 10px;
+  }

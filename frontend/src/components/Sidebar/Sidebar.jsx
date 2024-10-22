@@ -27,72 +27,79 @@ const Sidebar = ({ filterPlaces }) => {
 
   return (
     <aside className="sidebar">
-      <h3>Filter by Categories</h3>
+      <h5>Filter by Categories</h5>
       <ul className="sidebar-list">
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('waterfall')}
+              className='sidebar-checkbox'
             />
             Waterfalls
           </label>
         </li>
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('dam')}
+              className='sidebar-checkbox'
             />
             Dams
           </label>
         </li>
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('hillstation')}
+              className='sidebar-checkbox'
             />
             Hill Stations
           </label>
         </li>
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('view point')}
+              className='sidebar-checkbox'
             />
             View Points
           </label>
         </li>
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('lake')}
+              className='sidebar-checkbox'
             />
             Lakes
           </label>
         </li>
-        <li>
+        <li className='sidebar-lists'>
           <label>
             <input
               type="checkbox"
               onChange={() => handleCategoryChange('caves')}
+              className='sidebar-checkbox'
             />
             Caves
           </label>
         </li>
       </ul>
 
-      <h3>Filter by Ratings</h3>
+      <h5>Filter by Ratings</h5>
       <ul className="sidebar-list">
         {[5, 4, 3, 2, 1].map((rating) => (
-          <li key={rating}>
+          <li key={rating} className='sidebar-lists'>
             <label>
               <input
                 type="checkbox"
                 onChange={() => handleRatingChange(rating)}
+                className='sidebar-checkbox'
               />
               {rating} Star{rating > 1 && 's'}
             </label>
