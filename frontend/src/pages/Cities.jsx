@@ -33,7 +33,6 @@ const Cities = () => {
   const handleSearchChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
-    // Filter cities based on the search term
     const filtered = cities.filter(cityData =>
       cityData.city.toLowerCase().includes(value)
     );
@@ -44,7 +43,6 @@ const Cities = () => {
     navigate(`/places?city=${city}`); // Navigate to the Places page with the city as a query parameter
   };
 
-  // Function to render stars based on rating
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {

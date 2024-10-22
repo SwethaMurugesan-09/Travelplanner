@@ -3,10 +3,10 @@ const Travel = require('../models/Travel');
 
 
 const createPlace = async (req, res) => {
-  const { placeName, city, imageUrl } = req.body;
+  const { placeName, city, imageUrl ,ratings, details, category} = req.body;
 
   // Check if all fields are present
-  if (!placeName || !city || !imageUrl) {
+  if (!placeName || !city || !imageUrl || !ratings || !details) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -16,6 +16,9 @@ const createPlace = async (req, res) => {
       placeName,
       city,
       imageUrl,
+      ratings,
+      details,
+      category,
     });
 
     // Save to database

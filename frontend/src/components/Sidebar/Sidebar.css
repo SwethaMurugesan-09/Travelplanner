@@ -15,10 +15,8 @@
   .sidebar-item {
     margin-bottom: 20px;
     font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .sidebar-item:hover {
-    color: #007bff; /* Change color on hover */
+}
+  .sidebar-item input {
+    margin-right: 10px;
   }
   

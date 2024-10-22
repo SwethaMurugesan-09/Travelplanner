@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../styles/Places.css'; 
 import Navbar from '../components/Navbar/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const Places = () => {
   const [touristPlaces, setTouristPlaces] = useState([]);
@@ -26,7 +28,7 @@ const Places = () => {
         .get(`/api/places/${city}`)
         .then((response) => {
           setTouristPlaces(response.data);
-          setFilteredPlaces(response.data);
+          setFilteredPlaces(response.data); // Initially, display all places
         })
         .catch((error) => {
           console.error('Error fetching places:', error);
@@ -44,18 +46,47 @@ const Places = () => {
     );
     setFilteredPlaces(filtered);
   };
-
+  const filterPlaces = (selectedCategories) => {
+    if (selectedCategories.includes('allPlaces') || selectedCategories.length === 0) {
+      // Show all places if "All Places" is selected or no categories are selected
+      setFilteredPlaces(touristPlaces);
+    } else {
+      const filtered = touristPlaces.filter((place) => {
+        return selectedCategories.some((category) =>
+          place.category.toLowerCase().includes(category.toLowerCase())
+        );
+      });
+      setFilteredPlaces(filtered);
+    }
+  };
+  
+  
   const handlePlaceClick = (placeName) => {
     navigate(`/explore/${placeName}`);
   };
 
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          color={i <= rating ? '#FFD700' : '#ccc'}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <div>
-    <div className='places-total-container'>
-      <Navbar /> </div>
-      <div className="places-layout"> {/* Flex container */}
-        <Sidebar /> {/* Sidebar on the left */}
-        <div className="places-container"> {/* Places content on the right */}
+      <div className='places-total-container'>
+        <Navbar />
+      </div>
+      <div className="places-layout">
+        <Sidebar filterPlaces={filterPlaces} /> {/* Pass the filterPlaces function */}
+        <div className="places-container">
           <h1>Tourist Places in {city}</h1>
           <input
             type="text"
@@ -74,7 +105,11 @@ const Places = () => {
                   onClick={() => handlePlaceClick(place.placeName)}
                 >
                   <img src={place.imageUrl} alt={place.placeName} className="place-image" />
-                  <p>{place.placeName}</p>
+                  <div className="place-info">
+                    <p className="place-name">{place.placeName}</p>
+                    <div className="place-ratings">{renderStars(place.ratings)}</div>
+                  </div>
+                  <p className="place-details">{place.details}</p>
                 </div>
               ))}
             </div>

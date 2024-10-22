@@ -15,6 +15,18 @@ const placeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    ratings:{
+      type:Number,
+      required:true,
+    },
+    details:{
+      type:String,
+      required:true,
+    },
+    category:{
+      type:String,
+      required:true,
+    }
   },
   {
     timestamps: true,
