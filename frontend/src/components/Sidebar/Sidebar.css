@@ -18,5 +18,9 @@
 }
   .sidebar-item input {
     margin-right: 10px;
+    cursor: pointer;
   }
+  .sidebar-list
+{
   
+}

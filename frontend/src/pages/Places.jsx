@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Places.css'; 
+import '../styles/Places.css';
 import Navbar from '../components/Navbar/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const Places = () => {
@@ -13,7 +13,7 @@ const Places = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const getCityFromQuery = () => {
     const params = new URLSearchParams(location.search);
@@ -28,7 +28,7 @@ const Places = () => {
         .get(`/api/places/${city}`)
         .then((response) => {
           setTouristPlaces(response.data);
-          setFilteredPlaces(response.data); // Initially, display all places
+          setFilteredPlaces(response.data);
         })
         .catch((error) => {
           console.error('Error fetching places:', error);
@@ -46,21 +46,26 @@ const Places = () => {
     );
     setFilteredPlaces(filtered);
   };
-  const filterPlaces = (selectedCategories) => {
-    if (selectedCategories.includes('allPlaces') || selectedCategories.length === 0) {
-      // Show all places if "All Places" is selected or no categories are selected
-      setFilteredPlaces(touristPlaces);
-    } else {
-      const filtered = touristPlaces.filter((place) => {
-        return selectedCategories.some((category) =>
-          place.category.toLowerCase().includes(category.toLowerCase())
-        );
-      });
-      setFilteredPlaces(filtered);
+
+  // Combined filter by categories and ratings
+  const filterPlaces = (categories, ratings) => {
+    let filtered = touristPlaces;
+
+    // Filter by categories
+    if (categories.length > 0) {
+      filtered = filtered.filter((place) =>
+        categories.some((category) => place.placeName.toLowerCase().includes(category))
+      );
     }
+
+    // Filter by ratings
+    if (ratings.length > 0) {
+      filtered = filtered.filter((place) => ratings.includes(Math.floor(place.ratings)));
+    }
+
+    setFilteredPlaces(filtered);
   };
-  
-  
+
   const handlePlaceClick = (placeName) => {
     navigate(`/explore/${placeName}`);
   };
@@ -81,11 +86,11 @@ const Places = () => {
 
   return (
     <div>
-      <div className='places-total-container'>
+      <div className="places-total-container">
         <Navbar />
       </div>
       <div className="places-layout">
-        <Sidebar filterPlaces={filterPlaces} /> {/* Pass the filterPlaces function */}
+        <Sidebar filterPlaces={filterPlaces} />
         <div className="places-container">
           <h1>Tourist Places in {city}</h1>
           <input
@@ -99,9 +104,9 @@ const Places = () => {
           {filteredPlaces.length > 0 ? (
             <div className="places-grid">
               {filteredPlaces.map((place) => (
-                <div 
-                  key={place._id} 
-                  className="place-card" 
+                <div
+                  key={place._id}
+                  className="place-card"
                   onClick={() => handlePlaceClick(place.placeName)}
                 >
                   <img src={place.imageUrl} alt={place.placeName} className="place-image" />
