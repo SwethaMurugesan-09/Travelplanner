@@ -17,6 +17,10 @@ const travelSchema = mongoose.Schema(
     notes:{
       type:String,
       required:true,
+    },
+    ratings:{
+      type:Number,
+      required:true,
     }
   },
   {

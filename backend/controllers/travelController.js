@@ -24,9 +24,9 @@ const getTravelPlanById = async (req, res) => {
 
 // Create a new travel plan
 const createTravelPlan = async (req, res) => {
-  const { state, city, imageUrl ,notes} = req.body;
+  const { state, city, imageUrl ,notes, ratings} = req.body;
 
-  if (!notes || !state || !city || !imageUrl) {
+  if (!notes || !state || !city || !imageUrl || !ratings) {
     return res.status(400).json({ message: 'All required fields must be provided' });
   }
 
@@ -36,6 +36,7 @@ const createTravelPlan = async (req, res) => {
       city,
       imageUrl,
       notes,
+      ratings,
     });
 
     const savedTravelPlan = await newTravelPlan.save();
@@ -47,12 +48,12 @@ const createTravelPlan = async (req, res) => {
 
 // Update an existing travel plan
 const updateTravelPlan = async (req, res) => {
-  const { state, city, imageUrl,notes } = req.body;
+  const { state, city, imageUrl,notes ,ratings} = req.body;
 
   try {
     const updatedTravelPlan = await Travel.findByIdAndUpdate(
       req.params.id,
-      {  state, city, imageUrl ,notes},
+      {  state, city, imageUrl ,notes,ratings},
       { new: true, runValidators: true }
     );
 
@@ -102,16 +103,23 @@ const getCitiesByState = async (req, res) => {
 
 const getRandomStatesWithImages = async (req, res) => {
   try {
-    // Fetch all distinct states with their images
+    // Fetch all distinct states with their images and ratings
     const states = await Travel.aggregate([
-      { $group: { _id: "$state", imageUrl: { $first: "$imageUrl" } } }
+      {
+        $group: {
+          _id: "$state",
+          imageUrl: { $first: "$imageUrl" }, // Keep first image per state
+          ratings: { $avg: "$ratings" }, // Average the ratings of the grouped states
+        },
+      },
     ]);
 
     if (states.length < 10) {
       return res.status(200).json(states); // If less than 10 states, return all
     }
 
-    const randomStates = [states[0], states[1]]; // Make sure there are at least 10 states
+    // Select a random subset of states (e.g., 10)
+    const randomStates = states.slice(0, 10); // Fetch 10 random states if needed
     res.status(200).json(randomStates);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });

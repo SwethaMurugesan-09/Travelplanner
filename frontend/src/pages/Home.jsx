@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Home.css';
 import image1 from '../components/travel_assets/image1.jpg'; // Replace with appropriate image if needed
 import Navbar from '../components/Navbar/Navbar';
@@ -56,13 +58,26 @@ function Home() {
     }
   };
 
-  return (<>
-      <div className="Home-container">
-        
-        <div className="form-image-container">
-        <Navbar />
-          <img src={image1} alt="Travel" className="background-image" />
+  // Function to render stars based on rating
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          color={i <= rating ? '#FFD700' : '#ccc'} // Gold for filled stars, gray for empty
+        />
+      );
+    }
+    return stars;
+  };
 
+  return (
+    <>
+      <div className="Home-container">
+        <div className="form-image-container background-image" style={{backgroundImage: `url(${image1})`}}>
+          <Navbar />
           <form onSubmit={handleSubmit} className="form-overlay">
             <label>
               State:
@@ -107,6 +122,7 @@ function Home() {
             <button type="submit">Start Journey</button>
           </form>
         </div>
+
         <div className="famous-places">
           <h3>Famous Places</h3>
           <div className="places-grid">
@@ -115,6 +131,7 @@ function Home() {
                 <div key={state._id} className="place-card">
                   <img src={state.imageUrl} alt={state._id} />
                   <h4>{state._id}</h4>
+                  <div className='home-ratings'>{renderStars(state.ratings)}</div> {/* Render stars based on rating */}
                 </div>
               ))
             ) : (
@@ -122,8 +139,8 @@ function Home() {
             )}
           </div>
         </div>
-      </div>        </>
-
+      </div>
+    </>
   );
 }
 

@@ -1,32 +1,29 @@
 .navbar {
   position: absolute;
-  top: 0;  
-  left: 0; 
-  width: 100%; 
-  padding: 10px 20px; 
-  background-color: rgba(255, 255, 255, 0.8); 
-  z-index: 3; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 60px !important;
+  background: transparent;
+  z-index: 3;
 }
 
 .navbar-elements {
   display: flex;
-  flex-direction: row;
-  justify-content: end;
+  flex-direction: row !important;
+  justify-content: space-around;
+  gap: 2rem;
 }
 
-.navbar ul li {
-  margin-left: 20px;
-}
-
-.navbar ul li a {
-  text-decoration: none;
-  color: rgb(17, 16, 16);  
+.navbar-content a {
+  text-decoration: none; /* Apply directly to the anchor tag */
+  color: rgb(10, 10, 10);
   font-weight: bold;
-  padding: 10px 15px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
-.navbar ul li a:hover {
-  background-color: #969da7;  
+.navbar-content a:hover {
+  background-color: #969da7;
+  text-decoration: none; /* Ensure text decoration remains none on hover */
 }
