@@ -93,7 +93,7 @@ const getAllState = async (req, res) => {
 
 const getCitiesByState = async (req, res) => {
   try {
-    const cities = await Travel.find({ state: req.query.state }).select('city imageUrl notes');
+    const cities = await Travel.find({ state: req.query.state }).select('city imageUrl notes ratings');
     res.status(200).json(cities);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });

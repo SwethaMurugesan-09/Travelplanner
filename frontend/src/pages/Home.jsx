@@ -31,7 +31,8 @@ function Home() {
     async function fetchRandomStates() {
       try {
         const response = await axios.get(`/api/randomstates`);
-        setRandomStates(response.data);
+        const sortedStates = response.data.sort((a, b) => b.ratings - a.ratings); // Sort by ratings in descending order
+        setRandomStates(sortedStates);
       } catch (error) {
         console.error("Error fetching random states:", error.response?.data || error.message);
       }
@@ -131,7 +132,7 @@ function Home() {
                 <div key={state._id} className="place-card">
                   <img src={state.imageUrl} alt={state._id} />
                   <h4>{state._id}</h4>
-                  <div className='home-ratings'>{renderStars(state.ratings)}</div> {/* Render stars based on rating */}
+                  <div className='home-ratings'>{renderStars(state.ratings)}</div> 
                 </div>
               ))
             ) : (

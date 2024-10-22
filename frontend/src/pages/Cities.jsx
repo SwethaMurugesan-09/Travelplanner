@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Cities.css';
 import Navbar from '../components/Navbar/Navbar.jsx';
+
 const Cities = () => {
   const [cities, setCities] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]); // State for filtered cities
@@ -36,8 +39,24 @@ const Cities = () => {
     );
     setFilteredCities(filtered);
   };
+
   const handleCityClick = (city) => {
     navigate(`/places?city=${city}`); // Navigate to the Places page with the city as a query parameter
+  };
+
+  // Function to render stars based on rating
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          color={i <= rating ? '#FFD700' : '#ccc'} // Gold for filled stars, gray for empty
+        />
+      );
+    }
+    return stars;
   };
 
   return (
@@ -64,8 +83,11 @@ const Cities = () => {
                 alt={cityData.city}
                 className="city-image"
               />
-              <h2>{cityData.city}</h2>
-              <p>{cityData.notes}</p>
+              <div className="city-header">
+                <h2>{cityData.city}</h2>
+                <div className="city-ratings">{renderStars(cityData.ratings)}</div> {/* Render stars based on rating */}
+              </div>
+              <p className='city-para'>{cityData.notes}</p>
             </div>
           ))
         ) : (

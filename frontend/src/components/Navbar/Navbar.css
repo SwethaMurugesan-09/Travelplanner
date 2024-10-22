@@ -21,9 +21,10 @@
   font-weight: bold;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  padding: 10px;
 }
 
 .navbar-content a:hover {
   background-color: #969da7;
-  text-decoration: none; /* Ensure text decoration remains none on hover */
+  text-decoration: none; 
 }
