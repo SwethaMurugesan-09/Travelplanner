@@ -65,7 +65,7 @@
 .form-overlay button:hover {
   background-color: #081729;
 }
-.places-grid {
+.famous-places-grid {
   display: flex;
   flex-direction: row;
   gap:50px ;

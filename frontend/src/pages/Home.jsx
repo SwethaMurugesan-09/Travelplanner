@@ -126,7 +126,7 @@ function Home() {
 
         <div className="famous-places">
           <h3>Famous Places</h3>
-          <div className="places-grid">
+          <div className="famous-places-grid">
             {randomStates.length > 0 ? (
               randomStates.map((state) => (
                 <div key={state._id} className="place-card">

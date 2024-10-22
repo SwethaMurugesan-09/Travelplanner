@@ -1,0 +1,74 @@
+/* Main container for flex layout */
+.places-layout {
+    display: flex;
+  }
+  .sidebar {
+    width: 220px;
+    padding: 20px;
+    height: calc(100vh - 80px); /* Full height minus the navbar */
+    position: fixed;
+    top: 80px; /* Start below the navbar */
+    left: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-item {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .sidebar-item:hover {
+    color: #007bff;
+  }
+  
+  /* Main places container next to sidebar */
+  .places-container h1{
+    margin-left: 40%; /* Ensure enough space for the sidebar */
+    flex-grow: 1; /* Take up the rest of the available space */
+    width: calc(100% - 240px); /* Remaining width after sidebar */
+  }
+  
+  .places-search-input {
+    margin-left: 43%; 
+    width: 50%;
+    max-width: 350px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #dbd5d5;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+  
+  .places-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    justify-content: start;
+    margin-left: 300px; /* Ensure enough space for the sidebar */
+  }
+  
+  .place-card {
+    cursor: pointer;
+  }
+  
+  .place-image {
+    width: 300px;
+    height: 200px;
+    border-radius: 20px;
+  }
+  
+  .place-card p {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  

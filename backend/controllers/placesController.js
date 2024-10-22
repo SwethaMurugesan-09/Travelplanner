@@ -1,34 +1,33 @@
 const Place = require('../models/Place'); 
 const Travel = require('../models/Travel'); 
 
-const createPlace = async (req, res) => {
-  const { placeName, cityName, imageUrl } = req.body; 
 
-  if (!placeName || !cityName || !imageUrl) {
+const createPlace = async (req, res) => {
+  const { placeName, city, imageUrl } = req.body;
+
+  // Check if all fields are present
+  if (!placeName || !city || !imageUrl) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    const cityExists = await Travel.findOne({ city: cityName });
-    
-    if (!cityExists) {
-      return res.status(404).json({ message: 'City not found' });
-    }
-
+    // Create new place
     const newPlace = new Place({
       placeName,
-      city: cityExists._id, 
+      city,
       imageUrl,
     });
 
-    const savedPlace = await newPlace.save();
-    res.status(201).json(savedPlace);
+    // Save to database
+    await newPlace.save();
+
+    // Send success response
+    res.status(201).json(newPlace);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error('Error creating place:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
-
-
 
 const getTouristPlacesByCity = async (req, res) => {
   const { cityName } = req.params; // Change to cityName

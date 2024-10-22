@@ -14,7 +14,8 @@ dotenv.config();
 
 const app = express();
 app.use(cors({}));
-app.use(express.json());
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); // This parses URL-encoded bodies (if needed)
 
 const uploadDir = './upload/images';
 if (!fs.existsSync(uploadDir)) {
