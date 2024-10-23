@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
+import Navbar from '../components/Navbar/Navbar';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -66,6 +67,8 @@ const Login = () => {
     };
 
     return (
+        <div className="auth-total-container">
+            <Navbar/>
         <div className="auth-container">
             <div className="authContainer">
                 {isLogin ? (
@@ -136,7 +139,7 @@ const Login = () => {
                     </>
                 )}
             </div>
-        </div>
+        </div></div>
     );
 };
 

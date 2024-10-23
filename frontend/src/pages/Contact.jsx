@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Contact.css';
-
+import Navbar from '../components/Navbar/Navbar';
 const Contact    = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,6 +26,8 @@ const Contact    = () => {
   };
 
   return (
+    <div className="contact-form-total-container">
+        <Navbar />
     <div className="contact-form-container">
       <h2 className="contact-title">Contact Us</h2>
       {submitted ? (
@@ -76,7 +78,7 @@ const Contact    = () => {
           <button type="submit" className="contact-submit-btn">Submit</button>
         </form>
       )}
-    </div>
+    </div></div>
   );
 };
 
