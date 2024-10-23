@@ -1,10 +1,7 @@
 /* Sidebar container styling */
 .sidebar {
-  width: 220px;
-  padding: 20px;
-  height: 100vh;
-  position: fixed;
-  overflow-y: auto; /* Enable scroll if the content overflows */
+  width: 250px;
+ 
 }
 
 /* Sidebar list styling */

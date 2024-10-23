@@ -12,10 +12,16 @@ const Explore = () => {
     hotels: true,
     restaurants: true,
     tripplaces: true,
-  }); // State for selected categories
+  }); 
+  const [selectedRatings, setSelectedRatings] = useState({
+    5: true,
+    4: true,
+    3: true,
+    2: true,
+    1: true,
+  });
 
   useEffect(() => {
-    // Fetch specific place details from the backend
     axios
       .get(`/api/specificplace/explore/${placeName}`)
       .then((response) => {
@@ -27,15 +33,6 @@ const Explore = () => {
       });
   }, [placeName]);
 
-  if (error) {
-    return <p>{error}</p>; // Render error if any
-  }
-
-  if (!specificPlace) {
-    return <p>Loading...</p>; // Render loading state if data is not yet available
-  }
-
-  // Handle checkbox changes
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) => ({
       ...prev,
@@ -43,7 +40,13 @@ const Explore = () => {
     }));
   };
 
-  // Function to render star ratings
+  const handleRatingChange = (rating) => {
+    setSelectedRatings((prev) => ({
+      ...prev,
+      [rating]: !prev[rating],
+    }));
+  };
+
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -56,110 +59,155 @@ const Explore = () => {
     return stars;
   };
 
-  // Safely access specificPlace properties and avoid rendering objects
-  const placeNameString = typeof specificPlace.placeName === 'object' 
-    ? specificPlace.placeName?.placeName || 'Unknown Place' 
-    : specificPlace.placeName || 'Unknown Place';
+  const placeNameString = typeof specificPlace?.placeName === 'object' 
+    ? specificPlace?.placeName?.placeName || 'Unknown Place' 
+    : specificPlace?.placeName || 'Unknown Place';
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!specificPlace) {
+    return <p>Loading...</p>; 
+  }
+
+  // Check if any rating checkboxes are selected (at least one is true)
+  const isRatingFilterApplied = Object.values(selectedRatings).some(val => val);
+
+  // Check if any category checkboxes are selected (at least one is true)
+  const isCategoryFilterApplied = Object.values(selectedCategories).some(val => val);
+
+  // Filter hotels based on selected ratings, or show all if no ratings are selected
+  const filteredHotels = isRatingFilterApplied
+    ? specificPlace.hotels?.filter(hotel => selectedRatings[hotel.ratings])
+    : specificPlace.hotels;
+
+  // Filter restaurants based on selected ratings, or show all if no ratings are selected
+  const filteredRestaurants = isRatingFilterApplied
+    ? specificPlace.restaurant?.filter(rest => selectedRatings[rest.ratings])
+    : specificPlace.restaurant;
+
+  // Trip Places should always show, no filtering by ratings
+  const filteredTripPlaces = specificPlace.tripplaces;
+
+  // Only display categories if at least one checkbox is selected, otherwise show all
+  const displayHotels = isCategoryFilterApplied ? selectedCategories.hotels : true;
+  const displayRestaurants = isCategoryFilterApplied ? selectedCategories.restaurants : true;
+  const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
 
   return (
     <div className="explore-total-container">
-      <Navbar/>
-    <div className="explore-container">
-      <div className="explore-sidebar">
-        <h3>Categories</h3>
-        <div>
-          <input
-            type="checkbox"
-            id="hotels"
-            checked={selectedCategories.hotels}
-            onChange={() => handleCategoryChange('hotels')}
-          />
-          <label htmlFor="hotels">Hotels</label>
+      <Navbar />
+      <div className="explore-container">
+        <div className="explore-sidebar">
+          <h3>Categories</h3>
+          <div>
+            <input
+              type="checkbox"
+              id="hotels"
+              checked={selectedCategories.hotels}
+              onChange={() => handleCategoryChange('hotels')}
+            />
+            <label htmlFor="hotels">Hotels</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="restaurants"
+              checked={selectedCategories.restaurants}
+              onChange={() => handleCategoryChange('restaurants')}
+            />
+            <label htmlFor="restaurants">Restaurants</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="tripplaces"
+              checked={selectedCategories.tripplaces}
+              onChange={() => handleCategoryChange('tripplaces')}
+            />
+            <label htmlFor="tripplaces">Trip Places</label>
+          </div>
+
+          <h3>Filter by Ratings</h3>
+          {[5, 4, 3, 2, 1].map((rating) => (
+            <div key={rating}>
+              <input
+                type="checkbox"
+                id={`rating-${rating}`}
+                checked={selectedRatings[rating]}
+                onChange={() => handleRatingChange(rating)}
+              />
+              <label htmlFor={`rating-${rating}`}>{renderStars(rating)}</label>
+            </div>
+          ))}
         </div>
-        <div>
-          <input
-            type="checkbox"
-            id="restaurants"
-            checked={selectedCategories.restaurants}
-            onChange={() => handleCategoryChange('restaurants')}
-          />
-          <label htmlFor="restaurants">Restaurants</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="tripplaces"
-            checked={selectedCategories.tripplaces}
-            onChange={() => handleCategoryChange('tripplaces')}
-          />
-          <label htmlFor="tripplaces">Trip Places</label>
+
+        <div className="explore-main-content">
+          <h3>Details for {placeNameString}</h3>
+
+          {specificPlace.imageUrl && (
+            <img src={specificPlace.imageUrl} alt={placeNameString} className="explore-place-image" />
+          )}
+
+          {displayHotels && (
+            <>
+              <h2>Hotels:</h2>
+              <div className="explore-main-hotels">
+                {filteredHotels && filteredHotels.length > 0 ? (
+                  filteredHotels.map((hotel, index) => (
+                    <div key={index} className="explore-item-card">
+                      <img src={hotel.imageUrl} alt={hotel.name} className="explore-item-image" />
+                      <p><strong>{hotel.name}</strong></p>
+                      <p>Ratings: {renderStars(hotel.ratings)}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No hotels available</p>
+                )}
+              </div>
+            </>
+          )}
+
+          {displayRestaurants && (
+            <>
+              <h2>Restaurants:</h2>
+              <div className="explore-main-hotels">
+                {filteredRestaurants && filteredRestaurants.length > 0 ? (
+                  filteredRestaurants.map((rest, index) => (
+                    <div key={index} className="explore-item-card">
+                      <img src={rest.imageUrl} alt={rest.name} className="explore-item-image" />
+                      <p><strong>{rest.name}</strong></p>
+                      <p>Ratings: {renderStars(rest.ratings)}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No restaurants available</p>
+                )}
+              </div>
+            </>
+          )}
+
+          {displayTripPlaces && (
+            <>
+              <h2>Trip Places:</h2>
+              <div className="explore-main-hotels">
+                {filteredTripPlaces && filteredTripPlaces.length > 0 ? (
+                  filteredTripPlaces.map((tripplace, index) => (
+                    <div key={index} className="explore-item-card">
+                      <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
+                      <p><strong>{tripplace.name}</strong></p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No trip places available</p>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="main-content">
-        <h3>Details for {placeNameString}</h3>
-
-        {/* Display the main place image */}
-        {specificPlace.imageUrl && (
-          <img src={specificPlace.imageUrl} alt={placeNameString} className="place-image" />
-        )}
-
-        {/* Render Hotels Section */}
-        {selectedCategories.hotels && (
-          <>
-            <h2>Hotels:</h2>
-            {specificPlace.hotels && Array.isArray(specificPlace.hotels) && specificPlace.hotels.length > 0 ? (
-              specificPlace.hotels.map((hotel, index) => (
-                <div key={index} className="item-card">
-                  <img src={hotel.imageUrl} alt={hotel.name} className="item-image" />
-                  <p><strong>{hotel.name}</strong></p>
-                  <p>Ratings: {renderStars(hotel.ratings)}</p>
-                </div>
-              ))
-            ) : (
-              <p>No hotels available</p>
-            )}
-          </>
-        )}
-
-        {/* Render Restaurants Section */}
-        {selectedCategories.restaurants && (
-          <>
-            <h2>Restaurants:</h2>
-            {specificPlace.restaurant && Array.isArray(specificPlace.restaurant) && specificPlace.restaurant.length > 0 ? (
-              specificPlace.restaurant.map((rest, index) => (
-                <div key={index} className="item-card">
-                  <img src={rest.imageUrl} alt={rest.name} className="item-image" />
-                  <p><strong>{rest.name}</strong></p>
-                  <p>Ratings: {renderStars(rest.ratings)}</p>
-                </div>
-              ))
-            ) : (
-              <p>No restaurants available</p>
-            )}
-          </>
-        )}
-
-        {/* Render Trip Places Section */}
-        {selectedCategories.tripplaces && (
-          <>
-            <h2>Trip Places:</h2>
-            {specificPlace.tripplaces && Array.isArray(specificPlace.tripplaces) && specificPlace.tripplaces.length > 0 ? (
-              specificPlace.tripplaces.map((tripplace, index) => (
-                <div key={index} className="item-card">
-                  <img src={tripplace.imageUrl} alt={tripplace.name} className="item-image" />
-                  <p><strong>{tripplace.name}</strong></p>
-                  <p>Ratings: {renderStars(tripplace.ratings)}</p>
-                </div>
-              ))
-            ) : (
-              <p>No trip places available</p>
-            )}
-          </>
-        )}
-      </div>
-    </div></div>
+    </div>
   );
 };
 

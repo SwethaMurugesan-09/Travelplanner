@@ -60,6 +60,7 @@ const Cities = () => {
   return (
     <div className="Cities">
       <Navbar />
+      <div className="city-total-container">
       <h3>Best Tourist places in {state}</h3>
       <input
         type="text"
@@ -92,6 +93,7 @@ const Cities = () => {
           state && <p>Loading cities...</p>
         )}
       </div>
+    </div>
     </div>
   );
 };

@@ -1,17 +1,13 @@
-.places-layout {
-    display: flex;
-  }
+
   .sidebar {
-    width: 220px;
+    width: 250px;
     padding: 20px;
-    height: calc(100vh - 80px);
     position: fixed;
     top: 80px; 
     left: 0;
     overflow-y: auto;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }
-  
   .sidebar-list {
     list-style-type: none;
     padding: 0;
@@ -25,15 +21,17 @@
   .sidebar-item:hover {
     color: #007bff;
   }
-
+.places-layout{
+  width: calc(100% - 250px); 
+}
   .places-container h1{
-    margin-left: 40%;
+    margin-left: 50%;
     flex-grow: 1; 
-    width: calc(100% - 240px); 
+    margin-top: 80px;
   }
   
   .places-search-input {
-    margin-left: 43%; 
+    margin-left: 54%; 
     width: 50%;
     max-width: 350px;
     padding: 10px 15px;
@@ -51,7 +49,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
-    justify-content: start;
+    justify-content: center;
     margin-left: 300px;
   }
   
@@ -87,4 +85,13 @@
   }
   .place-ratings{
     padding-right: 10px;
+  }
+
+  .places-container{
+    justify-content: center;
+  }
+
+  .places-layout{
+    display: flex;
+    flex-direction: row;
   }
