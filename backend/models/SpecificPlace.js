@@ -22,7 +22,6 @@ const specificPlaceSchema = mongoose.Schema(
         imageUrl:[ { type: String, required: true }], // Trip place image
         details: { type: String, required: true }, // Trip place details
         details:{type:String,required:true},
-        amount:{type:String,required:true},
       },
     ],
     restaurant: [
@@ -31,6 +30,7 @@ const specificPlaceSchema = mongoose.Schema(
         imageUrl: [{ type: String, required: true }], // Restaurant image
         ratings: { type: Number, required: true }, // Restaurant ratings
         details:{type:String,required:true},
+        amount:{type:String,required:true},
       },
     ],
   },

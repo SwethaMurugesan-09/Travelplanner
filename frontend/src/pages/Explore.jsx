@@ -154,7 +154,7 @@ const Explore = () => {
                   filteredHotels.map((hotel, index) => (
                     <div key={index} className="explore-item-card">
                       <Link to={`/hotels/${hotel._id}`}> {/* Navigate to the hotel details page */}
-                        <img src={hotel.imageUrl} alt={hotel.name} className="explore-item-image" />
+                      <img src={hotel.imageUrl[0]} alt={hotel.name} className="explore-item-image" />
                       </Link>
                       <p><strong>{hotel.name}</strong></p>
                       <p>Ratings: {renderStars(hotel.ratings)}</p>
@@ -175,7 +175,7 @@ const Explore = () => {
         filteredRestaurants.map((restaurant, index) => (
           <div key={index} className="explore-item-card">
             <Link to={`/restaurants/${restaurant._id}`}>
-              <img src={restaurant.imageUrl} alt={restaurant.name} className="explore-item-image" />
+            <img src={restaurant.imageUrl[0]} alt={restaurant.name} className="explore-item-image" />
             </Link>
             <p><strong>{restaurant.name}</strong></p>
             <p>Ratings: {renderStars(restaurant.ratings)}</p>
@@ -196,7 +196,7 @@ const Explore = () => {
     filteredTripPlaces.map((tripplace, index) => (
       <div key={index} className="explore-item-card">
         <Link to={`/tripplaces/${tripplace._id}`}> {/* Navigate to the trip place details page */}
-          <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
+        <img src={tripplace.imageUrl[0]} alt={tripplace.name} className="explore-item-image" />
         </Link>
         <p><strong>{tripplace.name}</strong></p>
       </div>
