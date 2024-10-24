@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import '../styles/CurrencyConverter.css'
+import Navbar from '../components/Navbar/Navbar';
 const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState('USD');
@@ -24,6 +25,8 @@ const CurrencyConverter = () => {
   };
 
   return (
+    <div className="currency-conteiner">
+        <Navbar/>
     <div className="converter">
       <h1>Currency Converter</h1>
       <div className="input-section">
@@ -72,7 +75,7 @@ const CurrencyConverter = () => {
       <h2>
         {amount} {fromCurrency} = {convertedAmount} {toCurrency}
       </h2>
-    </div>
+    </div></div>
   );
 };
 

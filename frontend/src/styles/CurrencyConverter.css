@@ -1,0 +1,78 @@
+/* Currency Converter Container */
+.converter {
+    max-width: 400px;
+    margin: 150px auto;
+    padding: 30px;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .converter h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Section */
+  .input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-container label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .input-container input,
+  .input-container select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .input-container input:focus,
+  .input-container select:focus {
+    border-color: #007bff;
+  }
+  
+  /* Convert Button */
+  .convert-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .convert-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Converted Result */
+  h2 {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+    font-size: 20px;
+  }
+  
