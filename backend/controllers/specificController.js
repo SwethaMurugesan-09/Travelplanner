@@ -12,7 +12,6 @@ const createSpecificPlace = async (req, res) => {
   }
 
   try {
-    // Find the Place document by its name
     const place = await Place.findOne({ placeName });
 
     if (!place) {
@@ -20,10 +19,10 @@ const createSpecificPlace = async (req, res) => {
     }
 
     const newSpecificPlace = new SpecificPlace({
-      placeName: place._id,  // Reference to the Place document
-      hotels,                // Array of hotels (multiple entries)
-      tripplaces,            // Array of trip places (multiple entries)
-      restaurant,            // Array of restaurants (multiple entries)
+      placeName: place._id, 
+      hotels,               
+      tripplaces,           
+      restaurant,        
     });
 
     const savedSpecificPlace = await newSpecificPlace.save();

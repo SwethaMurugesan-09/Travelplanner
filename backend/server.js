@@ -9,14 +9,13 @@ const path = require('path');
 const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
 const specificRoutes = require('./routes/specificRoutes');
-const detailsRoutes = require('./routes/detailsRoutes');
 
 dotenv.config();
 
 const app = express();
 app.use(cors({}));
 app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); // This parses URL-encoded bodies (if needed)
+app.use(express.urlencoded({ extended: true })); 
 
 const uploadDir = './upload/images';
 if (!fs.existsSync(uploadDir)) {
@@ -76,7 +75,6 @@ app.use('/api', travelRoutes);
 app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
 app.use('/api/specificplace', specificRoutes);
-app.use('/api', detailsRoutes);
 
 
 const PORT = process.env.PORT || 5000;
