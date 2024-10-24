@@ -1,138 +1,132 @@
 .explore-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 90px;
-  }
-  .explore-sidebar {
-    width: 250px;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-right: 1px solid #ddd;
-    height: calc(100vh - 90px); /* Full height sidebar minus margin */
-    position: fixed;
-    top: 90px; /* Adjusted to align with the container's margin */
-  }
-  .explore-sidebar h3 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #6446b8;
-  }
-  
-  .explore-sidebar input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  .explore-sidebar div {
-    margin-bottom: 15px;
-    font-size: 16px;
-  }
-  
-.explore-main-content {
-    flex: 1; 
-    padding: 20px;
-    margin-left: 250px;
-    overflow-y: auto;
-  }
-  
-  .explore-main-content h3 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding-left: 35%;
-  }
-  
-  .explore-main-content h2 {
-    font-size: 22px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    color: #444;
-  }
-  
-
-  .explore-item-card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .explore-item-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .explore-item-image {
-    width: 230px;
-    height: 180px;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-right: 15px;
-    margin-bottom: 20px;
-  }
-  
-
-.explore-main-hotels{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 90px;
 }
 
+.explore-sidebar {
+  width: 250px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-right: 1px solid #ddd;
+  height: calc(100vh - 90px); /* Full height sidebar minus margin */
+  position: fixed;
+  top: 90px; /* Adjusted to align with the container's margin */
+}
 
+.explore-sidebar h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #6446b8;
+}
 
-  .explore-item-card p {
-    margin: 0;
+.explore-sidebar input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.explore-sidebar div {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.explore-main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px;
+  overflow-y: auto;
+}
+
+.explore-main-content h3 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-left: 35%;
+}
+
+.explore-main-content h2 {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  color: #444;
+}
+
+/* Common card styling for hotels, restaurants, and trip places */
+.explore-item-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  min-width: 230px;
+}
+
+.explore-item-card:hover {
+  transform: translateY(-5px);
+}
+
+.explore-item-image {
+  width: 230px;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+/* Flex container with horizontal scrolling for hotels */
+.explore-main-hotels,
+.explore-main-restaurants,
+.explore-main-tripplaces {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  padding-bottom: 15px;
+}
+
+.explore-main-hotels::-webkit-scrollbar,
+.explore-main-restaurants::-webkit-scrollbar,
+.explore-main-tripplaces::-webkit-scrollbar {
+  height: 8px; /* Scrollbar height for horizontal scroll */
+}
+
+.explore-main-hotels::-webkit-scrollbar-thumb,
+.explore-main-restaurants::-webkit-scrollbar-thumb,
+.explore-main-tripplaces::-webkit-scrollbar-thumb {
+  background-color: #ddd; /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
+.explore-main-hotels::-webkit-scrollbar-thumb:hover,
+.explore-main-restaurants::-webkit-scrollbar-thumb:hover,
+.explore-main-tripplaces::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+/* Additional styles for mobile responsiveness */
+@media (max-width: 768px) {
+  .explore-container {
+    flex-direction: column;
   }
-  
-  .explore-item-card strong {
-    font-size: 18px;
-    color: #333;
+
+  .explore-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
   }
-  
-  .explore-item-card p:last-child {
-    font-size: 16px;
-    color: #777;
+
+  .explore-main-content {
+    padding: 10px;
+    margin-left: 0;
   }
-  
-  .explore-item-card span {
-    font-size: 18px;
-    color: #ffcc00; /* Yellow color for stars */
-    margin-right: 2px;
+
+  .explore-item-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
   }
-  
-  @media (max-width: 768px) {
-    .explore-container {
-      flex-direction: column;
-    }
-  
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-      border-right: none;
-    }
-  
-    .main-content {
-      padding: 10px;
-    }
-  
-    .place-image {
-      max-width: 100%;
-    }
-  
-    .item-card {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .item-image {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-  }
-  
+}

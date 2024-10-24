@@ -9,17 +9,19 @@ const Explore = () => {
   const [specificPlace, setSpecificPlace] = useState(null); // State for specific place data
   const [error, setError] = useState(null); // State for error handling
   const [selectedCategories, setSelectedCategories] = useState({
-    hotels: true,
-    restaurants: true,
-    tripplaces: true,
-  }); 
-  const [selectedRatings, setSelectedRatings] = useState({
-    5: true,
-    4: true,
-    3: true,
-    2: true,
-    1: true,
+    hotels: false,
+    restaurants: false,
+    tripplaces: false,
   });
+  
+  const [selectedRatings, setSelectedRatings] = useState({
+    5: false,
+    4: false,
+    3: false,
+    2: false,
+    1: false,
+  });
+  
 
   useEffect(() => {
     axios
@@ -71,29 +73,23 @@ const Explore = () => {
     return <p>Loading...</p>; 
   }
 
-  // Check if any rating checkboxes are selected (at least one is true)
   const isRatingFilterApplied = Object.values(selectedRatings).some(val => val);
-
-  // Check if any category checkboxes are selected (at least one is true)
   const isCategoryFilterApplied = Object.values(selectedCategories).some(val => val);
+const filteredHotels = isRatingFilterApplied
+  ? specificPlace.hotels?.filter(hotel => selectedRatings[hotel.ratings])
+  : specificPlace.hotels;
 
-  // Filter hotels based on selected ratings, or show all if no ratings are selected
-  const filteredHotels = isRatingFilterApplied
-    ? specificPlace.hotels?.filter(hotel => selectedRatings[hotel.ratings])
-    : specificPlace.hotels;
+const filteredRestaurants = isRatingFilterApplied
+  ? specificPlace.restaurant?.filter(rest => selectedRatings[rest.ratings])
+  : specificPlace.restaurant;
 
-  // Filter restaurants based on selected ratings, or show all if no ratings are selected
-  const filteredRestaurants = isRatingFilterApplied
-    ? specificPlace.restaurant?.filter(rest => selectedRatings[rest.ratings])
-    : specificPlace.restaurant;
+const filteredTripPlaces = specificPlace.tripplaces;
 
-  // Trip Places should always show, no filtering by ratings
-  const filteredTripPlaces = specificPlace.tripplaces;
+const displayHotels = isCategoryFilterApplied ? selectedCategories.hotels : true;
+const displayRestaurants = isCategoryFilterApplied ? selectedCategories.restaurants : true;
+const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
 
-  // Only display categories if at least one checkbox is selected, otherwise show all
-  const displayHotels = isCategoryFilterApplied ? selectedCategories.hotels : true;
-  const displayRestaurants = isCategoryFilterApplied ? selectedCategories.restaurants : true;
-  const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
+  
 
   return (
     <div className="explore-total-container">
