@@ -6,11 +6,22 @@
     margin-bottom: 60px;
 }
 .hotels-container p{
-    margin-left: 50px;
+    margin-top: 20px;
+    margin-left: 55px;
 }
 .hotels-img{
-    width: 650px;
-    height: 370px;
     margin-bottom: 20px;
     margin-left: 20px;
+}
+.hotels-container {
+  text-align: center;
+  padding: 20px;
+}
+
+
+
+.carousel .slide img {
+  border-radius: 8px;
+  width: 650px;
+    height: 370px;
 }

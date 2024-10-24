@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/TripPlaces.css'
+import { Carousel } from 'react-responsive-carousel'; // Import the carousel
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
+import '../styles/TripPlaces.css'; // Your custom styles
 import Navbar from '../components/Navbar/Navbar';
+
 const TripPlaces = () => {
   const { id } = useParams(); // Get the trip place ID from the URL
   const [tripPlace, setTripPlace] = useState(null);
@@ -31,12 +34,24 @@ const TripPlaces = () => {
 
   return (
     <div className="tripplaces-total-container">
-      <Navbar/>
-    <div className='tripplaces-container'>
-      <h2>{tripPlace.name}</h2>
-      <img src={tripPlace.imageUrl} alt={tripPlace.name} className='tripplaces-img'/>
-      <p>Details: {tripPlace.details}</p>
-    </div></div>
+      <Navbar />
+      <div className="tripplaces-container">
+        <h2>{tripPlace.name}</h2>
+
+        {/* Carousel for trip place images */}
+        {tripPlace.imageUrl && tripPlace.imageUrl.length > 0 && (
+          <Carousel showThumbs={false} dynamicHeight={true} infiniteLoop={true}>
+            {tripPlace.imageUrl.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt={`Trip Place ${index}`} className="tripplaces-img" />
+              </div>
+            ))}
+          </Carousel>
+        )}
+
+        <p>Details: {tripPlace.details}</p>
+      </div>
+    </div>
   );
 };
 

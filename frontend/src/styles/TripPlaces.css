@@ -6,6 +6,7 @@
     text-align: center;
 }
 .tripplaces-container p{
+    margin-top: 20px;
     margin-left: 50px;
 }
 .tripplaces-img{
@@ -14,3 +15,7 @@
     margin-bottom: 20px;
     margin-left: 20px;
 }
+.tripplaces-container {
+    text-align: center;
+    padding: 20px;
+  }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Hotels.css'
+import { Carousel } from 'react-responsive-carousel'; // Import the carousel
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
+import '../styles/Hotels.css';
 import Navbar from '../components/Navbar/Navbar';
 
 const Hotels = () => {
@@ -32,14 +34,27 @@ const Hotels = () => {
 
   return (
     <div className="hotels-total-container">
-      <Navbar/>
-    <div className='hotels-container'>
-      <h2>{hotel.name}</h2>
-      <img src={hotel.imageUrl} alt={hotel.name} className='hotels-img'/>
-      <p>Ratings: {hotel.ratings}</p>
-      <p>Details: {hotel.details}</p>
-      <p>Amount: {hotel.amount}</p>
-    </div></div>
+      <Navbar />
+      <div className="hotels-container">
+        <h2>{hotel.name}</h2>
+
+      <div className="hotels-container-flex">
+        {hotel.imageUrl && hotel.imageUrl.length > 0 && (
+          <Carousel showThumbs={false} dynamicHeight={true} infiniteLoop={true}>
+            {hotel.imageUrl.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt={`Hotel ${index}`} className="hotels-img" />
+              </div>
+            ))}
+          </Carousel>
+        )}
+
+        <p>Ratings: {hotel.ratings}</p>
+        <p>Details: {hotel.details}</p>
+        <p>Amount: {hotel.amount}</p></div>
+
+      </div>
+    </div>
   );
 };
 
