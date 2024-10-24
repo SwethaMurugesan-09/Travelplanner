@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
+import CurrencyConverter from './pages/CurrencyConverter';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/cities" element={<Cities/>}/>
           <Route path="/places" element={<Places/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/currencyConverter" element={<CurrencyConverter/>}/>
           <Route path="/explore/:placeName" element={<Explore />} />
           <Route path="/hotels/:id" element={<Hotels/>} /> 
           <Route path="/restaurants/:id" element={<Restaurants />} /> 

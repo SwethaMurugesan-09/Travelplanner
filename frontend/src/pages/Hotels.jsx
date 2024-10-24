@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Hotels.css'
+import Navbar from '../components/Navbar/Navbar';
 
 const Hotels = () => {
   const { id } = useParams(); // Get the hotel ID from the URL
@@ -29,13 +31,15 @@ const Hotels = () => {
   }
 
   return (
-    <div>
+    <div className="hotels-total-container">
+      <Navbar/>
+    <div className='hotels-container'>
       <h2>{hotel.name}</h2>
-      <img src={hotel.imageUrl} alt={hotel.name} />
+      <img src={hotel.imageUrl} alt={hotel.name} className='hotels-img'/>
       <p>Ratings: {hotel.ratings}</p>
       <p>Details: {hotel.details}</p>
       <p>Amount: {hotel.amount}</p>
-    </div>
+    </div></div>
   );
 };
 

@@ -10,7 +10,7 @@ const Navbar = () => {
       </div>
       <div className='navbar-elements'>
         <div className='navbar-content'><Link to="/">Home</Link></div>
-        <div className='navbar-content'><Link to="/about">About Us</Link></div>
+        <div className='navbar-content'><Link to="/currencyConverter">CurrencyConverter</Link></div>
         <div className='navbar-content'><Link to="/contact">Contact</Link></div>
         <div className='navbar-content'><Link to="/login">Login</Link></div>
       </div>

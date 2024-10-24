@@ -1,0 +1,16 @@
+.hotels-container{
+    margin-top: 90px;
+}
+.hotels-container h2{
+    text-align: center;
+    margin-bottom: 60px;
+}
+.hotels-container p{
+    margin-left: 50px;
+}
+.hotels-img{
+    width: 650px;
+    height: 370px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}

@@ -1,0 +1,16 @@
+.tripplaces-container{
+    margin-top: 90px;
+}
+.tripplaces-container h2{
+    margin-bottom: 60px;
+    text-align: center;
+}
+.tripplaces-container p{
+    margin-left: 50px;
+}
+.tripplaces-img{
+    width: 650px;
+    height: 370px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}

@@ -1,0 +1,16 @@
+.restaurants-container{
+    margin-top: 90px;
+}
+.restaurants-container h2{
+    text-align: center;
+    margin-bottom: 60px;
+}
+.restaurants-container p{
+    margin-left: 50px;
+}
+.restaurants-img{
+    width: 650px;
+    height: 370px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
