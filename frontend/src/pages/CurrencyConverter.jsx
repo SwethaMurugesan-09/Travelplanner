@@ -72,7 +72,7 @@ const CurrencyConverter = () => {
         Convert
       </button>
 
-      <h2>
+      <h2 className='converter-text'>
         {amount} {fromCurrency} = {convertedAmount} {toCurrency}
       </h2>
     </div></div>
