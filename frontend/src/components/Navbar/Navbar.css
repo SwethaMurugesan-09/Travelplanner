@@ -12,19 +12,21 @@
   display: flex;
   flex-direction: row !important;
   justify-content: space-around;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .navbar-content a {
-  text-decoration: none; /* Apply directly to the anchor tag */
+  text-decoration: none; 
   color: rgb(10, 10, 10);
-  font-weight: bold;
+  font-weight:bold;
+  font-size: 18px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  padding: 10px;
+  padding: 5px;
 }
 
 .navbar-content a:hover {
   background-color: #969da7;
   text-decoration: none; 
 }
+
