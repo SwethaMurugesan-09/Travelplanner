@@ -3,17 +3,16 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Restaurants = () => {
-  const { id } = useParams(); // Get restaurant ID from URL
+  const { id } = useParams(); // Get the restaurant ID from the URL
   const [restaurant, setRestaurant] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/restaurants/${id}`); // Use full backend URL
+        const response = await axios.get(`http://localhost:5000/api/specificplace/restaurants/${id}`); // Fetch restaurant by ID
         setRestaurant(response.data);
       } catch (error) {
-        console.error('Error fetching restaurant:', error.response ? error.response.data : error.message);
         setError('Failed to fetch restaurant details.');
       }
     };
@@ -33,8 +32,8 @@ const Restaurants = () => {
     <div>
       <h2>{restaurant.name}</h2>
       <img src={restaurant.imageUrl} alt={restaurant.name} />
-      <p>Details: {restaurant.details}</p>
       <p>Ratings: {restaurant.ratings}</p>
+      <p>Details: {restaurant.details}</p>
     </div>
   );
 };

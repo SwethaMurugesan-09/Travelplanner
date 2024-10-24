@@ -3,17 +3,16 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Hotels = () => {
-  const { id } = useParams(); // Get hotel ID from URL
+  const { id } = useParams(); // Get the hotel ID from the URL
   const [hotel, setHotel] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/hotels/${id}`); // Ensure the URL is correct
+        const response = await axios.get(`http://localhost:5000/api/specificplace/hotels/${id}`); // Fetch hotel by ID
         setHotel(response.data);
       } catch (error) {
-        console.error('Error fetching hotel:', error.response ? error.response.data : error.message);
         setError('Failed to fetch hotel details.');
       }
     };
@@ -33,8 +32,9 @@ const Hotels = () => {
     <div>
       <h2>{hotel.name}</h2>
       <img src={hotel.imageUrl} alt={hotel.name} />
-      <p>Details: {hotel.details}</p>
       <p>Ratings: {hotel.ratings}</p>
+      <p>Details: {hotel.details}</p>
+      <p>Amount: {hotel.amount}</p>
     </div>
   );
 };

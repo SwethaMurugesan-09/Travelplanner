@@ -3,20 +3,21 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const TripPlaces = () => {
-  const { id } = useParams(); // Get trip place ID from URL
+  const { id } = useParams(); // Get the trip place ID from the URL
   const [tripPlace, setTripPlace] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`/api/tripplaces/${id}`) // Fetch trip place details by ID
-      .then((response) => {
+    const fetchTripPlace = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/specificplace/tripplaces/${id}`); // Fetch trip place by ID
         setTripPlace(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching trip place:', error);
+      } catch (error) {
         setError('Failed to fetch trip place details.');
-      });
+      }
+    };
+
+    fetchTripPlace();
   }, [id]);
 
   if (error) {
@@ -32,6 +33,7 @@ const TripPlaces = () => {
       <h2>{tripPlace.name}</h2>
       <img src={tripPlace.imageUrl} alt={tripPlace.name} />
       <p>Details: {tripPlace.details}</p>
+      <p>Amount: {tripPlace.amount}</p>
     </div>
   );
 };

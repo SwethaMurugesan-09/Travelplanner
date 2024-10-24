@@ -58,7 +58,58 @@ const getSpecificPlaceByPlaceName = async (req, res) => {
 };
 
   
+
+
+
+// Fetch a specific hotel by ID
+const getHotelById = async (req, res) => {
+  const { id } = req.params; // Hotel ID from the request parameters
+
+  try {
+    const specificPlace = await SpecificPlace.findOne({ 'hotels._id': id }, { 'hotels.$': 1 }); // Find the specific hotel by its ID
+    if (!specificPlace || !specificPlace.hotels) {
+      return res.status(404).json({ message: 'Hotel not found' });
+    }
+    res.status(200).json(specificPlace.hotels[0]); // Return the specific hotel
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// Fetch a specific restaurant by ID
+const getRestaurantById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const specificPlace = await SpecificPlace.findOne({ 'restaurant._id': id }, { 'restaurant.$': 1 });
+    if (!specificPlace || !specificPlace.restaurant) {
+      return res.status(404).json({ message: 'Restaurant not found' });
+    }
+    res.status(200).json(specificPlace.restaurant[0]);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// Fetch a specific trip place by ID
+const getTripPlaceById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const specificPlace = await SpecificPlace.findOne({ 'tripplaces._id': id }, { 'tripplaces.$': 1 });
+    if (!specificPlace || !specificPlace.tripplaces) {
+      return res.status(404).json({ message: 'Trip place not found' });
+    }
+    res.status(200).json(specificPlace.tripplaces[0]);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
 module.exports = {
+  getHotelById,
+  getRestaurantById,
+  getTripPlaceById,
   createSpecificPlace,
   getSpecificPlaceByPlaceName,
 };
