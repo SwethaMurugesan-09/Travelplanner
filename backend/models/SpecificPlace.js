@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the schema for SpecificPlace
 const specificPlaceSchema = mongoose.Schema(
   {
     placeName: {
