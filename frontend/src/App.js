@@ -6,6 +6,10 @@ import Cities from './pages/Cities';
 import Login from './pages/Login';
 import Explore from './pages/Explore';
 import Contact from './pages/Contact';
+import Hotels from './pages/Hotels';
+import Restaurants from './pages/Restaurants';
+import TripPlaces from './pages/TripPlaces';
+
 function App() {
   return (
     <Router>
@@ -17,6 +21,9 @@ function App() {
           <Route path="/places" element={<Places/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/explore/:placeName" element={<Explore />} />
+          <Route path="/hotels/:id" element={<Hotels/>} /> 
+          <Route path="/restaurants/:id" element={<Restaurants />} /> 
+          <Route path="/tripplaces/:id" element={<TripPlaces />} /> 
           </Routes>
       </div>
     </Router>

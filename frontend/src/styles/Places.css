@@ -44,13 +44,19 @@
     margin-bottom: 30px;
     margin-top: 20px;
   }
+
+  .places-containe {
+    width: 100%;
+  }
   
   .places-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
     justify-content: center;
-    margin-left: 300px;
+    margin-left: 250px;
+    width: 100%;
+    margin-top: 2rem;
   }
   
   .place-image {

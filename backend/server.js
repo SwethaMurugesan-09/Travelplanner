@@ -9,7 +9,7 @@ const path = require('path');
 const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
 const specificRoutes = require('./routes/specificRoutes');
-const specificPlaceRoutes = require('./routes/detailsRouter');
+const detailsRoutes = require('./routes/detailsRoutes');
 
 dotenv.config();
 
@@ -76,7 +76,8 @@ app.use('/api', travelRoutes);
 app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
 app.use('/api/specificplace', specificRoutes);
-app.use('/api', specificPlaceRoutes);
+app.use('/api', detailsRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

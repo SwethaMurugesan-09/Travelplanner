@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Explore.css';
 import Navbar from '../components/Navbar/Navbar';
@@ -13,7 +13,7 @@ const Explore = () => {
     restaurants: false,
     tripplaces: false,
   });
-  
+
   const [selectedRatings, setSelectedRatings] = useState({
     5: false,
     4: false,
@@ -21,18 +21,19 @@ const Explore = () => {
     2: false,
     1: false,
   });
-  
 
   useEffect(() => {
-    axios
-      .get(`/api/specificplace/explore/${placeName}`)
-      .then((response) => {
+    const fetchSpecificPlace = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/specificplace/explore/${placeName}`); // Full backend URL
         setSpecificPlace(response.data); // Set the response data to specificPlace state
-      })
-      .catch((error) => {
-        console.error('Error fetching specific place:', error);
-        setError('Failed to fetch specific place details.'); // Handle error
-      });
+      } catch (error) {
+        console.error('Error fetching specific place:', error.response ? error.response.data : error.message);
+        setError('Failed to fetch specific place details.');
+      }
+    };
+
+    fetchSpecificPlace();
   }, [placeName]);
 
   const handleCategoryChange = (category) => {
@@ -61,8 +62,8 @@ const Explore = () => {
     return stars;
   };
 
-  const placeNameString = typeof specificPlace?.placeName === 'object' 
-    ? specificPlace?.placeName?.placeName || 'Unknown Place' 
+  const placeNameString = typeof specificPlace?.placeName === 'object'
+    ? specificPlace?.placeName?.placeName || 'Unknown Place'
     : specificPlace?.placeName || 'Unknown Place';
 
   if (error) {
@@ -70,26 +71,25 @@ const Explore = () => {
   }
 
   if (!specificPlace) {
-    return <p>Loading...</p>; 
+    return <p>Loading...</p>;
   }
 
   const isRatingFilterApplied = Object.values(selectedRatings).some(val => val);
   const isCategoryFilterApplied = Object.values(selectedCategories).some(val => val);
-const filteredHotels = isRatingFilterApplied
-  ? specificPlace.hotels?.filter(hotel => selectedRatings[hotel.ratings])
-  : specificPlace.hotels;
 
-const filteredRestaurants = isRatingFilterApplied
-  ? specificPlace.restaurant?.filter(rest => selectedRatings[rest.ratings])
-  : specificPlace.restaurant;
+  const filteredHotels = isRatingFilterApplied
+    ? specificPlace.hotels?.filter(hotel => selectedRatings[hotel.ratings])
+    : specificPlace.hotels;
 
-const filteredTripPlaces = specificPlace.tripplaces;
+  const filteredRestaurants = isRatingFilterApplied
+    ? specificPlace.restaurant?.filter(rest => selectedRatings[rest.ratings])
+    : specificPlace.restaurant;
 
-const displayHotels = isCategoryFilterApplied ? selectedCategories.hotels : true;
-const displayRestaurants = isCategoryFilterApplied ? selectedCategories.restaurants : true;
-const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
+  const filteredTripPlaces = specificPlace.tripplaces;
 
-  
+  const displayHotels = isCategoryFilterApplied ? selectedCategories.hotels : true;
+  const displayRestaurants = isCategoryFilterApplied ? selectedCategories.restaurants : true;
+  const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
 
   return (
     <div className="explore-total-container">
@@ -152,11 +152,13 @@ const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplace
               <div className="explore-main-hotels">
                 {filteredHotels && filteredHotels.length > 0 ? (
                   filteredHotels.map((hotel, index) => (
-                    <div key={index} className="explore-item-card">
-                      <img src={hotel.imageUrl} alt={hotel.name} className="explore-item-image" />
-                      <p><strong>{hotel.name}</strong></p>
-                      <p>Ratings: {renderStars(hotel.ratings)}</p>
-                    </div>
+                    <Link key={index} to={`/hotels/${hotel._id}`}> {/* Navigate to the hotel details page */}
+                      <div className="explore-item-card">
+                        <img src={hotel.imageUrl} alt={hotel.name} className="explore-item-image" />
+                        <p><strong>{hotel.name}</strong></p>
+                        <p>Ratings: {renderStars(hotel.ratings)}</p>
+                      </div>
+                    </Link>
                   ))
                 ) : (
                   <p>No hotels available</p>
@@ -170,12 +172,14 @@ const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplace
               <h2>Restaurants:</h2>
               <div className="explore-main-hotels">
                 {filteredRestaurants && filteredRestaurants.length > 0 ? (
-                  filteredRestaurants.map((rest, index) => (
-                    <div key={index} className="explore-item-card">
-                      <img src={rest.imageUrl} alt={rest.name} className="explore-item-image" />
-                      <p><strong>{rest.name}</strong></p>
-                      <p>Ratings: {renderStars(rest.ratings)}</p>
-                    </div>
+                  filteredRestaurants.map((restaurant, index) => (
+                    <Link key={index} to={`/restaurants/${restaurant._id}`}> {/* Navigate to the restaurant details page */}
+                      <div className="explore-item-card">
+                        <img src={restaurant.imageUrl} alt={restaurant.name} className="explore-item-image" />
+                        <p><strong>{restaurant.name}</strong></p>
+                        <p>Ratings: {renderStars(restaurant.ratings)}</p>
+                      </div>
+                    </Link>
                   ))
                 ) : (
                   <p>No restaurants available</p>
@@ -190,10 +194,12 @@ const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplace
               <div className="explore-main-hotels">
                 {filteredTripPlaces && filteredTripPlaces.length > 0 ? (
                   filteredTripPlaces.map((tripplace, index) => (
-                    <div key={index} className="explore-item-card">
-                      <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
-                      <p><strong>{tripplace.name}</strong></p>
-                    </div>
+                    <Link key={index} to={`/tripplaces/${tripplace._id}`}> {/* Navigate to the trip place details page */}
+                      <div className="explore-item-card">
+                        <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
+                        <p><strong>{tripplace.name}</strong></p>
+                      </div>
+                    </Link>
                   ))
                 ) : (
                   <p>No trip places available</p>
