@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+  import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Explore.css';
@@ -54,14 +54,14 @@ const Explore = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
-        stars.push(<span key={i}>&#9733;</span>); // Filled star
+        stars.push(<span key={i} className="star">&#9733;</span>); // Filled star
       } else {
-        stars.push(<span key={i}>&#9734;</span>); // Empty star
+        stars.push(<span key={i} className="star">&#9734;</span>); // Empty star
       }
     }
     return stars;
   };
-
+  
   const placeNameString = typeof specificPlace?.placeName === 'object'
     ? specificPlace?.placeName?.placeName || 'Unknown Place'
     : specificPlace?.placeName || 'Unknown Place';
@@ -152,13 +152,14 @@ const Explore = () => {
               <div className="explore-main-hotels">
                 {filteredHotels && filteredHotels.length > 0 ? (
                   filteredHotels.map((hotel, index) => (
-                    <Link key={index} to={`/hotels/${hotel._id}`}> {/* Navigate to the hotel details page */}
-                      <div className="explore-item-card">
+                    <div key={index} className="explore-item-card">
+                      <Link to={`/hotels/${hotel._id}`}> {/* Navigate to the hotel details page */}
                         <img src={hotel.imageUrl} alt={hotel.name} className="explore-item-image" />
-                        <p><strong>{hotel.name}</strong></p>
-                        <p>Ratings: {renderStars(hotel.ratings)}</p>
-                      </div>
-                    </Link>
+                      </Link>
+                      <p><strong>{hotel.name}</strong></p>
+                      <p>Ratings: {renderStars(hotel.ratings)}</p>
+                    </div>                  
+                    
                   ))
                 ) : (
                   <p>No hotels available</p>
@@ -166,45 +167,44 @@ const Explore = () => {
               </div>
             </>
           )}
-
-          {displayRestaurants && (
-            <>
-              <h2>Restaurants:</h2>
-              <div className="explore-main-hotels">
-                {filteredRestaurants && filteredRestaurants.length > 0 ? (
-                  filteredRestaurants.map((restaurant, index) => (
-                    <Link key={index} to={`/restaurants/${restaurant._id}`}> {/* Navigate to the restaurant details page */}
-                      <div className="explore-item-card">
-                        <img src={restaurant.imageUrl} alt={restaurant.name} className="explore-item-image" />
-                        <p><strong>{restaurant.name}</strong></p>
-                        <p>Ratings: {renderStars(restaurant.ratings)}</p>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <p>No restaurants available</p>
-                )}
-              </div>
-            </>
-          )}
+{displayRestaurants && (
+  <>
+    <h2>Restaurants:</h2>
+    <div className="explore-main-hotels">
+      {filteredRestaurants && filteredRestaurants.length > 0 ? (
+        filteredRestaurants.map((restaurant, index) => (
+          <div key={index} className="explore-item-card">
+            <Link to={`/restaurants/${restaurant._id}`}>
+              <img src={restaurant.imageUrl} alt={restaurant.name} className="explore-item-image" />
+            </Link>
+            <p><strong>{restaurant.name}</strong></p>
+            <p>Ratings: {renderStars(restaurant.ratings)}</p>
+          </div>
+        ))
+      ) : (
+        <p>No restaurants available</p>
+      )}
+    </div>
+  </>
+)}
 
           {displayTripPlaces && (
             <>
               <h2>Trip Places:</h2>
               <div className="explore-main-hotels">
-                {filteredTripPlaces && filteredTripPlaces.length > 0 ? (
-                  filteredTripPlaces.map((tripplace, index) => (
-                    <Link key={index} to={`/tripplaces/${tripplace._id}`}> {/* Navigate to the trip place details page */}
-                      <div className="explore-item-card">
-                        <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
-                        <p><strong>{tripplace.name}</strong></p>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <p>No trip places available</p>
-                )}
-              </div>
+  {filteredTripPlaces && filteredTripPlaces.length > 0 ? (
+    filteredTripPlaces.map((tripplace, index) => (
+      <div key={index} className="explore-item-card">
+        <Link to={`/tripplaces/${tripplace._id}`}> {/* Navigate to the trip place details page */}
+          <img src={tripplace.imageUrl} alt={tripplace.name} className="explore-item-image" />
+        </Link>
+        <p><strong>{tripplace.name}</strong></p>
+      </div>
+    ))
+  ) : (
+    <p>No trip places available</p>
+  )}
+</div>
             </>
           )}
         </div>
