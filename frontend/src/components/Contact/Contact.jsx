@@ -2,6 +2,28 @@ import React, { useState } from 'react';
 import './Contact.css';
 import Navbar from '../Navbar/Navbar';
 const Contact    = () => {
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+    
+        formData.append("access_key", "1952d936-2c92-4a85-a80b-8a1b5543dc4a");
+    
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+    
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: json
+        }).then((res) => res.json());
+    
+        if (res.success) {
+         alert(res.message);
+        }
+      };
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +54,7 @@ const Contact    = () => {
       {submitted ? (
         <p className="contact-success-message">Thank you! We have received your query.</p>
       ) : (
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form"onSubmit={onSubmit}>
           <div className="contact-form-group">
             <label htmlFor="name" className="contact-label">Name</label>
             <input

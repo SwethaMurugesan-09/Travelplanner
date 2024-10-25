@@ -61,7 +61,6 @@ app.post("/upload", upload.single('Travel'), (req, res) => {
 
 
 
-
 app.use('/images', express.static('upload/images'));
 
 connectDB();

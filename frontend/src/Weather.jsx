@@ -1,45 +1,64 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 
-const MeteostatData = () => {
+const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
+
+const Weather = () => {
+    const [city, setCity] = useState(""); // Default city
+    const [days, setDays] = useState(); // Default number of days
     const [weatherData, setWeatherData] = useState(null);
-    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchWeatherData = async () => {
-            try {
-                const response = await axios.get('https://meteostat.p.rapidapi.com/point/monthly', {
-                    params: {
-                        lat: 52.5244,
-                        lon: 13.4105,
-                        alt: 43,
-                        start: '2020-01-01',
-                        end: '2020-12-31'
-                    },
-                    headers: {
-                        'x-rapidapi-key': '46a83165a8msh31524d7da8d4360p142e01jsnf6043d00d364',
-                        'x-rapidapi-host': 'meteostat.p.rapidapi.com'
-                    }
-                });
-                setWeatherData(response.data);
-            } catch (error) {
-                setError('Failed to fetch data');
-                console.error(error);
-            }
-        };
-
-        fetchWeatherData();
-    }, []);
-
-    if (error) return <div>{error}</div>;
-    if (!weatherData) return <div>Loading...</div>;
+    const fetchData = async () => {
+        setLoading(true);  
+        try {
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=${days}&appid=${KEY}&units=metric`);
+            setWeatherData(response.data);
+            setLoading(false);  
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            alert('Error fetching data');
+            setLoading(false); 
+        }
+    };
 
     return (
-        <div>
-            <h1>Monthly Weather Data</h1>
-            <pre>{JSON.stringify(weatherData, null, 2)}</pre>
+        <div className="weather">
+            <h1>Weather Forecast</h1>
+
+            <input
+                type="text"
+                placeholder="Enter city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+            />
+            <input
+                type="number"
+                min="1"
+                max="16" // OpenWeatherMap allows forecasts up to 16 days
+                placeholder="Number of days"
+                value={days}
+                onChange={(e) => setDays(e.target.value)}
+            />
+            <button onClick={fetchData}>Fetch Weather</button>
+
+            {/* Show loading message */}
+            {loading && <p>Loading...</p>}
+
+            {/* Render weather data if available */}
+            {weatherData && (
+                <div>
+                    {weatherData.list.map((day, index) => (
+                        <div key={index} style={{ margin: '20px 0' }}>
+                            <h3>Day {index + 1}</h3>
+                            <p><strong>Temperature:</strong> {day.main.temp}°C</p>
+                            <p><strong>Weather:</strong> {day.weather[0].description}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
 
-export default MeteostatData;
+export default Weather;
