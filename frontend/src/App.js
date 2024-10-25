@@ -9,6 +9,7 @@ import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
 import Contact from './components/Contact/Contact';
+import About from './components/About/About';
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/cities" element={<Cities/>}/>
           <Route path="/places" element={<Places/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/about" element={<About/>}/>
           <Route path="/explore/:placeName" element={<Explore />} />
           <Route path="/hotels/:id" element={<Hotels/>} /> 
           <Route path="/restaurants/:id" element={<Restaurants />} /> 
