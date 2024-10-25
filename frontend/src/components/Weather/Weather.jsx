@@ -24,8 +24,7 @@ const Weather = () => {
 
     return (
         <div className="weather-total-container">
-        <div className="weather-forecast">
-            <h1>Weather Forecast</h1>
+            <div className="weather-forecast">
 
             <input
                 type="text"

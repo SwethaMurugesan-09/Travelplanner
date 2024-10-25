@@ -117,6 +117,7 @@ const Cities = () => {
         </div>
       </div>
       <div className="weather-container">
+      <h3 style={{fontFamily:'karla'}}>Weather Forecasting</h3>
         <Weather />
       </div>
     </div>

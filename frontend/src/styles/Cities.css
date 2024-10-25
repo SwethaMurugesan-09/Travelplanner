@@ -119,8 +119,8 @@
   margin-top: 0.89rem;
 }
 .weather-container{
-  margin-top: 20px;
-  margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 70px;
 }
 @media (max-width: 768px) {
   .city-card {
