@@ -6,7 +6,6 @@ import Navbar from '../components/Navbar/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import Weather from '../components/Weather/Weather';
 
 const Places = () => {
   const [touristPlaces, setTouristPlaces] = useState([]);
@@ -123,9 +122,6 @@ const Places = () => {
             <p>No tourist places found.</p>
           )}
         </div>
-      </div>
-      <div className="weather-container">
-        <Weather/>
       </div>
     </div>
   );

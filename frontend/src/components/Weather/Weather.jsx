@@ -23,6 +23,7 @@ const Weather = () => {
     };
 
     return (
+        <div className="weather-total-container">
         <div className="weather-forecast">
             <h1>Weather Forecast</h1>
 
@@ -43,10 +44,10 @@ const Weather = () => {
             <button onClick={fetchData}>Fetch Weather</button>
 
             {loading && <p>Loading...</p>}
+            </div>
 
-            {/* Render weather data if available */}
             {weatherData && (
-                <div>
+                <div className='weather-output-container'>
                     {weatherData.list.map((day, index) => (
                         <div className='weather-output'  key={index} style={{ margin: '20px 0' }}>
                             <h3>Day {index + 1}</h3>

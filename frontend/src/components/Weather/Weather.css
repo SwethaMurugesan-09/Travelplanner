@@ -1,22 +1,24 @@
 /* Weather.css */
 
 .weather-forecast {
-    max-width: 600px; /* Limit the width of the container */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add some padding */
-    background-color: #f9f9f9; /* Light background */
-    border-radius: 10px; /* Rounded corners */
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-
+.weather-total-container{
+    display: flex;
+    flex-direction: row;
+}
 .weather-forecast h1 {
-    text-align: center; /* Center the heading */
-    color: #333; /* Dark text color */
-    font-family: 'Arial', sans-serif; /* Font family */
+    text-align: center; 
+    color: #333; 
 }
 
 .weather-forecast input {
-    width: 100%; /* Full width */
+    width: 50%;
     padding: 10px; /* Padding inside the input */
     margin: 10px 0; /* Margin above and below inputs */
     border: 1px solid #ccc; /* Light border */
@@ -25,9 +27,9 @@
 }
 
 .weather-forecast button {
-    width: 100%; /* Full width */
+    width: 30%; /* Full width */
     padding: 10px; /* Padding inside the button */
-    background-color: #28a745; /* Green background */
+    background-color: #28a745; /* Green background 28a745*/
     color: white; /* White text */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
@@ -40,14 +42,7 @@
     background-color: #218838; /* Darker green on hover */
 }
 
-.weather-output {
-    padding: 15px; /* Padding inside the output section */
-    border: 1px solid #e1e1e1; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #ffffff; /* White background */
-    margin: 10px 0; /* Margin above and below each output section */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-}
+
 
 .weather-output h3 {
     margin: 0; /* Remove default margin */

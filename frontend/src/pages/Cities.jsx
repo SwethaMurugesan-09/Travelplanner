@@ -1,32 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Cities.css';
 import Navbar from '../components/Navbar/Navbar.jsx';
+import Weather from '../components/Weather/Weather.jsx';
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
-  const [filteredCities, setFilteredCities] = useState([]); // State for filtered cities
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const state = searchParams.get('state');
-  const navigate = useNavigate(); // Hook to navigate to Places page
+  const navigate = useNavigate();
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     async function fetchCities() {
       if (state) {
+        setLoading(true);
         try {
           const response = await axios.get(`/api/cities?state=${state}`);
           setCities(response.data);
-          setFilteredCities(response.data); // Initially, all cities are shown
+          setFilteredCities(response.data);
         } catch (error) {
           console.error('Error fetching cities:', error.response?.data || error.message);
+        } finally {
+          setLoading(false);
         }
       }
     }
-
     fetchCities();
   }, [state]);
 
@@ -40,60 +46,79 @@ const Cities = () => {
   };
 
   const handleCityClick = (city) => {
-    navigate(`/places?city=${city}`); // Navigate to the Places page with the city as a query parameter
+    navigate(`/places?city=${city}`);
   };
 
   const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <FontAwesomeIcon
-          key={i}
-          icon={faStar}
-          color={i <= rating ? '#FFD700' : '#ccc'} // Gold for filled stars, gray for empty
-        />
-      );
+    return Array.from({ length: 5 }, (_, i) => (
+      <FontAwesomeIcon
+        key={i}
+        icon={faStar}
+        color={i < rating ? '#FFD700' : '#ccc'}
+      />
+    ));
+  };
+
+  const scroll = (direction) => {
+    const { current } = scrollContainerRef;
+    if (current) {
+      const scrollAmount = 300;
+      current.scrollLeft += direction === 'left' ? -scrollAmount : scrollAmount;
     }
-    return stars;
   };
 
   return (
     <div className="Cities">
       <Navbar />
       <div className="city-total-container">
-      <h3>Best Tourist places in {state}</h3>
-      <input
-        type="text"
-        placeholder="Search for a city..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className="city-search-input"
-      />
-      <div className="city-container">
-        {filteredCities.length > 0 ? (
-          filteredCities.map((cityData) => (
-            <div
-              key={cityData.city}
-              className="city-card"
-              onClick={() => handleCityClick(cityData.city)} // Attach the click handler to each city card
-            >
-              <img
-                src={cityData.imageUrl}
-                alt={cityData.city}
-                className="city-image"
-              />
-              <div className="city-header">
-                <h2>{cityData.city}</h2>
-                <div className="city-ratings">{renderStars(cityData.ratings)}</div> {/* Render stars based on rating */}
-              </div>
-              <p className='city-para'>{cityData.notes}</p>
-            </div>
-          ))
-        ) : (
-          state && <p>Loading cities...</p>
-        )}
+        <h3>Best Tourist places in {state || "your selected state"}</h3>
+        <input
+          type="text"
+          placeholder="Search for a city..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="city-search-input"
+        />
+        <div className="city-carousel">
+          <button className="carousel-btn left" onClick={() => scroll('left')}>
+            <MdKeyboardArrowLeft />
+          </button>
+          <div className="city-container" ref={scrollContainerRef}>
+            {loading ? (
+              <p>Loading cities...</p>
+            ) : (
+              filteredCities.length > 0 ? (
+                filteredCities.map((cityData) => (
+                  <div
+                    key={cityData.city}
+                    className="city-card"
+                    onClick={() => handleCityClick(cityData.city)}
+                  >
+                    <img
+                      src={cityData.imageUrl}
+                      alt={cityData.city}
+                      className="city-image"
+                    />
+                    <div className="city-header">
+                      <h2>{cityData.city}</h2>
+                      <div className="city-ratings">{renderStars(cityData.ratings)}</div>
+                    </div>
+                    <p className="city-para">{cityData.notes}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No cities found</p>
+              )
+            )}
+          </div>
+          <button className="carousel-btn right" onClick={() => scroll('right')}>
+            <MdKeyboardArrowRight />
+          </button>
+        </div>
       </div>
-    </div>
+      <div className="weather-container">
+        <Weather />
+      </div>
     </div>
   );
 };
