@@ -26,7 +26,6 @@ const CurrencyConverter = () => {
 
   return (
     <div className="currency-conteiner">
-        <Navbar/>
     <div className="converter">
       <h1>Currency Converter</h1>
       <div className="input-section">

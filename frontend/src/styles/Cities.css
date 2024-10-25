@@ -28,7 +28,14 @@
   position: relative;
   margin-top: 80px;
 }
+.city-total-container1 {
+  position: relative;
+  margin-top: 30px;
+}
 
+.city-total-container1 h3{
+  padding-left: 20px;
+}
 .city-carousel {
   display: flex;
   align-items: center;
@@ -121,6 +128,10 @@
 .weather-container{
     margin-top: 20px;
     margin-bottom: 70px;
+}
+.weather-container h2{
+    margin-bottom: 40px !important;
+    margin-left: -200px;
 }
 @media (max-width: 768px) {
   .city-card {

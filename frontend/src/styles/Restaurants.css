@@ -1,24 +1,28 @@
-.restaurants-container{
-    margin-top: 90px;
-}
-.restaurants-container h2{
+.restaurants-total-container h2{
+    margin-top: 100px;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    color: blueviolet;
 }
-.restaurants-container p{
-    margin-top: 20px;
-    margin-left: 50px;
+.restaurants-container{
+    display: flex;
+    flex-direction: row;
+    gap:0px ;
 }
-.restaurants-img{
-    width: 650px;
-    height: 370px;
-    margin-bottom: 20px;
-    margin-left: 20px;
+.restaurants-container-flex {
+    margin: 5px;
+    margin-left: 100px;
+    margin-right: 150px;
+}
+.restaurants-currency{
+    margin-right:150px ;
 }
 
-.restaurants-container {
-    text-align: center;
-    padding: 20px;
+.restaurants-img {
+    width: 550px;
+    height: 370px;
   }
-  
-  
+ .restaurants-container-flex span{
+    font-size: 18px;
+    color: blueviolet;
+ } 

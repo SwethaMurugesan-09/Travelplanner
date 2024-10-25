@@ -1,12 +1,11 @@
 /* Currency Converter Container */
 .converter {
-    max-width: 400px;
-    margin: 150px auto;
+  width: 400px;
     padding: 30px;
     background-color: #f7f7f7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    font-family: 'Arial', sans-serif;
+    margin-bottom: 50px;
   }
   
   .converter h1 {
@@ -69,9 +68,10 @@
   }
   
   .converter-text {
+    margin-top: 20px !important;
+    margin-bottom: px !important;
     text-align: center;
-    margin-top: 30px;
-    color: #333;
+    color: #333 !important;
     font-size: 25px;
   }
   

@@ -49,7 +49,7 @@ const TripPlaces = () => {
           </Carousel>
         )}
 
-        <p>Details: {tripPlace.details}</p>
+        <p><span>Details:</span> {tripPlace.details}</p>
       </div>
     </div>
   );

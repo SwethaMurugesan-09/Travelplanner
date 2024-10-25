@@ -11,12 +11,14 @@ import Weather from '../components/Weather/Weather.jsx';
 const Cities = () => {
   const [cities, setCities] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]);
+  const [recommendedCities, setRecommendedCities] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const state = searchParams.get('state');
   const navigate = useNavigate();
   const scrollContainerRef = useRef(null);
+  const recommendedScrollRef = useRef(null);
 
   useEffect(() => {
     async function fetchCities() {
@@ -26,6 +28,7 @@ const Cities = () => {
           const response = await axios.get(`/api/cities?state=${state}`);
           setCities(response.data);
           setFilteredCities(response.data);
+          setRecommendedCities(response.data.filter((_, i) => (i + 1) % 2 === 0));
         } catch (error) {
           console.error('Error fetching cities:', error.response?.data || error.message);
         } finally {
@@ -59,8 +62,8 @@ const Cities = () => {
     ));
   };
 
-  const scroll = (direction) => {
-    const { current } = scrollContainerRef;
+  const scroll = (direction, ref) => {
+    const { current } = ref;
     if (current) {
       const scrollAmount = 300;
       current.scrollLeft += direction === 'left' ? -scrollAmount : scrollAmount;
@@ -80,7 +83,7 @@ const Cities = () => {
           className="city-search-input"
         />
         <div className="city-carousel">
-          <button className="carousel-btn left" onClick={() => scroll('left')}>
+          <button className="carousel-btn left" onClick={() => scroll('left', scrollContainerRef)}>
             <MdKeyboardArrowLeft />
           </button>
           <div className="city-container" ref={scrollContainerRef}>
@@ -111,13 +114,55 @@ const Cities = () => {
               )
             )}
           </div>
-          <button className="carousel-btn right" onClick={() => scroll('right')}>
+          <button className="carousel-btn right" onClick={() => scroll('right', scrollContainerRef)}>
             <MdKeyboardArrowRight />
           </button>
         </div>
       </div>
+
+      {/* Recommended Places Section */}
+      <div className="city-total-container1">
+        <h3>Recommended Places</h3>
+        <div className="city-carousel">
+          <button className="carousel-btn left" onClick={() => scroll('left', recommendedScrollRef)}>
+            <MdKeyboardArrowLeft />
+          </button>
+          <div className="city-container" ref={recommendedScrollRef}>
+            {loading ? (
+              <p>Loading recommended cities...</p>
+            ) : (
+              recommendedCities.length > 0 ? (
+                recommendedCities.map((cityData) => (
+                  <div
+                    key={cityData.city}
+                    className="city-card"
+                    onClick={() => handleCityClick(cityData.city)}
+                  >
+                    <img
+                      src={cityData.imageUrl}
+                      alt={cityData.city}
+                      className="city-image"
+                    />
+                    <div className="city-header">
+                      <h2>{cityData.city}</h2>
+                      <div className="city-ratings">{renderStars(cityData.ratings)}</div>
+                    </div>
+                    <p className="city-para">{cityData.notes}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No recommended cities found</p>
+              )
+            )}
+          </div>
+          <button className="carousel-btn right" onClick={() => scroll('right', recommendedScrollRef)}>
+            <MdKeyboardArrowRight />
+          </button>
+        </div>
+      </div>
+
       <div className="weather-container">
-      <h3 style={{fontFamily:'karla'}}>Weather Forecasting</h3>
+        <h2>Weather Forecasting</h2>
         <Weather />
       </div>
     </div>
@@ -125,3 +170,4 @@ const Cities = () => {
 };
 
 export default Cities;
+

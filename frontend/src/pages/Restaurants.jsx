@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel'; // Import the carousel com
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import '../styles/Restaurants.css'; // Import your custom styles
 import Navbar from '../components/Navbar/Navbar';
+import CurrencyConverter from '../components/CurrencyConverter/CurrencyConverter';
 
 const Restaurants = () => {
   const { id } = useParams(); // Get the restaurant ID from the URL
@@ -35,9 +36,10 @@ const Restaurants = () => {
   return (
     <div className="restaurants-total-container">
       <Navbar />
-      <div className="restaurants-container">
-        <h2>{restaurant.name}</h2>
+      <h2>{restaurant.name}</h2>
 
+      <div className="restaurants-container">
+      <div className="hotels-container-flex">
         {restaurant.imageUrl && restaurant.imageUrl.length > 0 && (
           <Carousel showThumbs={false} dynamicHeight={true} infiniteLoop={true}>
             {restaurant.imageUrl.map((image, index) => (
@@ -48,8 +50,12 @@ const Restaurants = () => {
           </Carousel>
         )}
 
-        <p>Ratings: {restaurant.ratings}</p>
-        <p>Details: {restaurant.details}</p>
+        <p><span>Ratings: </span>{restaurant.ratings}</p>
+        <p><span>Details: </span>{restaurant.details}</p>
+        </div>
+        <div className="restaurants-currency">
+        <CurrencyConverter/>
+      </div>
       </div>
     </div>
   );
