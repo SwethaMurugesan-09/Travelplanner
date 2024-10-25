@@ -101,3 +101,10 @@
     display: flex;
     flex-direction: row;
   }
+
+  .weather-container{
+    margin-left: 250px;
+    justify-content: center;
+    text-align: center;
+  }
+  

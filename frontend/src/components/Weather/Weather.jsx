@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-
+import './Weather.css'
 const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
 
 const Weather = () => {
@@ -23,7 +23,7 @@ const Weather = () => {
     };
 
     return (
-        <div className="weather">
+        <div className="weather-forecast">
             <h1>Weather Forecast</h1>
 
             <input
@@ -42,14 +42,13 @@ const Weather = () => {
             />
             <button onClick={fetchData}>Fetch Weather</button>
 
-            {/* Show loading message */}
             {loading && <p>Loading...</p>}
 
             {/* Render weather data if available */}
             {weatherData && (
                 <div>
                     {weatherData.list.map((day, index) => (
-                        <div key={index} style={{ margin: '20px 0' }}>
+                        <div className='weather-output'  key={index} style={{ margin: '20px 0' }}>
                             <h3>Day {index + 1}</h3>
                             <p><strong>Temperature:</strong> {day.main.temp}°C</p>
                             <p><strong>Weather:</strong> {day.weather[0].description}</p>
