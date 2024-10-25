@@ -5,12 +5,12 @@ import Home from './pages/Home';
 import Cities from './pages/Cities';
 import Login from './pages/Login';
 import Explore from './pages/Explore';
-import Contact from './pages/Contact';
 import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
-import CurrencyConverter from './pages/CurrencyConverter';
-
+import CurrencyConverter from './components/CurrencyConverter/CurrencyConverter';
+import Contact from './components/Contact/Contact';
+import Weather from './Weather';
 function App() {
   return (
     <Router>
@@ -26,6 +26,7 @@ function App() {
           <Route path="/hotels/:id" element={<Hotels/>} /> 
           <Route path="/restaurants/:id" element={<Restaurants />} /> 
           <Route path="/tripplaces/:id" element={<TripPlaces />} /> 
+          <Route path="/weather" element={<Weather/>}/>
           </Routes>
       </div>
     </Router>

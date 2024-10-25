@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/CurrencyConverter.css'
-import Navbar from '../components/Navbar/Navbar';
+import './CurrencyConverter.css'
+import Navbar from '../Navbar/Navbar';
 const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState('USD');
