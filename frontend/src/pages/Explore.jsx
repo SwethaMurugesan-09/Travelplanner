@@ -53,14 +53,15 @@ const Explore = () => {
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < rating) {
-        stars.push(<span key={i} className="star">&#9733;</span>); // Filled star
-      } else {
-        stars.push(<span key={i} className="star">&#9734;</span>); // Empty star
-      }
+      stars.push(
+        <span key={i} className="star">
+          {i < rating ? '★' : '☆'} {/* ★ is filled, ☆ is empty */}
+        </span>
+      );
     }
     return stars;
   };
+  
   
   const placeNameString = typeof specificPlace?.placeName === 'object'
     ? specificPlace?.placeName?.placeName || 'Unknown Place'

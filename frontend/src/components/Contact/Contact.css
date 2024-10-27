@@ -1,79 +1,115 @@
-/* Container */
+/* Container for the contact form */
 .contact-form-container {
-    max-width: 600px;
-    margin: 100px auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
+  position: relative; /* Required for absolute positioning of the pseudo-element */
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Hide any overflow caused by the pseudo-element */
+  color: #fff; /* Change text color to white for better contrast */
+}
+
+/* Pseudo-element for the blurred background image */
+.contact-form-container::before {
+  content: ''; /* Required for the pseudo-element to be displayed */
+  position: absolute; /* Position it relative to the container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../travel_assets/contact-background.jpg'); /* Background image */
+  background-size: cover; /* Make the background cover the entire container */
+  background-position: center; /* Center the background image */
+  filter: blur(2px); /* Apply blur effect */
+  z-index: 0; /* Send it to the back */
+}
+
+/* Form Title */
+.contact-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 26px;
+  color: #000000; /* Change title color to white */
+  position: relative; /* Position it above the pseudo-element */
+  z-index: 1; /* Bring it above the background */
+  font-weight: 5rem;
+}
+/* Success Message Image */
+/* Success Message Container */
+.success-message-container {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: calc(100vh - 100px); /* Full viewport height minus the navbar height */
+  text-align: center; /* Center text */
+  margin-top: 20px; /* Optional margin for spacing */
+}
+
+/* Success Message */
+.contact-success-message {
+  color: #52a72e; 
+  font-size: 30px;
+  font-weight: bold; 
+  margin-top: 20px;
+  font-weight: 3rem;
   
-  /* Form Title */
-  .contact-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 26px;
-    color: #333;
-  }
-  
-  /* Success Message */
-  .contact-success-message {
-    text-align: center;
-    color: green;
-    font-size: 18px;
-    margin-top: 1rem;
-  }
-  
-  /* Form Elements */
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .contact-form-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  .contact-label {
-    font-size: 16px;
-    margin-bottom: 0.5rem;
-    display: block;
-    color: #555;
-  }
-  
-  .contact-input, .contact-textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .contact-input:focus, .contact-textarea:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  .contact-textarea {
-    resize: vertical;
-    height: 120px;
-  }
-  
-  /* Submit Button */
-  .contact-submit-btn {
-    background-color: #007bff;
-    color: #fff;
-    padding: 0.8rem 1.2rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    max-width: 120px;
-  }
-  
-  .contact-submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+/* Form Elements */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Position it above the pseudo-element */
+  z-index: 1; /* Bring it above the background */
+}
+
+.contact-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.contact-label {
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #262525;
+}
+
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.contact-textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+/* Submit Button */
+.contact-submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: 120px;
+}
+
+.contact-submit-btn:hover {
+  background-color: #0056b3;
+}

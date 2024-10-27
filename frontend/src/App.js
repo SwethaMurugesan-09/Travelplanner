@@ -9,6 +9,7 @@ import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
 import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/tripplaces/:id" element={<TripPlaces />} /> 
           </Routes>
       </div>
+      <Footer/>
     </Router>
   );
 }

@@ -113,6 +113,11 @@
   color: yellow; /* Set the star color to yellow */
   font-size: 25px; /* Adjust the size if needed */
 }
+.star {
+  color: rgb(19, 19, 19); /* Makes the star yellow */
+  font-size: 1.2em; /* Adjust the size as desired */
+  border-radius: 6px; /* Adds a light border-radius */
+}
 
 @media (max-width: 768px) {
   .explore-container {

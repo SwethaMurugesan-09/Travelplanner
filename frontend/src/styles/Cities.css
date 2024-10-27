@@ -120,10 +120,9 @@
 }
 
 .city-para {
-  padding: 0 20px;
-  font-size: 0.9rem;
-  line-height: 1rem;
-  margin-top: 0.89rem;
+  font-size: 1.0 rem ; 
+  padding: 10px 10px;
+  justify-content: center;
 }
 .weather-container{
     margin-top: 20px;

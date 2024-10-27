@@ -1,0 +1,32 @@
+.footer{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(246, 246, 246);
+    gap: 200px;
+    margin-bottom: 10px;
+}
+.footer-service{
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    max-width: 500px;
+}
+.footer-content{
+    display: flex;
+    flex-direction:column ;
+    margin: 40px;
+    max-width:300px;
+    margin-left: 100px;
+}
+.footer-contact{
+    margin: 40px;
+    margin-right: 50px;
+}
+.footer-contact p{
+    margin: 15px 0px;
+}
+.footer-contact-icons{
+    font-size: 27px;
+    cursor: pointer;
+    text-decoration: none;
+}
