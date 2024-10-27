@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { FaInstagram } from "react-icons/fa6";
-import { ImLinkedin } from "react-icons/im";
+import { FaLinkedin } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -29,7 +29,7 @@ const Footer = () => {
             <FaInstagram />
           </a>
           <a href="https://www.linkedin.com/in/swetha--murugesan/" target="_blank" rel="noopener noreferrer">
-            <ImLinkedin />
+          <FaLinkedin />
           </a>
         </div>
       </div>
