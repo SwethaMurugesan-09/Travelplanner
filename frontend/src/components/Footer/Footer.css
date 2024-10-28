@@ -4,6 +4,7 @@
     background-color: rgb(246, 246, 246);
     gap: 200px;
     margin-bottom: 10px;
+    max-height: 500px;
 }
 .footer-service{
     display: flex;

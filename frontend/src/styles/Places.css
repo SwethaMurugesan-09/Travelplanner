@@ -2,8 +2,7 @@
   .sidebar {
     width: 250px;
     padding: 20px;
-    position: fixed;
-    top: 80px; 
+    margin-top: 80px; 
     left: 0;
     overflow-y: auto;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -45,8 +44,9 @@
     margin-top: 20px;
   }
 
-  .places-containe {
+  .places-container{
     width: 100%;
+    margin-left: -270px;
   }
   
   .places-grid {

@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Footer.css';
-import { FaInstagram } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa6";
+import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 
 const Footer = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100); // Adjust the scroll position as needed
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className='footer'>
+    <div className={`footer ${scrolled ? 'scrolled' : ''}`}>
       <div className="footer-content">
         <h2>Travey</h2>
         <p>Travey is the flagship leisure travel brand. Known for its range of customized travel offerings with quality services, we maintain the highest standards of reliability and safety, which our clients value and cherish.</p>
@@ -29,7 +42,7 @@ const Footer = () => {
             <FaInstagram />
           </a>
           <a href="https://www.linkedin.com/in/swetha--murugesan/" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin />
+            <FaLinkedin />
           </a>
         </div>
       </div>
