@@ -25,7 +25,7 @@ const Cities = () => {
       if (state) {
         setLoading(true);
         try {
-          const response = await axios.get(`/api/cities?state=${state}`);
+          const response = await axios.get(`http://localhost:5000/api/cities?state=${state}`);
           setCities(response.data);
           setFilteredCities(response.data);
           setRecommendedCities(response.data.filter((_, i) => (i + 1) % 2 === 0));

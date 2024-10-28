@@ -25,7 +25,7 @@ const Places = () => {
   useEffect(() => {
     if (city) {
       axios
-        .get(`/api/places/${city}`)
+        .get(`http://localhost:5000/api/places/${city}`)
         .then((response) => {
           setTouristPlaces(response.data);
           setFilteredPlaces(response.data);
