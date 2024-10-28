@@ -21,7 +21,7 @@ function Home() {
   useEffect(() => {
     async function fetchStates() {
       try {
-        const response = await axios.get(`/api/states`);
+        const response = await axios.get(`http://localhost:5000/api/states`);
         setStates(response.data);
       } catch (error) {
         console.error("Error fetching states:", error.response?.data || error.message);
@@ -30,7 +30,7 @@ function Home() {
 
     async function fetchRandomStates() {
       try {
-        const response = await axios.get(`/api/randomstates`);
+        const response = await axios.get(`http://localhost:5000/api/randomstates`);
         const sortedStates = response.data.sort((a, b) => b.ratings - a.ratings);
         setRandomStates(sortedStates);
       } catch (error) {

@@ -104,6 +104,7 @@ const getCitiesByState = async (req, res) => {
 const getRandomStatesWithImages = async (req, res) => {
   try {
     // Fetch all distinct states with their images and ratings
+    console.log("Reached");
     const states = await Travel.aggregate([
       {
         $group: {
