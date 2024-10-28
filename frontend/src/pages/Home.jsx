@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 
 function Home() {
   const [states, setStates] = useState([]);
-  const [randomStates, setRandomStates] = useState([]); // For recommended places
+  const [randomStates, setRandomStates] = useState([]);
   const [formData, setFormData] = useState({
     state: '',
     startTravelDate: '',
@@ -31,7 +31,7 @@ function Home() {
     async function fetchRandomStates() {
       try {
         const response = await axios.get(`/api/randomstates`);
-        const sortedStates = response.data.sort((a, b) => b.ratings - a.ratings); // Sort by ratings in descending order
+        const sortedStates = response.data.sort((a, b) => b.ratings - a.ratings);
         setRandomStates(sortedStates);
       } catch (error) {
         console.error("Error fetching random states:", error.response?.data || error.message);
@@ -39,7 +39,7 @@ function Home() {
     }
 
     fetchStates();
-    fetchRandomStates(); // Fetch random states for recommended places
+    fetchRandomStates();
   }, []);
 
   const handleInputChange = (e) => {
@@ -59,7 +59,6 @@ function Home() {
     }
   };
 
-  // Function to render stars based on rating
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -67,11 +66,15 @@ function Home() {
         <FontAwesomeIcon
           key={i}
           icon={faStar}
-          color={i <= rating ? '#FFD700' : '#ccc'} // Gold for filled stars, gray for empty
+          color={i <= rating ? '#FFD700' : '#ccc'}
         />
       );
     }
     return stars;
+  };
+
+  const handlePlaceClick = (state) => {
+    navigate(`/cities?state=${state._id}`);
   };
 
   return (
@@ -129,7 +132,7 @@ function Home() {
           <div className="famous-places-grid">
             {randomStates.length > 0 ? (
               randomStates.map((state) => (
-                <div key={state._id} className="place-card">
+                <div key={state._id} className="place-card" onClick={() => handlePlaceClick(state)}>
                   <img src={state.imageUrl} alt={state._id} />
                   <h4>{state._id}</h4>
                   <div className='home-ratings'>{renderStars(state.ratings)}</div> 
