@@ -1,0 +1,25 @@
+.about-container{
+    margin: 100px 100px;
+}
+.about-travey{
+    display: flex;
+    flex-direction: row;
+    margin: -20px 100px;
+    gap: 200px;
+}
+.about-travey-img{
+    width: 500px;
+}
+.about-travey-img img{
+    width: 500px;
+    height: auto;
+}
+.about-travey-text{
+    margin-bottom: 80px;
+}
+.about-container h2{
+    margin-bottom: 20px;
+}
+.about-travey-text h2{
+    margin-bottom: 20px;
+}
