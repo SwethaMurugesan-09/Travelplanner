@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'; 
 import { CgProfile } from "react-icons/cg";
 
 const Navbar = ({ isAuthenticated, handleLogout }) => {
   const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown
+  const [isScrolled, setIsScrolled] = useState(false); // State to check if page is scrolled
 
   // Toggle the dropdown menu
   const toggleDropdown = () => {
@@ -16,8 +17,20 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
     setShowDropdown(false);
   };
 
+  // Listen to scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0); // If scrolled, set to true
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div>
         <h1>Travey</h1>
       </div>

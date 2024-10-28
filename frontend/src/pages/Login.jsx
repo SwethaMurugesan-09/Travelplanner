@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
 import Navbar from '../components/Navbar/Navbar';
-
+import img1 from '../components/travel_assets/login-img.jpg';
+import img2 from '../components/travel_assets/signup-img.jpg';
 const Login = () => {
     // State for managing login and signup view
     const [isLogin, setIsLogin] = useState(true);
@@ -41,7 +42,7 @@ const Login = () => {
         if (responseData && responseData.success) {
             localStorage.setItem('auth-token', responseData.token);
             setIsAuthenticated(true);  // Set the user as logged in
-            window.location.replace("/");
+            window.location.replace("/login");
         } else {
             alert(responseData ? responseData.errors : "User does not exist. Please create an account.");
         }
@@ -51,7 +52,7 @@ const Login = () => {
         e.preventDefault();
         const formData = { username, email, password };
         console.log("Signup attempted with:", formData);
-
+    
         let responseData;
         await fetch('http://localhost:5000/signup/signup', {
             method: 'POST',
@@ -67,16 +68,16 @@ const Login = () => {
             console.error("Error during signup:", error);
             alert("There was an error processing your request.");
         });
-
+    
         if (responseData && responseData.success) {
             localStorage.setItem('auth-token', responseData.token);
             setIsAuthenticated(true);  // Set the user as logged in
-            window.location.replace("/");
+            window.location.replace("/login");  // Redirect to homepage or another page
         } else {
             alert(responseData ? responseData.errors : "Email already registered.");
         }
     };
-
+    
     // Function to handle logout
     const handleLogout = () => {
         localStorage.removeItem('auth-token');  // Remove token from localStorage
@@ -105,7 +106,9 @@ const Login = () => {
                         <>
                             {isLogin ? (
                                 <>
-                                    <h2 className="login-heading">Login</h2>
+                                <h2 className="login-heading">Login</h2>
+                                <div className="login-container">
+                                   <div className="login-content">
                                     <form onSubmit={handleLogin}>
                                         <div className="login-inputGroup">
                                             <label htmlFor="email" className="login-label">Email:</label>
@@ -132,10 +135,21 @@ const Login = () => {
                                         <button type="submit" className="login-button">Login</button>
                                     </form>
                                     <span className="login-footer">Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a></span>
-                                </>
+                               </div>
+                               
+                               <div className="login-img">
+                                    <img src={img2}/>
+                               </div>
+                               </div> </>
                             ) : (
                                 <>
+                                
                                     <h2 className="login-heading">Sign Up</h2>
+                                    <div className="login-container">
+                                    <div className="login-img">
+                                        <img src={img1}/>
+                                    </div>
+                                    <div className="login-content">
                                     <form onSubmit={handleSignup}>
                                         <div className="login-inputGroup">
                                             <label htmlFor="username" className="login-label">Username:</label>
@@ -173,7 +187,7 @@ const Login = () => {
                                         <button type="submit" className="login-button">Sign Up</button>
                                     </form>
                                     <span className="login-footer">Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login here</a></span>
-                                </>
+                                </div></div></>
                             )}
                         </>
                     )}

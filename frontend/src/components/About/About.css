@@ -23,3 +23,13 @@
 .about-travey-text h2{
     margin-bottom: 20px;
 }
+.about-container span{
+    color: rgb(7, 183, 37);
+    font-size: 18px;
+    font-weight: bold;
+}
+.about-travey-text span{
+    color: rgb(7, 183, 37);
+    font-size: 18px;
+    font-weight: bold;
+}

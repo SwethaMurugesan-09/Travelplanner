@@ -1,11 +1,17 @@
 .navbar {
-  top: 0px;
+  top: 0;
   left: 0;
   width: 100%;
   padding: 10px 60px !important;
-  background: transparent;
+  background: transparent; /* Transparent when at the top of the page */
   z-index: 3;
   position: fixed !important;
+  transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: #fdfdfd; /* Solid black color when scrolled */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
 }
 
 .navbar-elements {
@@ -17,8 +23,8 @@
 
 .navbar-content a {
   text-decoration: none; 
-  color: rgb(10, 10, 10);
-  font-weight:bold;
+  color: rgb(0, 0, 0); /* White text for contrast against dark navbar */
+  font-weight: bold;
   font-size: 18px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -29,4 +35,3 @@
   background-color: #969da7;
   text-decoration: none; 
 }
-
