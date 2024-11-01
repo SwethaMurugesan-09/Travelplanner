@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
 import img1 from '../components/travel_assets/login-img.jpg';
 import img2 from '../components/travel_assets/signup-img.jpg';
+
 const Login = () => {
     // State for managing login and signup view
     const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    // Update authentication status if a token is found
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
         if (token) {
@@ -17,6 +19,7 @@ const Login = () => {
         }
     }, []);
 
+    // Login handler
     const handleLogin = async (e) => {
         e.preventDefault();
         const formData = { email, password };
@@ -40,12 +43,13 @@ const Login = () => {
         if (responseData && responseData.success) {
             localStorage.setItem('auth-token', responseData.token);
             setIsAuthenticated(true);  // Set the user as logged in
-            window.location.replace("/login");
+            window.location.replace("/home");
         } else {
             alert(responseData ? responseData.errors : "User does not exist. Please create an account.");
         }
     };
 
+    // Signup handler
     const handleSignup = async (e) => {
         e.preventDefault();
         const formData = { username, email, password };
@@ -68,20 +72,22 @@ const Login = () => {
         });
     
         if (responseData && responseData.success) {
-            localStorage.setItem('auth-token', responseData.token);
-            setIsAuthenticated(true);  
-            window.location.replace("/home");  // Redirect to homepage or another page
+            setIsLogin(true);  // Switch to login view after successful signup
+            alert("Signup successful! Please log in.");
         } else {
             alert(responseData ? responseData.errors : "Email already registered.");
         }
     };
     
+  
+    // Handle logout
     const handleLogout = () => {
         localStorage.removeItem('auth-token');  // Remove token from localStorage
         setIsAuthenticated(false);             // Set the user as logged out
         window.location.replace("/");          // Redirect to homepage or login page
     };
 
+    // Handle enter key press for login/signup actions
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             if (isLogin) {
@@ -92,97 +98,106 @@ const Login = () => {
         }
     };
 
+    // Check if all fields are filled
+    const isLoginEnabled = email && password;
+    const isSignupEnabled = username && email && password;
+
     return (
         <div className="auth-total-container">
             <div className="auth-container">
                 <div className="authContainer">
-                        <>
-                            {isLogin ? (
-                                <>
-                                <h2 className="login-heading">Login</h2>
-                                <div className="login-container">
-                                   <div className="login-content">
-                                    <form onSubmit={handleLogin}>
-                                        <div className="login-inputGroup">
-                                            <label htmlFor="email" className="login-label">Email:</label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                onKeyDown={handleKeyPress}
-                                                className="login-input"
-                                            />
-                                        </div>
-                                        <div className="login-inputGroup">
-                                            <label htmlFor="password" className="login-label">Password:</label>
-                                            <input
-                                                type="password"
-                                                id="password"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                onKeyDown={handleKeyPress}
-                                                className="login-input"
-                                            />
-                                        </div>
-                                        <button type="submit" className="login-button">Login</button>
-                                    </form>
-                                    <span className="login-footer">Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a></span>
+                    <>
+                        {isLogin ? (
+                            <>
+                            <h2 className="login-heading">Login</h2>
+                            <div className="login-container">
+                               <div className="login-content">
+                                <form onSubmit={handleLogin}>
+                                    <div className="login-inputGroup">
+                                        <label htmlFor="email" className="login-label">Email:</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            onKeyDown={handleKeyPress}
+                                            className="login-input"
+                                        />
+                                    </div>
+                                    <div className="login-inputGroup">
+                                        <label htmlFor="password" className="login-label">Password:</label>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            onKeyDown={handleKeyPress}
+                                            className="login-input"
+                                        />
+                                    </div>
+                                    <button type="submit" className="login-button" disabled={!isLoginEnabled}>
+                                        Login
+                                    </button>
+                                </form>
+                                <span className="login-footer">Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a></span>
                                </div>
                                
                                <div className="login-img">
-                                    <img src={img2}/>
+                                    <img src={img2} alt="Login visual"/>
                                </div>
-                               </div> </>
-                            ) : (
-                                <>
-                                
-                                    <h2 className="login-heading">Sign Up</h2>
-                                    <div className="login-container">
-                                    <div className="login-img">
-                                        <img src={img1}/>
+                               </div> 
+                            </>
+                        ) : (
+                            <>
+                                <h2 className="login-heading">Sign Up</h2>
+                                <div className="login-container">
+                                <div className="login-img">
+                                    <img src={img1} alt="Signup visual"/>
+                                </div>
+                                <div className="login-content">
+                                <form onSubmit={handleSignup}>
+                                    <div className="login-inputGroup">
+                                        <label htmlFor="username" className="login-label">Username:</label>
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            onKeyDown={handleKeyPress}
+                                            className="login-input"
+                                        />
                                     </div>
-                                    <div className="login-content">
-                                    <form onSubmit={handleSignup}>
-                                        <div className="login-inputGroup">
-                                            <label htmlFor="username" className="login-label">Username:</label>
-                                            <input
-                                                type="text"
-                                                id="username"
-                                                value={username}
-                                                onChange={(e) => setUsername(e.target.value)}
-                                                onKeyDown={handleKeyPress}
-                                                className="login-input"
-                                            />
-                                        </div>
-                                        <div className="login-inputGroup">
-                                            <label htmlFor="email" className="login-label">Email:</label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                onKeyDown={handleKeyPress}
-                                                className="login-input"
-                                            />
-                                        </div>
-                                        <div className="login-inputGroup">
-                                            <label htmlFor="password" className="login-label">Password:</label>
-                                            <input
-                                                type="password"
-                                                id="password"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                onKeyDown={handleKeyPress}
-                                                className="login-input"
-                                            />
-                                        </div>
-                                        <button type="submit" className="login-button">Sign Up</button>
-                                    </form>
-                                    <span className="login-footer">Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login here</a></span>
-                                </div></div></>
-                            )}
-                        </>
+                                    <div className="login-inputGroup">
+                                        <label htmlFor="email" className="login-label">Email:</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            onKeyDown={handleKeyPress}
+                                            className="login-input"
+                                        />
+                                    </div>
+                                    <div className="login-inputGroup">
+                                        <label htmlFor="password" className="login-label">Password:</label>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            onKeyDown={handleKeyPress}
+                                            className="login-input"
+                                        />
+                                    </div>
+                                    <button type="submit" className="login-button" disabled={!isSignupEnabled}>
+                                        Sign Up
+                                    </button>
+                                </form>
+                                <span className="login-footer">Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login here</a></span>
+                            </div></div>
+                            </>
+                        )}
+                    </>
                 </div>
             </div>
         </div>
