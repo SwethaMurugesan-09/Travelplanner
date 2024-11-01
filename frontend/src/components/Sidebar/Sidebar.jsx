@@ -12,6 +12,7 @@ const Sidebar = ({ filterPlaces }) => {
       : [...selectedCategories, category];
 
     setSelectedCategories(updatedCategories);
+    console.log("Updated Categories:", updatedCategories); // Debugging log
     filterPlaces(updatedCategories, selectedRatings); // Pass updated categories and ratings
   };
 
@@ -22,6 +23,7 @@ const Sidebar = ({ filterPlaces }) => {
       : [...selectedRatings, rating];
 
     setSelectedRatings(updatedRatings);
+    console.log("Updated Ratings:", updatedRatings); // Debugging log
     filterPlaces(selectedCategories, updatedRatings); // Pass updated categories and ratings
   };
 
@@ -29,66 +31,18 @@ const Sidebar = ({ filterPlaces }) => {
     <aside className="sidebar">
       <h5>Filter by Categories</h5>
       <ul className="sidebar-list">
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('waterfall')}
-              className='sidebar-checkbox'
-            />
-            Waterfalls
-          </label>
-        </li>
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('dam')}
-              className='sidebar-checkbox'
-            />
-            Dams
-          </label>
-        </li>
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('hillstation')}
-              className='sidebar-checkbox'
-            />
-            Hill Stations
-          </label>
-        </li>
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('view point')}
-              className='sidebar-checkbox'
-            />
-            View Points
-          </label>
-        </li>
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('lake')}
-              className='sidebar-checkbox'
-            />
-            Lakes
-          </label>
-        </li>
-        <li className='sidebar-lists'>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => handleCategoryChange('caves')}
-              className='sidebar-checkbox'
-            />
-            Caves
-          </label>
-        </li>
+        {['waterfall', 'dam', 'hillstation', 'view point', 'lake', 'caves'].map((category) => (
+          <li key={category} className='sidebar-lists'>
+            <label>
+              <input
+                type="checkbox"
+                onChange={() => handleCategoryChange(category)}
+                className='sidebar-checkbox'
+              />
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </label>
+          </li>
+        ))}
       </ul>
 
       <h5>Filter by Ratings</h5>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
-import Navbar from '../components/Navbar/Navbar';
 import img1 from '../components/travel_assets/login-img.jpg';
 import img2 from '../components/travel_assets/signup-img.jpg';
 const Login = () => {
@@ -11,11 +10,10 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Check if user is already authenticated (token exists in localStorage)
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
         if (token) {
-            setIsAuthenticated(true); // If token exists, user is logged in
+            setIsAuthenticated(true); 
         }
     }, []);
 
@@ -71,14 +69,13 @@ const Login = () => {
     
         if (responseData && responseData.success) {
             localStorage.setItem('auth-token', responseData.token);
-            setIsAuthenticated(true);  // Set the user as logged in
-            window.location.replace("/login");  // Redirect to homepage or another page
+            setIsAuthenticated(true);  
+            window.location.replace("/home");  // Redirect to homepage or another page
         } else {
             alert(responseData ? responseData.errors : "Email already registered.");
         }
     };
     
-    // Function to handle logout
     const handleLogout = () => {
         localStorage.removeItem('auth-token');  // Remove token from localStorage
         setIsAuthenticated(false);             // Set the user as logged out
@@ -97,12 +94,8 @@ const Login = () => {
 
     return (
         <div className="auth-total-container">
-            <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
             <div className="auth-container">
                 <div className="authContainer">
-                    {isAuthenticated ? (
-                        <h2>Welcome, you are logged in!</h2>
-                    ) : (
                         <>
                             {isLogin ? (
                                 <>
@@ -190,7 +183,6 @@ const Login = () => {
                                 </div></div></>
                             )}
                         </>
-                    )}
                 </div>
             </div>
         </div>

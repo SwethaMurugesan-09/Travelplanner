@@ -39,20 +39,7 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
         <div className="navbar-content"><Link to="/about">About</Link></div>
         <div className="navbar-content"><Link to="/contact">Contact</Link></div>
 
-        <div className="navbar-content profile-container">
-          <CgProfile onClick={toggleDropdown} className="profile-icon" />
-          
-          {showDropdown && (
-            <div className="profile-dropdown">
-              {isAuthenticated ? (
-                <button onClick={() => { handleLogout(); closeDropdown(); }} className="dropdown-item">Logout</button>
-              ) : (
-                <Link to="/login" onClick={closeDropdown} className="dropdown-item">Login</Link>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
+       </div>
     </nav>
   );
 };

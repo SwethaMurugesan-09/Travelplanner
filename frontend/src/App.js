@@ -15,12 +15,13 @@ function App() {
   return (
     <Router>
       <div className="App">
+        
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/home" element={<Home/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/cities" element={<Cities/>}/>
           <Route path="/places" element={<Places/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Login/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/explore/:placeName" element={<Explore />} />
           <Route path="/hotels/:id" element={<Hotels/>} /> 
@@ -28,7 +29,6 @@ function App() {
           <Route path="/tripplaces/:id" element={<TripPlaces />} /> 
           </Routes>
       </div>
-      <Footer/>
     </Router>
   );
 }

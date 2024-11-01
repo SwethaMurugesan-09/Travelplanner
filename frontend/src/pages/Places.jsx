@@ -51,10 +51,10 @@ const Places = () => {
   const filterPlaces = (categories, ratings) => {
     let filtered = touristPlaces;
 
-    // Filter by categories
+    // Filter by categories (assuming each place has a `category` field)
     if (categories.length > 0) {
       filtered = filtered.filter((place) =>
-        categories.some((category) => place.placeName.toLowerCase().includes(category))
+        categories.some((category) => place.category.toLowerCase() === category)
       );
     }
 
@@ -63,6 +63,7 @@ const Places = () => {
       filtered = filtered.filter((place) => ratings.includes(Math.floor(place.ratings)));
     }
 
+    console.log("Filtered Places:", filtered); // Debugging log
     setFilteredPlaces(filtered);
   };
 
