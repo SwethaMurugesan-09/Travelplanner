@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Places from './pages/Places';
 import Home from './pages/Home';
 import Cities from './pages/Cities';
@@ -12,29 +12,42 @@ import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
+import { AuthProvider } from './context/AuthContext';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Login />} />
-
-        <Route element={<ProtectedRoutes/>}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cities" element={<Cities />} />
-              <Route path="/places" element={<Places />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/explore/:placeName" element={<Explore />} />
-            <Route path="/hotels/:id" element={<Hotels />} />
-            <Route path="/restaurants/:id" element={<Restaurants />} />
-            <Route path="/tripplaces/:id" element={<TripPlaces />} />
-          </Route>
-        </Routes>
-      </div>
+      <AuthProvider>
+        <div className="App">
+          <AppRoutes />
+        </div>
+      </AuthProvider>
     </Router>
   );
-}
+};
+
+const AppRoutes = () => {
+  const location = useLocation(); 
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cities" element={<Cities />} />
+          <Route path="/places" element={<Places />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/explore/:placeName" element={<Explore />} />
+          <Route path="/hotels/:id" element={<Hotels />} />
+          <Route path="/restaurants/:id" element={<Restaurants />} />
+          <Route path="/tripplaces/:id" element={<TripPlaces />} />
+        </Route>
+      </Routes>
+      {location.pathname !== '/' && <Footer />}
+    </>
+  );
+};
 
 export default App;
