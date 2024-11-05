@@ -11,28 +11,27 @@ import TripPlaces from './pages/TripPlaces';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoutes from './utils/ProtectedRoutes';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          {/* Public Route */}
           <Route path="/" element={<Login />} />
 
-          {/* Protected Routes */}
-          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
-          <Route path="/cities" element={<ProtectedRoute><Cities /></ProtectedRoute>} />
-          <Route path="/places" element={<ProtectedRoute><Places /></ProtectedRoute>} />
-          <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-          <Route path="/explore/:placeName" element={<ProtectedRoute><Explore /></ProtectedRoute>} />
-          <Route path="/hotels/:id" element={<ProtectedRoute><Hotels /></ProtectedRoute>} /> 
-          <Route path="/restaurants/:id" element={<ProtectedRoute><Restaurants /></ProtectedRoute>} /> 
-          <Route path="/tripplaces/:id" element={<ProtectedRoute><TripPlaces /></ProtectedRoute>} /> 
+        <Route element={<ProtectedRoutes/>}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/cities" element={<Cities />} />
+              <Route path="/places" element={<Places />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/explore/:placeName" element={<Explore />} />
+            <Route path="/hotels/:id" element={<Hotels />} />
+            <Route path="/restaurants/:id" element={<Restaurants />} />
+            <Route path="/tripplaces/:id" element={<TripPlaces />} />
+          </Route>
         </Routes>
-        <Footer /> {/* Assuming Footer is visible on all pages */}
       </div>
     </Router>
   );

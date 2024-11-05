@@ -38,7 +38,7 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
         <div className="navbar-content"><Link to="/">Home</Link></div>
         <div className="navbar-content"><Link to="/about">About</Link></div>
         <div className="navbar-content"><Link to="/contact">Contact</Link></div>
-
+        <div className="navbar-content"><Link to="/">Logout</Link></div>
        </div>
     </nav>
   );
