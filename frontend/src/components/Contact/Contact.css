@@ -5,56 +5,36 @@
   margin: 100px auto;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Hide any overflow caused by the pseudo-element */
-  color: #fff; /* Change text color to white for better contrast */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  color: #fff; 
 }
 
-/* Pseudo-element for the blurred background image */
-.contact-form-container::before {
-  content: ''; /* Required for the pseudo-element to be displayed */
-  position: absolute; /* Position it relative to the container */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('../travel_assets/contact-background.jpg'); /* Background image */
-  background-size: cover; /* Make the background cover the entire container */
-  background-position: center; /* Center the background image */
-  filter: blur(2px); /* Apply blur effect */
-  z-index: 0; /* Send it to the back */
-}
 
-/* Form Title */
 .contact-title {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 26px;
-  color: #000000; /* Change title color to white */
-  position: relative; /* Position it above the pseudo-element */
-  z-index: 1; /* Bring it above the background */
+  color: #000000;
+  position: relative; 
   font-weight: bold;
 }
-/* Success Message Image */
-/* Success Message Container */
+
 .success-message-container {
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  height: calc(100vh - 100px); /* Full viewport height minus the navbar height */
-  text-align: center; /* Center text */
-  margin-top: 20px; /* Optional margin for spacing */
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 100px); 
+  text-align: center; 
+  margin: 50px 0px;
 }
 
-/* Success Message */
 .contact-success-message {
-  color: #52a72e; 
+  color: #000000; 
   font-size: 30px;
   font-weight: bold; 
   margin-top: 20px;
   font-weight: 3rem;
-  
 }
 
 /* Form Elements */

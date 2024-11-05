@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 
-// Create the context
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -12,11 +12,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
-    if (token) {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
+    setIsAuthenticated(!!token); // Set isAuthenticated based on token presence
+  }, [isAuthenticated]); // Trigger useEffect when isAuthenticated changes
+  
   const login = (token) => {
     localStorage.setItem('auth-token', token);
     setIsAuthenticated(true);

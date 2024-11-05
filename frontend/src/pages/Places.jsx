@@ -27,15 +27,17 @@ const Places = () => {
       axios
         .get(`http://localhost:5000/api/places/${city}`)
         .then((response) => {
+          console.log("API Data:", response.data); // Log API data structure
           setTouristPlaces(response.data);
           setFilteredPlaces(response.data);
         })
         .catch((error) => {
-          console.error('Error fetching places:', error);
-          setError('Failed to load tourist places');
+          console.error("Error fetching places:", error);
+          setError("Failed to load tourist places");
         });
     }
   }, [city]);
+  
 
   const handleSearchChange = (event) => {
     const searchValue = event.target.value.toLowerCase();
@@ -47,26 +49,27 @@ const Places = () => {
     setFilteredPlaces(filtered);
   };
 
-  // Combined filter by categories and ratings
   const filterPlaces = (categories, ratings) => {
     let filtered = touristPlaces;
-
-    // Filter by categories (assuming each place has a `category` field)
+  
+    // Test category filtering alone
     if (categories.length > 0) {
       filtered = filtered.filter((place) =>
-        categories.some((category) => place.category.toLowerCase() === category)
+        categories.includes(place.category.toLowerCase())
       );
     }
-
-    // Filter by ratings
+  
+    // Test rating filtering alone
     if (ratings.length > 0) {
-      filtered = filtered.filter((place) => ratings.includes(Math.floor(place.ratings)));
+      filtered = filtered.filter((place) =>
+        ratings.includes(Math.floor(place.ratings))
+      );
     }
-
-    console.log("Filtered Places:", filtered); // Debugging log
+  
+    console.log("Filtered Places (Categories and Ratings):", filtered); // Debugging log
     setFilteredPlaces(filtered);
   };
-
+  
   const handlePlaceClick = (placeName) => {
     navigate(`/explore/${placeName}`);
   };

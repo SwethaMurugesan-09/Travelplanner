@@ -12,7 +12,6 @@ const Sidebar = ({ filterPlaces }) => {
       : [...selectedCategories, category];
 
     setSelectedCategories(updatedCategories);
-    console.log("Updated Categories:", updatedCategories); // Debugging log
     filterPlaces(updatedCategories, selectedRatings); // Pass updated categories and ratings
   };
 
@@ -23,7 +22,6 @@ const Sidebar = ({ filterPlaces }) => {
       : [...selectedRatings, rating];
 
     setSelectedRatings(updatedRatings);
-    console.log("Updated Ratings:", updatedRatings); // Debugging log
     filterPlaces(selectedCategories, updatedRatings); // Pass updated categories and ratings
   };
 
@@ -32,12 +30,12 @@ const Sidebar = ({ filterPlaces }) => {
       <h5>Filter by Categories</h5>
       <ul className="sidebar-list">
         {['waterfall', 'dam', 'hillstation', 'view point', 'lake', 'caves'].map((category) => (
-          <li key={category} className='sidebar-lists'>
+          <li key={category} className="sidebar-lists">
             <label>
               <input
                 type="checkbox"
                 onChange={() => handleCategoryChange(category)}
-                className='sidebar-checkbox'
+                className="sidebar-checkbox"
               />
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </label>
@@ -48,12 +46,12 @@ const Sidebar = ({ filterPlaces }) => {
       <h5>Filter by Ratings</h5>
       <ul className="sidebar-list">
         {[5, 4, 3, 2, 1].map((rating) => (
-          <li key={rating} className='sidebar-lists'>
+          <li key={rating} className="sidebar-lists">
             <label>
               <input
                 type="checkbox"
                 onChange={() => handleRatingChange(rating)}
-                className='sidebar-checkbox'
+                className="sidebar-checkbox"
               />
               {rating} Star{rating > 1 && 's'}
             </label>
