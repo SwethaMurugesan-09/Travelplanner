@@ -32,7 +32,7 @@ const Navbar = () => {
         <h1>Travey</h1>
       </div>
       <div className="navbar-elements">
-        <div className="navbar-content"><Link to="/">Home</Link></div>
+        <div className="navbar-content"><Link to="/home">Home</Link></div>
         <div className="navbar-content"><Link to="/about">About</Link></div>
         <div className="navbar-content"><Link to="/contact">Contact</Link></div>
         {isAuthenticated ? (

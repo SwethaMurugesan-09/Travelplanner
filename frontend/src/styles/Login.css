@@ -90,7 +90,13 @@
       color: #0056b3;
     }
     
-    /* Responsive */
+/* Image Styling */
+.login-container img {
+  height: 100%; 
+  width: auto;
+  object-fit: cover; 
+  border-radius: 10px;
+}
     @media (max-width: 600px) {
       .authContainer {
         padding: 1.5rem;
