@@ -4,14 +4,14 @@
 .tripplaces-container h2{
     margin-bottom: 60px;
     text-align: center;
-    color: blueviolet;
+    color: rgb(2, 2, 2);
 }
 .tripplaces-container p{
     margin-top: 20px;
     margin-left: 50px;
 }
 .tripplaces-container span{
-    color: blueviolet;
+    color: rgb(20, 8, 31);
     font-size: 18px;
 }
 .tripplaces-img{

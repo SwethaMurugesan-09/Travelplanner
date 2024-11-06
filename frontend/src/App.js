@@ -34,15 +34,15 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cities" element={<Cities />} />
-          <Route path="/places" element={<Places />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/explore/:placeName" element={<Explore />} />
-          <Route path="/hotels/:id" element={<Hotels />} />
-          <Route path="/restaurants/:id" element={<Restaurants />} />
-          <Route path="/tripplaces/:id" element={<TripPlaces />} />
+          <Route path="/home" element={<div style={{ minHeight: '80vh' }}><Home /></div>} />
+          <Route path="/contact" element={<div style={{ minHeight: '80vh' }}><Contact /></div>} />
+          <Route path="/cities" element={<div style={{ minHeight: '80vh' }}><Cities /></div>} />
+          <Route path="/places" element={<div style={{ minHeight: '80vh' }}><Places /></div>} />
+          <Route path="/about" element={<div style={{ minHeight: '80vh' }}><About /></div>} />
+          <Route path="/explore/:placeName" element={<div style={{ minHeight: '80vh' }}><Explore /></div>} />
+          <Route path="/hotels/:id" element={<div style={{ minHeight: '80vh' }}><Hotels /></div>} />
+          <Route path="/restaurants/:id" element={<div style={{ minHeight: '80vh' }}><Restaurants /></div>} />
+          <Route path="/tripplaces/:id" element={<div style={{ minHeight: '80vh' }}><TripPlaces /></div>} />
         </Route>
       </Routes>
       {location.pathname !== '/' && <Footer />}
