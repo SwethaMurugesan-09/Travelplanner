@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
+import GoogleMapEmbed from './components/GoogleApi/GoogleMap';
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/restaurants/:id" element={<div style={{ minHeight: '80vh' }}><Restaurants /></div>} />
           <Route path="/tripplaces/:id" element={<div style={{ minHeight: '80vh' }}><TripPlaces /></div>} />
         </Route>
+        <Route path="/google" element={<GoogleMapEmbed/>}/>
       </Routes>
       {location.pathname !== '/' && <Footer />}
     </>

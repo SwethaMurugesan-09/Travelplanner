@@ -1,14 +1,23 @@
-/* Container for the contact form */
 .contact-form-container {
-  position: relative; /* Required for absolute positioning of the pseudo-element */
-  max-width: 600px;
+  position: relative; 
   margin: 100px auto;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   color: #fff; 
 }
 
+.contact-form-total-container {
+  background-image: url('../travel_assets/contact.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
 .contact-title {
   text-align: center;
@@ -59,7 +68,7 @@
 .contact-input,
 .contact-textarea {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.7rem 3rem 0.7rem 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
@@ -79,15 +88,16 @@
 
 /* Submit Button */
 .contact-submit-btn {
-  background-color: #007bff;
+  background-color: #0b1622;
   color: #fff;
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 2rem;
   border: none;
   border-radius: 4px;
   font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  max-width: 120px;
+  max-width: 150px;
+  margin-left: 23%;
 }
 
 .contact-submit-btn:hover {

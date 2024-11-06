@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './Contact.css';
 import Navbar from '../Navbar/Navbar';
 import { motion } from 'framer-motion';
-import smiley from '../travel_assets/happiness.png'; // Import the smiley image
-
+import smiley from '../travel_assets/happiness.png'; 
+import cont from '../travel_assets/contact-background.jpg';
 const Contact = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -61,7 +61,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="contact-form-total-container">
+        <div className="contact-form-total-container" >
             <Navbar />
             {!submitted ? (
                 <motion.div 

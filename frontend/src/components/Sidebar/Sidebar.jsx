@@ -29,7 +29,7 @@ const Sidebar = ({ filterPlaces }) => {
     <aside className="sidebar">
       <h5>Filter by Categories</h5>
       <ul className="sidebar-list">
-        {['waterfall', 'dam', 'hillstation', 'view point', 'lake', 'caves'].map((category) => (
+        {['waterfalls', 'dam', 'hillstation', 'view point', 'lake', 'caves'].map((category) => (
           <li key={category} className="sidebar-lists">
             <label>
               <input

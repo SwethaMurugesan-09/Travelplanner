@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div>
+      <div className='navbar-webName'>
         <h1>Travey</h1>
       </div>
       <div className="navbar-elements">
