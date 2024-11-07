@@ -167,6 +167,7 @@ function Home() {
                 <div key={pkg._id} className="package-card">
                   <img src={pkg.imageUrl[0]} alt={pkg.city} />
                   <h4>{pkg.city}</h4>
+                  <h4>{pkg.rate}</h4>
                   <button onClick={() => handleExploreClick(pkg._id)}>Explore</button>
                   </div>
               ))

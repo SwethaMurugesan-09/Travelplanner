@@ -12,6 +12,10 @@ const packagesSchema = mongoose.Schema(
           description:{
             type: String,
             required: true,
+          },
+          rate:{
+            type: Number,
+            required: true,
           }
     },
     {

@@ -3,18 +3,17 @@ const Packages = require('../models/Packages'); // Adjust path as necessary
 // Create a new package
 const createPackage = async (req, res) => {
     try {
-        const { city, imageUrl, description } = req.body;
+        const { city, imageUrl, description ,rate} = req.body;
 
-        // Validate request
-        if (!city || !imageUrl || !description) {
+        if (!city || !imageUrl || !description ||!rate) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-        // Create a new package document
         const newPackage = new Packages({
             city,
             imageUrl,
-            description
+            description,
+            rate
         });
 
         // Save the package to the database
