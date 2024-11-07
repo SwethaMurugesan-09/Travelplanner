@@ -4,12 +4,13 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Home.css';
-import image1 from '../components/travel_assets/image1.jpg'; // Replace with appropriate image if needed
+import image1 from '../components/travel_assets/image1.jpg';
 import Navbar from '../components/Navbar/Navbar';
 
 function Home() {
   const [states, setStates] = useState([]);
   const [randomStates, setRandomStates] = useState([]);
+  const [packages, setPackages] = useState([]);
   const [formData, setFormData] = useState({
     state: '',
     startTravelDate: '',
@@ -38,8 +39,18 @@ function Home() {
       }
     }
 
+    async function fetchPackages() {
+      try {
+        const response = await axios.get(`http://localhost:5000/package/get`);
+        setPackages(response.data);
+      } catch (error) {
+        console.error("Error fetching packages:", error.response?.data || error.message);
+      }
+    }
+
     fetchStates();
     fetchRandomStates();
+    fetchPackages();
   }, []);
 
   const handleInputChange = (e) => {
@@ -75,6 +86,10 @@ function Home() {
 
   const handlePlaceClick = (state) => {
     navigate(`/cities?state=${state._id}`);
+  };
+
+  const handleExploreClick = (packageId) => {
+    navigate(`/packages/${packageId}`);
   };
 
   return (
@@ -143,11 +158,22 @@ function Home() {
             )}
           </div>
         </div>
+        
         <div className="home-packages">
-            <h3>Packages</h3>
-            <div className="home-packages-container">
-                <div></div>
-            </div>
+          <h3>Packages</h3>
+          <div className="home-packages-container">
+            {packages.length > 0 ? (
+              packages.map((pkg) => (
+                <div key={pkg._id} className="package-card">
+                  <img src={pkg.imageUrl[0]} alt={pkg.city} />
+                  <h4>{pkg.city}</h4>
+                  <button onClick={() => handleExploreClick(pkg._id)}>Explore</button>
+                  </div>
+              ))
+            ) : (
+              <p>Loading packages...</p>
+            )}
+          </div>
         </div>
       </div>
     </>

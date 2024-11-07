@@ -4,5 +4,6 @@ const packagesController = require('../controllers/packagesController'); // Adju
 
 packagesrouter.post('/create', packagesController.createPackage);
 packagesrouter.get('/get', packagesController.getPackages);
+packagesrouter.get('/get/:id', packagesController.getPackageById);
 
 module.exports = packagesrouter;

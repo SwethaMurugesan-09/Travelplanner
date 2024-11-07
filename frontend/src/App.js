@@ -14,6 +14,7 @@ import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
 import GoogleMapEmbed from './components/GoogleApi/GoogleMap';
+import Packages from './pages/Packages';
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/hotels/:id" element={<div style={{ minHeight: '80vh' }}><Hotels /></div>} />
           <Route path="/restaurants/:id" element={<div style={{ minHeight: '80vh' }}><Restaurants /></div>} />
           <Route path="/tripplaces/:id" element={<div style={{ minHeight: '80vh' }}><TripPlaces /></div>} />
+          <Route path="/packages/:id" element={<Packages />} />
         </Route>
         <Route path="/google" element={<GoogleMapEmbed/>}/>
       </Routes>

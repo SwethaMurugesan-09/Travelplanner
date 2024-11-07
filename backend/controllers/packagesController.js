@@ -35,8 +35,25 @@ const getPackages = async (req, res) => {
     }
 };
 
+const getPackageById = async (req, res) => {
+    try {
+        const packageId = req.params.id;
+        const packageDetails = await Packages.findById(packageId);
+
+        if (!packageDetails) {
+            return res.status(404).json({ message: 'Package not found' });
+        }
+
+        res.status(200).json(packageDetails);
+    } catch (error) {
+        console.error('Error retrieving package by ID:', error);
+        res.status(500).json({ message: 'Error retrieving package by ID', error });
+    }
+};
+
 // Export the controller methods
 module.exports = {
     createPackage,
     getPackages,
+    getPackageById,
 };
