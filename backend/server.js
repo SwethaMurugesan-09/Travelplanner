@@ -9,28 +9,29 @@ const path = require('path');
 const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
 const specificRoutes = require('./routes/specificRoutes');
+const packagesrouter = require('./routes/packagesRoutes');
 
 dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-    'https://travey.onrender.com/',
-  ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
-]
+// const allowedOrigins = [
+//     'https://travey.onrender.com/',
+//   ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
+// ]
 
-const corsOption = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    }
-    else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET','POST','PUT','DELETE'],
-  credentials: true,
-}
+// const corsOption = {
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     }
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: ['GET','POST','PUT','DELETE'],
+//   credentials: true,
+// }
 app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
@@ -51,17 +52,16 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png/;
-    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = fileTypes.test(file.mimetype);
+    const isImage = file.mimetype.startsWith("image/");
 
-    if (extname && mimetype) {
+    if (isImage) {
       return cb(null, true);
     } else {
-      cb(new Error('Error: Only images (jpg, png) are allowed'));
+      cb(new Error('Error: Only image files are allowed'));
     }
   }
 });
+
 
 app.post("/upload", upload.single('Travel'), (req, res) => {
   if (!req.file) {
@@ -93,6 +93,7 @@ app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
 app.use('/api/specificplace', specificRoutes);
 
+app.use('/package',packagesrouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

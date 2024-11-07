@@ -103,24 +103,17 @@ const getCitiesByState = async (req, res) => {
 
 const getRandomStatesWithImages = async (req, res) => {
   try {
-    // Fetch all distinct states with their images and ratings
-    console.log("Reached");
     const states = await Travel.aggregate([
       {
         $group: {
           _id: "$state",
-          imageUrl: { $first: "$imageUrl" }, // Keep first image per state
-          ratings: { $avg: "$ratings" }, // Average the ratings of the grouped states
+          imageUrl: { $first: "$imageUrl" }, 
+          ratings: { $avg: "$ratings" }, 
         },
       },
     ]);
 
-    if (states.length < 10) {
-      return res.status(200).json(states); // If less than 10 states, return all
-    }
-
-    // Select a random subset of states (e.g., 10)
-    const randomStates = states.slice(0, 10); // Fetch 10 random states if needed
+    const randomStates = [states[0], states[3]]; // Make sure there are at least 10 states
     res.status(200).json(randomStates);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });

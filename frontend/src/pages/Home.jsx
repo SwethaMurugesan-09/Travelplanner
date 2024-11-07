@@ -143,6 +143,12 @@ function Home() {
             )}
           </div>
         </div>
+        <div className="home-packages">
+            <h3>Packages</h3>
+            <div className="home-packages-container">
+                <div></div>
+            </div>
+        </div>
       </div>
     </>
   );
