@@ -95,9 +95,10 @@
   font-size: 30px;
 }
 .home-packages h3  {
-  padding-left: 105px;
+  margin-left: 20px;
   font-weight: bolder;
   font-size: 30px;
+  margin-bottom: 30px;
 }
 .famous-places h4  {
   padding-left: 10px;
@@ -106,4 +107,56 @@
 }
 .home-ratings{
   padding-left: 10px;
+}
+.home-packages{
+  margin-left: 80px;
+  max-width: 350px; 
+}
+.home-packages-container {
+/* background-color: rgb(254, 254, 254); */
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+cursor: pointer;
+margin-bottom: 30px;
+display: flex;
+flex-direction: row;
+gap: 50px;
+
+}
+
+.city-card:hover {
+  transform: scale(1.05); 
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+.package-img{
+  height: 200px;
+  width: 350px;
+  margin-bottom: 20px;
+}
+.package-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.package-card .package-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.package-city {
+  margin-left: 15px;
+  font-size: 21px;
+}
+
+.package-rate {
+  margin-right: 10px;
+  font-size: 21px;
+}
+
+.package-button{
+  background-color: #ffd900;
+  padding: 7px 30px; 
+   border: none;
+   border-radius: 0.3rem;
+   margin-bottom: 20px;
+   margin-left: 15px;
 }

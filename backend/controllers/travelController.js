@@ -113,7 +113,7 @@ const getRandomStatesWithImages = async (req, res) => {
       },
     ]);
 
-    const randomStates = [states[0], states[3]]; // Make sure there are at least 10 states
+    const randomStates = [states[0], states[3], states[2]]; // Make sure there are at least 10 states
     res.status(200).json(randomStates);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });

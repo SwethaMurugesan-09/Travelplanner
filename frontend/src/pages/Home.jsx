@@ -164,12 +164,15 @@ function Home() {
           <div className="home-packages-container">
             {packages.length > 0 ? (
               packages.map((pkg) => (
-                <div key={pkg._id} className="package-card">
-                  <img src={pkg.imageUrl[0]} alt={pkg.city} />
-                  <h4>{pkg.city}</h4>
-                  <h4>{pkg.rate}</h4>
-                  <button onClick={() => handleExploreClick(pkg._id)}>Explore</button>
-                  </div>
+                <div className="package-card">
+                <img src={pkg.imageUrl[0]} alt={pkg.city} className='package-img' />
+                <div className="package-details">
+                  <div><h4 className="package-city">{pkg.city}</h4></div>
+                  <div><h4 className="package-rate">{pkg.rate}</h4></div>
+                </div>
+                <button className='package-button' onClick={() => handleExploreClick(pkg._id)}>Explore</button>
+              </div>
+              
               ))
             ) : (
               <p>Loading packages...</p>

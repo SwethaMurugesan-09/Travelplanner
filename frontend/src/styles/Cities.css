@@ -82,7 +82,7 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: rgb(254, 254, 254);
+  /* background-color: rgb(254, 254, 254); */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }

@@ -33,8 +33,10 @@ const Packages = () => {
     <div className="Packages">
       <h2>{packageDetails.city}</h2>
       <div className="Packages-images">
-        <img src={packageDetails.imageUrl[1]} alt={`${packageDetails.city} view 1`} />
-        <img src={packageDetails.imageUrl[2]} alt={`${packageDetails.city} view 2`} />
+        <img src={packageDetails.imageUrl[2]} alt={`${packageDetails.city} view 1`} />
+        <img src={packageDetails.imageUrl[1]} alt={`${packageDetails.city} view 2`} />
+        <img src={packageDetails.imageUrl[3]} alt={`${packageDetails.city} view 2`} />
+        <img src={packageDetails.imageUrl[0]} alt={`${packageDetails.city} view 2`} />
       </div>
       {/* Use dangerouslySetInnerHTML to render the formatted description */}
       <p dangerouslySetInnerHTML={{ __html: formatDescription(packageDetails.description) }} />
