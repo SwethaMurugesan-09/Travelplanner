@@ -1,20 +1,20 @@
+// Navbar.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; 
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import './Navbar.css';
 import { CgProfile } from "react-icons/cg";
-import { useAuth } from '../../context/AuthContext'; // Corrected path to AuthContext
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth(); // Access isAuthenticated and logout from AuthContext
-  const [showDropdown, setShowDropdown] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  // Toggle the dropdown menu
-  const toggleDropdown = () => {
-    setShowDropdown((prevState) => !prevState);
+  const handleLogout = () => {
+    logout();
+    navigate('/'); // Redirect to home page after logout
   };
 
-  // Listen to scroll events
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -32,15 +32,15 @@ const Navbar = () => {
         <h1>Travey</h1>
       </div>
       <div className="navbar-elements">
-        <div className="navbar-content"><Link to="/home">Home</Link></div>
+        <div className="navbar-content"><Link to="/">Home</Link></div>
         <div className="navbar-content"><Link to="/about">About</Link></div>
         <div className="navbar-content"><Link to="/contact">Contact</Link></div>
         {isAuthenticated ? (
           <div className="navbar-content">
-            <button onClick={logout}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (
-          <div className="navbar-content"><Link to="/">Login</Link></div>
+          <div className="navbar-content"><Link to="/login">Login</Link></div>
         )}
       </div>
     </nav>

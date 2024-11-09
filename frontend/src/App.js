@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Places from './pages/Places';
@@ -29,26 +30,31 @@ const App = () => {
 };
 
 const AppRoutes = () => {
-  const location = useLocation(); 
+  const location = useLocation();
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* Public routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/cities" element={<Cities />} />
+        <Route path="/places" element={<Places />} />
+        <Route path="/explore/:placeName" element={<Explore />} />
+        <Route path="/hotels/:id" element={<Hotels />} />
+        <Route path="/restaurants/:id" element={<Restaurants />} />
+        <Route path="/tripplaces/:id" element={<TripPlaces />} />
+        <Route path="/packages/:id" element={<Packages />} />
+        <Route path="/google" element={<GoogleMapEmbed />} />
+
+        {/* Protected route for Contact */}
         <Route element={<ProtectedRoutes />}>
-          <Route path="/home" element={<div style={{ minHeight: '80vh' }}><Home /></div>} />
-          <Route path="/contact" element={<div style={{ minHeight: '80vh' }}><Contact /></div>} />
-          <Route path="/cities" element={<div style={{ minHeight: '80vh' }}><Cities /></div>} />
-          <Route path="/places" element={<div style={{ minHeight: '80vh' }}><Places /></div>} />
-          <Route path="/about" element={<div style={{ minHeight: '80vh' }}><About /></div>} />
-          <Route path="/explore/:placeName" element={<div style={{ minHeight: '80vh' }}><Explore /></div>} />
-          <Route path="/hotels/:id" element={<div style={{ minHeight: '80vh' }}><Hotels /></div>} />
-          <Route path="/restaurants/:id" element={<div style={{ minHeight: '80vh' }}><Restaurants /></div>} />
-          <Route path="/tripplaces/:id" element={<div style={{ minHeight: '80vh' }}><TripPlaces /></div>} />
-          <Route path="/packages/:id" element={<Packages />} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
-        <Route path="/google" element={<GoogleMapEmbed/>}/>
       </Routes>
+
+      {/* Render the Footer if the current path is not "/" */}
       {location.pathname !== '/' && <Footer />}
     </>
   );

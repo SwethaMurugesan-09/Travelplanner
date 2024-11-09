@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Pakages.css';
+import Navbar from '../components/Navbar/Navbar';
 
 const Packages = () => {
   const { id } = useParams();
@@ -24,22 +25,24 @@ const Packages = () => {
     return <p>Loading package details...</p>;
   }
 
-  // Function to add lines around "Entry price" sections
   const formatDescription = (description) => {
     return description.replace(/(Entry price *: *\d+)/gi, '<hr />$1<hr />');
   };
 
   return (
-    <div className="Packages">
-      <h2>{packageDetails.city}</h2>
-      <div className="Packages-images">
-        <img src={packageDetails.imageUrl[2]} alt={`${packageDetails.city} view 1`} />
-        <img src={packageDetails.imageUrl[1]} alt={`${packageDetails.city} view 2`} />
-        <img src={packageDetails.imageUrl[3]} alt={`${packageDetails.city} view 2`} />
-        <img src={packageDetails.imageUrl[0]} alt={`${packageDetails.city} view 2`} />
-      </div>
-      {/* Use dangerouslySetInnerHTML to render the formatted description */}
-      <p dangerouslySetInnerHTML={{ __html: formatDescription(packageDetails.description) }} />
+    <div className="packages-total-container">
+      <Navbar/>
+      <div className="Packages-container">
+        <h3 className="package-container-h3">{packageDetails.city}</h3>
+        
+        <div className="packages-images">
+          {packageDetails.imageUrl.map((image, index) => (
+            <img className='packages-img'key={index} src={image} alt={`${packageDetails.city} - ${index + 1}`} />
+          ))}
+        </div>
+
+        <p dangerouslySetInnerHTML={{ __html: formatDescription(packageDetails.description) }} />
+      </div> 
     </div>
   );
 };

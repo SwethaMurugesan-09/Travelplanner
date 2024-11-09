@@ -22,6 +22,7 @@ const Cities = () => {
 
   useEffect(() => {
     async function fetchCities() {
+      window.scrollTo(0, 0);
       if (state) {
         setLoading(true);
         try {

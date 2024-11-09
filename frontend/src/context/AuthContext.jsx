@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem('auth-token', token);
     setIsAuthenticated(true);
-    navigate('/home');
+    navigate('/contact');
   };
 
   const logout = () => {

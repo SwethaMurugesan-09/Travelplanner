@@ -23,6 +23,7 @@ const Places = () => {
   const city = getCityFromQuery();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (city) {
       axios
         .get(`http://localhost:5000/api/places/${city}`)

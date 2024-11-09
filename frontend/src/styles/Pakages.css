@@ -1,79 +1,16 @@
-/* Packages.css */
-.Packages {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
+.package-container-h3{
+  text-align: center !important;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.packages-img{
+  width: 400px;
+  height: 300px;
+}
+
+.packages-images {
   
-  .Packages h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #1d3557;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  .Packages p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-top: 20px;
-    color: #555;
-    text-align: justify;
-  }
-  
-  .Packages-images {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  .Packages-images img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .Packages-images img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  }
-  
-  @media (min-width: 768px) {
-    .Packages-images {
-      flex-direction: row;
-      gap: 20px;
-    }
-  
-    .Packages-images img {
-      width: 48%;
-    }
-  }
-/* Packages.css */
-.entry-price hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-  }
-  
-  .Packages p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #555;
-    text-align: justify;
-  }
-  
-  .Packages hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-  }
-    
+  display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:0rem;
+}

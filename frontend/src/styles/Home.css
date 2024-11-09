@@ -113,14 +113,13 @@
   max-width: 350px; 
 }
 .home-packages-container {
-/* background-color: rgb(254, 254, 254); */
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 cursor: pointer;
 margin-bottom: 30px;
-display: flex;
-flex-direction: row;
-gap: 50px;
-
+display: grid;
+grid-template-columns: repeat(3,1fr);
+gap: 75px;
+flex-wrap: wrap;
 }
 
 .city-card:hover {
@@ -128,9 +127,11 @@ gap: 50px;
 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 .package-img{
-  height: 200px;
-  width: 350px;
+  height: 250px;
+  width: 400px;
   margin-bottom: 20px;
+  cursor:default !important;;
+
 }
 .package-card {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
