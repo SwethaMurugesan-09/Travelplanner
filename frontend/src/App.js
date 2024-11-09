@@ -55,7 +55,7 @@ const AppRoutes = () => {
       </Routes>
 
       {/* Render the Footer if the current path is not "/" */}
-      {location.pathname !== '/' && <Footer />}
+      {location.pathname !== '/login' && <Footer />}
     </>
   );
 };

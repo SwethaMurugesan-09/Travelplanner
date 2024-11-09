@@ -24,12 +24,14 @@
     margin-bottom: 20px;
 }
 .about-container span{
-    color: rgb(7, 183, 37);
+    color: #e0be00;
     font-size: 18px;
     font-weight: bold;
+  /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4); Shadow effect */
+
 }
 .about-travey-text span{
-    color: rgb(7, 183, 37);
+    color:#e0be00;
     font-size: 18px;
     font-weight: bold;
 }

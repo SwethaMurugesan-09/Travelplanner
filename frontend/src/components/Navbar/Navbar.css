@@ -33,5 +33,15 @@
 
 .navbar-content a:hover {
   background-color: #969da7;
+  text-decoration: none;
+   border: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+.navbar-btn{
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: transparent;
   text-decoration: none; 
 }

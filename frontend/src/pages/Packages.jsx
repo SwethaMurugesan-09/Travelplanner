@@ -26,8 +26,9 @@ const Packages = () => {
   }
 
   const formatDescription = (description) => {
-    return description.replace(/(Entry price *: *\d+)/gi, '<hr />$1<hr />');
+    return description.replace(/(Entry price *: *[\d₹-]+)/gi, '<hr />$1<hr />');
   };
+    
 
   return (
     <div className="packages-total-container">
@@ -40,7 +41,7 @@ const Packages = () => {
             <img className='packages-img'key={index} src={image} alt={`${packageDetails.city} - ${index + 1}`} />
           ))}
         </div>
-
+          <h5 className='packages-text'>Explore</h5>
         <p dangerouslySetInnerHTML={{ __html: formatDescription(packageDetails.description) }} />
       </div> 
     </div>

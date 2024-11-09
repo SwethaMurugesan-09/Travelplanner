@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="navbar-content"><Link to="/contact">Contact</Link></div>
         {isAuthenticated ? (
           <div className="navbar-content">
-            <button onClick={handleLogout}>Logout</button>
+            <button className='navbar-btn' onClick={handleLogout}>Logout</button>
           </div>
         ) : (
           <div className="navbar-content"><Link to="/login">Login</Link></div>
