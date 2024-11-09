@@ -162,10 +162,11 @@ const Cities = () => {
         </div>
       </div>
 
-      <div className="weather-container">
-        <h2>Weather Forecasting</h2>
-        <Weather />
-      </div>
+<div className="weather-container">
+  <h2>Weather Forecasting</h2>
+  <Weather city={state} days={1} />
+</div>
+
     </div>
   );
 };
