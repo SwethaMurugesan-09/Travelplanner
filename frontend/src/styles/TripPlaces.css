@@ -6,20 +6,38 @@
     text-align: center;
     color: rgb(2, 2, 2);
 }
-.tripplaces-container p{
-    margin-top: 20px;
-    margin-left: 50px;
-}
+
 .tripplaces-container span{
     color: rgb(20, 8, 31);
     font-size: 18px;
 }
 .tripplaces-img{
-    width: 650px !important;
-    height: 370px !important;
+    width: 600px !important;
+    height: 400px !important;
     margin-bottom: 20px;
+    object-fit: cover;
 }
 .tripplaces-container {
     text-align: center;
     padding: 20px;
   }
+  .carousel-root {
+    background-color: transparent !important;
+}
+
+.carousel .thumb {
+    width: 60px; 
+    height: 60px;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.carousel .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.tripplace-info{
+    display: flex;
+    flex-direction: row;
+}

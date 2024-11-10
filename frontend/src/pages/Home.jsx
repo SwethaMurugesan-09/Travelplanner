@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Home.css';
-import image1 from '../components/travel_assets/image1.jpg';
+import home from '../components/travel_assets/image2.jpg';
 import Navbar from '../components/Navbar/Navbar';
 
 function Home() {
@@ -95,11 +95,11 @@ function Home() {
   return (
     <>
       <div className="Home-container">
-        <div className="form-image-container background-image" style={{backgroundImage: `url(${image1})`}}>
+        <div className="form-image-container background-image" style={{backgroundImage: `url(${home})`}}>
           <Navbar />
           <form onSubmit={handleSubmit} className="form-overlay">
+            <h1 className='home-form-text'>Explore the world</h1>
             <label>
-              State:
               <select
                 name="state"
                 value={formData.state}
@@ -113,31 +113,7 @@ function Home() {
                 )}
               </select>
             </label>
-
-            <label>
-              Start Travel Date:
-              <input
-                type="date"
-                name="startTravelDate"
-                value={formData.startTravelDate}
-                onChange={handleInputChange}
-                required
-                min={today}
-              />
-            </label>
-
-            <label>
-              End Travel Date:
-              <input
-                type="date"
-                name="endTravelDate"
-                value={formData.endTravelDate}
-                onChange={handleInputChange}
-                required
-                min={formData.startTravelDate || today}
-              />
-            </label>
-
+              
             <button type="submit">Start Journey</button>
           </form>
         </div>

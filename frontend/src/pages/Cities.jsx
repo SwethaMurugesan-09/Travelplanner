@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Cities.css';
 import Navbar from '../components/Navbar/Navbar.jsx';
-import Weather from '../components/Weather/Weather.jsx';
+// import Weather from '../components/Weather/Weather.jsx';
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
@@ -164,7 +164,7 @@ const Cities = () => {
 
 <div className="weather-container">
   <h2>Weather Forecasting</h2>
-  <Weather city={state} days={7} />
+  {/* <Weather city={state} days={7} /> */}
 </div>
 
     </div>

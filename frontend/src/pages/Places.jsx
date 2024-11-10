@@ -112,12 +112,14 @@ const Places = () => {
                   onClick={() => handlePlaceClick(place.placeName)}
                 >
                   <img src={place.imageUrl} alt={place.placeName} className="place-image" />
+
+                  <div className="place-infor">
                   <div className="place-info">
                     <p className="place-name">{place.placeName}</p>
                     <div className="place-ratings">{renderStars(place.ratings)}</div>
                   </div>
                   <p className="place-details">{place.details}</p>
-                </div>
+                </div></div>
               ))}
             </div>
           ) : (

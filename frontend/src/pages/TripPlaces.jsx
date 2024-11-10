@@ -38,9 +38,18 @@ const TripPlaces = () => {
       <div className="tripplaces-container">
         <h2>{tripPlace.name}</h2>
 
-        {/* Carousel for trip place images */}
+
+
+    <div className="tripplace-info">
+      <div>
         {tripPlace.imageUrl && tripPlace.imageUrl.length > 0 && (
-          <Carousel showThumbs={false} dynamicHeight={true} infiniteLoop={true}>
+          <Carousel showThumbs={true} 
+              showArrows={false} 
+              autoPlay 
+              interval={2000} 
+              infiniteLoop 
+              showStatus={false} 
+              dynamicHeight={true}>
             {tripPlace.imageUrl.map((image, index) => (
               <div key={index}>
                 <img src={image} alt={`Trip Place ${index}`} className="tripplaces-img" />
@@ -48,9 +57,10 @@ const TripPlaces = () => {
             ))}
           </Carousel>
         )}
-
-        <p><span>Details:</span> {tripPlace.details}</p>
-      </div>
+        </div>
+        <div>
+        <p><span>Details:</span> {tripPlace.details}</p></div>
+      </div></div>
     </div>
   );
 };

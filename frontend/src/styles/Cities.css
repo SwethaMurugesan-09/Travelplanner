@@ -75,7 +75,6 @@
 
 .city-card {
   flex: 0 0 300px; 
-  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   /* background-color: rgb(254, 254, 254); */
@@ -83,17 +82,15 @@
   cursor: pointer;
 }
 
-.city-card:hover {
+/* .city-card:hover {
   transform: scale(1.05); 
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-}
+} */
 
 .city-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-bottom-left-radius: 20px; 
-  border-bottom-right-radius: 20px; 
 }
 
 .city-header {

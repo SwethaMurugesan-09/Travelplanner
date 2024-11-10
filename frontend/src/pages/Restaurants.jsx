@@ -39,9 +39,16 @@ const Restaurants = () => {
       <h2>{restaurant.name}</h2>
 
       <div className="restaurants-container">
-      <div className="hotels-container-flex">
+      <div className="restaurants-container-flex">
         {restaurant.imageUrl && restaurant.imageUrl.length > 0 && (
-          <Carousel showThumbs={false} dynamicHeight={true} infiniteLoop={true}>
+      <Carousel 
+               showThumbs={true} 
+           showArrows={false} 
+             autoPlay 
+               interval={2000} 
+             infiniteLoop 
+                              showStatus={false} 
+            dynamicHeight={true}>
             {restaurant.imageUrl.map((image, index) => (
               <div key={index}>
                 <img src={image} alt={`Restaurant ${index}`} className="restaurants-img" />
@@ -49,9 +56,10 @@ const Restaurants = () => {
             ))}
           </Carousel>
         )}
-
+          <div className="restaurants-details">
         <p><span>Ratings: </span>{restaurant.ratings}</p>
         <p><span>Details: </span>{restaurant.details}</p>
+        </div>
         </div>
         <div className="restaurants-currency">
         <CurrencyConverter/>

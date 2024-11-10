@@ -76,33 +76,40 @@
 }
 
 .place-image {
-  width: 300px;
-  height: 200px;
-  border-radius: 20px;
+  /* width: 400px;
+  height: 300px; */
+  width: 350px;
+  height: 240px;
 }
 
 .place-card {
   cursor: pointer;
-  max-width: 300px;
+  max-width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .place-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: -22px;
 }
-
+.place-infor{
+  margin-left: 10px;
+}
 .place-name {
   color: #0020d2;
   padding-left: 10px;
+  margin-top: 20px;
 }
 
 .place-details {
   font-size: 1rem;
   padding: 10px;
+  margin-bottom: 5px!important;
 }
 
 .place-ratings {
-  padding-right: 10px;
+  padding-right: 12px;
 }
