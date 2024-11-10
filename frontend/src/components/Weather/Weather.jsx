@@ -5,18 +5,19 @@ import rain from '../travel_assets/heavy-rain.png';
 import sunny from '../travel_assets/sunny.png';
 import cloudy from '../travel_assets/cloudy.png';
 import snowy from '../travel_assets/snowy.png';
-import weatherBackground from '../travel_assets/weather-background.jpg';const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
+import weatherBackground from '../travel_assets/weather-background.jpg';
+
+const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
+
 const Weather = ({ city: initialCity, days: initialDays }) => {
-    const [city, setCity] = useState(initialCity || "");
-    const [days, setDays] = useState(initialDays || 1);
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const fetchData = async () => {
-        if (city && days) {
+        if (initialCity && initialDays) {
             setLoading(true);
             try {
-                const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=${days}&appid=${KEY}&units=metric`);
+                const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${initialCity}&cnt=${initialDays}&appid=${KEY}&units=metric`);
                 setWeatherData(response.data);
             } catch (err) {
                 console.error('Error fetching data:', err);
@@ -27,10 +28,9 @@ const Weather = ({ city: initialCity, days: initialDays }) => {
         }
     };
 
-    // Fetch weather automatically if initialCity and initialDays are provided
     useEffect(() => {
         fetchData();
-    }, [city, days]);
+    }, [initialCity, initialDays]);
 
     const getWeatherImage = (description) => {
         if (description.includes("rain")) return rain;
@@ -42,31 +42,13 @@ const Weather = ({ city: initialCity, days: initialDays }) => {
 
     return (
         <div className="weather-total-container">
-            <div className="weather-forecast">
-                <input
-                    type="text"
-                    placeholder="Enter city"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-                <input
-                    type="number"
-                    min="1"
-                    max="16"
-                    placeholder="Number of days"
-                    value={days}
-                    onChange={(e) => setDays(e.target.value)}
-                />
-                <button onClick={fetchData}>Fetch Weather</button>
-                {loading && <p>Loading...</p>}
-            </div>
-
+            {loading && <p>Loading...</p>}
             {weatherData && (
                 <div className="weather-output-container">
                     {weatherData.list.map((day, index) => (
                         <div className="weather-output" key={index}>
                             <img src={getWeatherImage(day.weather[0].description)} alt={day.weather[0].description} />
-                            <h3>Day {index + 1}</h3>
+                            <h5>Day {index + 1}</h5>
                             <p><strong>Temperature:</strong> {day.main.temp}°C</p>
                             <p><strong>Weather:</strong> {day.weather[0].description}</p>
                         </div>

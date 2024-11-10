@@ -20,15 +20,16 @@ const Places = () => {
     return params.get('city');
   };
 
-  const city = getCityFromQuery();
+  const city = getCityFromQuery(); // Get the city from the URL query
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (city) {
+      // Fetch tourist places for the selected city
       axios
         .get(`http://localhost:5000/api/places/${city}`)
         .then((response) => {
-          console.log("API Data:", response.data); // Log API data structure
+          console.log("API Data:", response.data);
           setTouristPlaces(response.data);
           setFilteredPlaces(response.data);
         })
@@ -38,7 +39,6 @@ const Places = () => {
         });
     }
   }, [city]);
-  
 
   const handleSearchChange = (event) => {
     const searchValue = event.target.value.toLowerCase();
@@ -52,25 +52,22 @@ const Places = () => {
 
   const filterPlaces = (categories, ratings) => {
     let filtered = touristPlaces;
-  
-    // Test category filtering alone
+
     if (categories.length > 0) {
       filtered = filtered.filter((place) =>
         categories.includes(place.category.toLowerCase())
       );
     }
-  
-    // Test rating filtering alone
+
     if (ratings.length > 0) {
       filtered = filtered.filter((place) =>
         ratings.includes(Math.floor(place.ratings))
       );
     }
-  
-    console.log("Filtered Places (Categories and Ratings):", filtered); // Debugging log
+
     setFilteredPlaces(filtered);
   };
-  
+
   const handlePlaceClick = (placeName) => {
     navigate(`/explore/${placeName}`);
   };

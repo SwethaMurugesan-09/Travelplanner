@@ -1,74 +1,34 @@
-.weather-total-container {
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-    padding-left: 200px;
-}
-
-.weather-forecast {
-    background-image: url('../travel_assets/weather-background.jpg'); /* Background image */
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    width: 35%;
-    height: 250px;
-    box-sizing: border-box;
-}
-
-.weather-forecast input {
-    width: 50%;
-    padding: 10px;
-    margin: 25px 100px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-}
-
-.weather-forecast button {
-    width: 35%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 50px;
-    margin-left: -25px;
-}
-
-.weather-forecast button:hover {
-    background-color: #218838;
-}
 
 .weather-output-container {
-    margin-left: 160px;
+    margin-left: 270px;
     margin-top: 0px;
-    background-color: #1cb3d5; /* Keep the background color */
-    padding: 20px; /* Add some padding for better spacing */
+    /* background-color: #1cb3d5; */
+    background-color: #f4f4f4;
+    padding: 20px;
     border-radius: 10px;
-    width: 400px; /* Set a fixed width for the output container */
-    max-width: 100%; /* Ensure it doesn't overflow */
+    width: 950px;
+    max-width: 100%; 
+    display: flex;
+    flex-direction: row;
 }
 
 .weather-output {
-    padding: 10px; /* Add padding to the output items */
+    padding: 10px; 
     border-radius: 10px;
     color: #fff;
     text-align: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    margin-bottom: 10px; /* Reduced margin for better spacing */
-    width: 100%; /* Ensure it takes full width of the container */
+    margin-bottom: 10px; 
+    width: 100%; 
+}
+.weather-output h5{
+    color: black;
 }
 
-
 .weather-output img {
-    width: 20%;
+    width: 70%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 10px;
