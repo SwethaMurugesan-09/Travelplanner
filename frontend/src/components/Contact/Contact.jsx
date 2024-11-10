@@ -2,9 +2,64 @@ import React, { useState } from 'react';
 import './Contact.css';
 import Navbar from '../Navbar/Navbar';
 import { motion } from 'framer-motion';
-import smiley from '../travel_assets/happiness.png'; 
-import cont from '../travel_assets/contact-background.jpg';
+import smiley from '../travel_assets/happiness.png';
+import { useAuth } from '../../context/AuthContext'; // Import useAuth
+
 const Contact = () => {
+    const { isAuthenticated, login } = useAuth(); // Access authentication state and login function
+    const [submitted, setSubmitted] = useState(false);
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        queries: '',
+    });
+
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: '',
+    });
+
+    // Handle change for both forms
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleLoginChange = (e) => {
+        const { name, value } = e.target;
+        setLoginData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/signup/login', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            });
+            const data = await response.json();
+            if (data.success) {
+                login(data.token); // Login user
+            } else {
+                alert(data.errors || "User does not exist. Please create an account.");
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            alert("There was an error logging in.");
+        }
+    };
+
     const onSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -24,24 +79,8 @@ const Contact = () => {
         }).then((res) => res.json());
 
         if (res.success) {
-            setSubmitted(true); // Set submitted to true after success
+            setSubmitted(true);
         }
-    };
-
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        queries: '',
-    });
-
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
     };
 
     // Animation variants
@@ -61,20 +100,57 @@ const Contact = () => {
     };
 
     return (
-        <div className="contact-form-total-container" >
+        <div className="contact-form-total-container">
             <Navbar />
-            {!submitted ? (
-                <motion.div 
-                    className="contact-form-container" 
-                    initial="hidden" 
-                    animate="visible" 
+            {!isAuthenticated ? (
+                <motion.div
+                    className="auth-container"
+                    initial="hidden"
+                    animate="visible"
                     variants={containerVariants}
                     transition={{ duration: 0.5 }}
                 >
-                    <motion.h2 
-                        className="contact-title" 
+                    <h2 className="login-heading">Login to Contact Us</h2>
+                    <form onSubmit={handleLoginSubmit}>
+                        <div className="login-inputGroup">
+                            <label htmlFor="email" className="login-label">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={loginData.email}
+                                onChange={handleLoginChange}
+                                className="login-input"
+                                required
+                            />
+                        </div>
+                        <div className="login-inputGroup">
+                            <label htmlFor="password" className="login-label">Password:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={loginData.password}
+                                onChange={handleLoginChange}
+                                className="login-input"
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="login-button">Login</button>
+                    </form>
+                </motion.div>
+            ) : !submitted ? (
+                <motion.div
+                    className="contact-form-container"
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    transition={{ duration: 0.5 }}
+                >
+                    <motion.h2
+                        className="contact-title"
                         variants={titleVariants}
-                        initial="hidden" 
+                        initial="hidden"
                         animate="visible"
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
@@ -122,8 +198,8 @@ const Contact = () => {
                             />
                         </div>
 
-                        <motion.button 
-                            type="submit" 
+                        <motion.button
+                            type="submit"
                             className="contact-submit-btn"
                             variants={buttonVariants}
                             whileHover="hover"
@@ -134,13 +210,12 @@ const Contact = () => {
                     </form>
                 </motion.div>
             ) : (
-                <motion.div 
-                    className="success-message-container" 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
+                <motion.div
+                    className="success-message-container"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    {/* Add the smiley image before the success message */}
                     <img src={smiley} alt="Smiley" style={{ width: '100px', marginBottom: '10px' }} />
                     <p className="contact-success-message">
                         Thank you! We have received your query.
