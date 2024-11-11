@@ -41,6 +41,9 @@ app.use(cors(
 ));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
+app.get("/",(req,res)=>{
+  res.json("Hello");
+})
 
 const uploadDir = './upload/images';
 if (!fs.existsSync(uploadDir)) {
