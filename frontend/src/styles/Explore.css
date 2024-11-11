@@ -1,3 +1,7 @@
+.explore-total-container {
+  min-height: 100vh;
+}
+
 .explore-container {
   display: flex;
   flex-direction: row;
@@ -9,7 +13,7 @@
   padding: 50px;
   border-right: 1px solid #ddd;
   height: calc(100vh - 90px); /* Full height sidebar minus margin */
-  position: fixed;
+  /* position: fixed; */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -32,7 +36,7 @@
 .explore-main-content {
   flex: 1;
   padding: 20px;
-  margin-left: 250px;
+  margin-left: 20px;
   overflow-y: auto;
 }
 

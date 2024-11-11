@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Cities.css';
 import Navbar from '../components/Navbar/Navbar.jsx';
-// import Weather from '../components/Weather/Weather.jsx';
+ import Weather from '../components/Weather/Weather.jsx';
+import Footer from '../components/Footer/Footer.jsx';
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
@@ -72,6 +73,7 @@ const Cities = () => {
   };
 
   return (
+    <>
     <div className="Cities">
       <Navbar />
       <div className="city-total-container">
@@ -168,6 +170,11 @@ const Cities = () => {
 </div>
 
     </div>
+
+    <div>
+      <Footer/>
+    </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer/Footer';
 const Explore = () => {
   const { placeName } = useParams();
   const [specificPlace, setSpecificPlace] = useState(null);
@@ -102,6 +103,7 @@ const Explore = () => {
   const displayTripPlaces = isCategoryFilterApplied ? selectedCategories.tripplaces : true;
 
   return (
+    <>
     <div className="explore-total-container">
       <Navbar />
       <div className="explore-container">
@@ -219,6 +221,10 @@ const Explore = () => {
         </div>
       </div>
     </div>
+    <div>
+      <Footer/>
+    </div>
+    </>
   );
 };
 

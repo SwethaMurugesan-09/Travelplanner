@@ -6,6 +6,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Home.css';
 import home from '../components/travel_assets/image2.jpg';
 import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 function Home() {
   const [states, setStates] = useState([]);
@@ -157,6 +158,10 @@ function Home() {
             )}
           </div>
         </div>
+      </div>
+
+      <div>
+        <Footer/>
       </div>
     </>
   );

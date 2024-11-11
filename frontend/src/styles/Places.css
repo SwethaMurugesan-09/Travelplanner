@@ -113,3 +113,7 @@
 .place-ratings {
   padding-right: 12px;
 }
+
+.places {
+  min-height: 155.4vh;
+}

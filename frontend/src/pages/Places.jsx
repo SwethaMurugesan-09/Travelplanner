@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer/Footer'
 
 const Places = () => {
   const [touristPlaces, setTouristPlaces] = useState([]);
@@ -87,7 +88,8 @@ const Places = () => {
   };
 
   return (
-    <div>
+    <>
+    <div className='places'>
       <div className="places-total-container">
         <Navbar />
       </div>
@@ -128,6 +130,11 @@ const Places = () => {
         </div>
       </div>
     </div>
+
+    <div>
+      <Footer/>
+    </div>
+    </>
   );
 };
 
