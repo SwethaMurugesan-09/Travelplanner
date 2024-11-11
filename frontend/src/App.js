@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Places from './pages/Places';
@@ -10,11 +9,9 @@ import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
 import Contact from './components/Contact/Contact';
-import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
-import GoogleMapEmbed from './components/GoogleApi/GoogleMap';
 import Packages from './pages/Packages';
 
 const App = () => {
@@ -35,7 +32,6 @@ const AppRoutes = () => {
   return (
     <>
       <Routes>
-        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
@@ -46,16 +42,11 @@ const AppRoutes = () => {
         <Route path="/restaurants/:id" element={<Restaurants />} />
         <Route path="/tripplaces/:id" element={<TripPlaces />} />
         <Route path="/packages/:id" element={<Packages />} />
-        <Route path="/google" element={<GoogleMapEmbed />} />
 
-        {/* Protected route for Contact */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
-
-      {/* Render the Footer if the current path is not "/" */}
-      {/* {location.pathname !== '/login' && <Footer />} */}
     </>
   );
 };
