@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import { motion } from 'framer-motion';
 import smiley from '../travel_assets/happiness.png';
 import { useAuth } from '../../context/AuthContext'; // Import useAuth
+import Footer from '../Footer/Footer';
 
 const Contact = () => {
     const { isAuthenticated, login } = useAuth(); // Access authentication state and login function
@@ -100,6 +101,7 @@ const Contact = () => {
     };
 
     return (
+        <>
         <div className="contact-form-total-container">
             <Navbar />
             {!isAuthenticated ? (
@@ -222,7 +224,12 @@ const Contact = () => {
                     </p>
                 </motion.div>
             )}
+          
         </div>
+        <div>
+            <Footer/>
+        </div>
+        </>
     );
 };
 

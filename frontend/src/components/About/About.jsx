@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import './About.css'
 import img from '../travel_assets/about-img.webp';
+import Footer from '../Footer/Footer';
 const About = () => {
   return (
     <div className='About'>
@@ -32,6 +33,9 @@ So why wait? Choose the best trip planners in India for your next adventure and 
 
 </p>
 </div>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   )

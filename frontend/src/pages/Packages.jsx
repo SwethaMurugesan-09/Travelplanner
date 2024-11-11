@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Pakages.css';
 import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 const Packages = () => {
   const { id } = useParams();
@@ -44,6 +45,9 @@ const Packages = () => {
           <h5 className='packages-text'>Explore</h5>
         <p dangerouslySetInnerHTML={{ __html: formatDescription(packageDetails.description) }} />
       </div> 
+      <div>
+        <Footer/>
+      </div>
     </div>
   );
 };

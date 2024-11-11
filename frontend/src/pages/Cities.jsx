@@ -166,7 +166,7 @@ const Cities = () => {
 
 <div className="weather-container">
   <h2>Weather Forecasting</h2>
-  {/* <Weather city={state} days={7} /> */}
+  <Weather city={state} days={7} />
 </div>
 
     </div>
