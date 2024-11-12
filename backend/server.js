@@ -15,28 +15,26 @@ dotenv.config();
 
 const app = express();
 
-// const allowedOrigins = [
-//     'https://travey.onrender.com/',
-//   ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
-// ]
+const allowedOrigins = [
+    'https://travey.onrender.com/',
+  ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
+]
 
-// const corsOption = {
-//   origin: (origin, callback) => {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     }
-//     else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   methods: ['GET','POST','PUT','DELETE'],
-//   credentials: true,
-// }
-app.use(cors({
-  origin: ["https://deploy-mern-1whq.vercel.app", "http://localhost:3000"],
-  methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true
-}));
+const corsOption = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    }
+    else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET','POST','PUT','DELETE'],
+  credentials: true,
+}
+
+
+app.use(cors());
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
