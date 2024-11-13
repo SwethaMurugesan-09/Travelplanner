@@ -26,10 +26,10 @@ const usersSchema = new mongoose.Schema({
             ref: 'SpecificPlace',
         }
     ],
-    bookings: [
+    bookingId: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Bookings',
+            ref: 'HotelBooking',
         }
     ]    
     

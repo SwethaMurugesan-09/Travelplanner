@@ -10,9 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     
-    const { login } = useAuth(); // Access the login function from AuthContext
+    const { login } = useAuth(); 
 
-    // Login handler
     const handleLogin = async (e) => {
         e.preventDefault();
         const formData = { email, password };
@@ -30,7 +29,7 @@ const Login = () => {
 
             const data = await response.json();
             if (data.success) {
-                login(data.token); // Use login function to set auth state and navigate
+                login(data.token); 
             } else {
                 alert(data.errors || "User does not exist. Please create an account.");
             }
@@ -57,7 +56,7 @@ const Login = () => {
 
             const data = await response.json();
             if (data.success) {
-                setIsLogin(true); // Switch to login view after successful signup
+                setIsLogin(true); 
                 alert("Signup successful! Please log in.");
             } else {
                 alert(data.errors || "Email already registered.");

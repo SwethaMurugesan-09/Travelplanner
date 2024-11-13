@@ -14,6 +14,7 @@ import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
 import Packages from './pages/Packages';
 import Profile from './pages/Profile';
+import HotelBookingForm from './components/Booking/Booking';
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/contact" element={<Contact />} />
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/booking' element={<HotelBookingForm/>}/>
         </Route>
       </Routes>
     </>

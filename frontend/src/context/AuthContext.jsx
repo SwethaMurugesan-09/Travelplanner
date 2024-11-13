@@ -18,14 +18,39 @@ export const AuthProvider = ({ children }) => {
     setIsLoadingAuth(false);
   }, []);
 
-  const login = (token) => {
+  const login = async (token) => {
     localStorage.setItem('auth-token', token); 
     setIsAuthenticated(true);
+    
+    // Fetch and store userId after setting the token
+    const userId = await fetchUserId(token);
+    if (userId) {
+      localStorage.setItem('userId', userId);
+    }
+    
     navigate('/'); 
+  };
+
+  const fetchUserId = async (token) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/user/profile', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      return data.success ? data.user._id : null; // Assuming the userId is in data.user._id
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      return null;
+    }
   };
 
   const logout = () => {
     localStorage.removeItem('auth-token'); 
+    localStorage.removeItem('userId'); // Clear userId on logout
     setIsAuthenticated(false);
     navigate('/'); 
   };
