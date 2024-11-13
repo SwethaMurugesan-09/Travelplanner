@@ -13,6 +13,7 @@ import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
 import Packages from './pages/Packages';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -42,9 +43,9 @@ const AppRoutes = () => {
         <Route path="/restaurants/:id" element={<Restaurants />} />
         <Route path="/tripplaces/:id" element={<TripPlaces />} />
         <Route path="/packages/:id" element={<Packages />} />
-
         <Route element={<ProtectedRoutes />}>
           <Route path="/contact" element={<Contact />} />
+          <Route path='/profile' element={<Profile/>}/>
         </Route>
       </Routes>
     </>

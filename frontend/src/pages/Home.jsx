@@ -108,10 +108,11 @@ function Home() {
               >
                 <option value="">Select State</option>
                 {states.length > 0 ? states.map((state) => (
-                  <option key={state} value={state}>{state}</option>
-                )) : (
-                  <option disabled>Loading states...</option>
-                )}
+  <option key={state} value={state}>{state}</option>
+)) : (
+  <option disabled>Loading states...</option>
+)}
+
               </select>
             </label>
               
@@ -122,40 +123,42 @@ function Home() {
         <div className="famous-places">
           <h3>Famous Places</h3>
           <div className="famous-places-grid">
-            {randomStates.length > 0 ? (
-              randomStates.map((state) => (
-                <div key={state._id} className="famous-place-card" onClick={() => handlePlaceClick(state)}>
-                  <img src={state.imageUrl} alt={state._id} />
-                  <div className='famous-place-flex'>
-                        <h4>{state._id}</h4>
-                        <div className='home-ratings'>{renderStars(state.ratings)}</div> 
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>Loading recommended places...</p>
-            )}
+          {randomStates.length > 0 ? (
+  randomStates.map((state) => (
+    <div key={state._id} className="famous-place-card" onClick={() => handlePlaceClick(state)}>
+      <img src={state.imageUrl} alt={state._id} />
+      <div className='famous-place-flex'>
+        <h4>{state._id}</h4>
+        <div className='home-ratings'>{renderStars(state.ratings)}</div> 
+      </div>
+    </div>
+  ))
+) : (
+  <p>Loading recommended places...</p>
+)}
+
           </div>
         </div>
         
         <div className="home-packages">
           <h3>Packages</h3>
           <div className="home-packages-container">
-            {packages.length > 0 ? (
-              packages.map((pkg) => (
-                <div className="home-package-card">
-                <img src={pkg.imageUrl[0]} alt={pkg.city} className='home-package-img' />
-                <div className="home-package-details">
-                  <div><h4 className="home-package-city">{pkg.city}</h4></div>
-                  <div><h4 className="home-package-rate">₹{pkg.rate}</h4></div>
-                </div>
-                <button className='home-package-button' onClick={() => handleExploreClick(pkg._id)}>Explore</button>
-              </div>
-              
-              ))
-            ) : (
-              <p>Loading packages...</p>
-            )}
+          {packages.length > 0 ? (
+  packages.map((pkg) => (
+    <div key={pkg._id} className="home-package-card">
+      <img src={pkg.imageUrl[0]} alt={pkg.city} className='home-package-img' />
+      <div className="home-package-details">
+        <div><h4 className="home-package-city">{pkg.city}</h4></div>
+        <div><h4 className="home-package-rate">₹{pkg.rate}</h4></div>
+      </div>
+      <button className='home-package-button' onClick={() => handleExploreClick(pkg._id)}>Explore</button>
+    </div>
+  ))
+) : (
+  <p>Loading packages...</p>
+)}
+
+
           </div>
         </div>
       </div>

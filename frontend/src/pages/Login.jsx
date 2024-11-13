@@ -5,7 +5,6 @@ import img2 from '../components/travel_assets/signup-img.jpg';
 import { useAuth } from '../context/AuthContext'; // Ensure you import useAuth
 
 const Login = () => {
-    // State for managing login and signup view
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

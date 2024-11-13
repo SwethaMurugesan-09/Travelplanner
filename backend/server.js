@@ -10,6 +10,7 @@ const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
 const specificRoutes = require('./routes/specificRoutes');
 const packagesrouter = require('./routes/packagesRoutes');
+const hotelrouter = require('./routes/hotelBookingRoutes');
 
 dotenv.config();
 
@@ -98,6 +99,7 @@ app.use('/api', travelRoutes);
 app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
 app.use('/api/specificplace', specificRoutes);
+app.use('/api', hotelrouter);
 
 app.use('/package',packagesrouter);
 

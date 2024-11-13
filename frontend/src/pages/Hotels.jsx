@@ -59,11 +59,13 @@ const Hotels = () => {
             <p><span>Ratings:</span> {hotel.ratings}</p>
             <p><span>Details:</span> {hotel.details}</p>
             <p><span>Amount:</span> ₹{hotel.amount}</p>
+            <button>Book Now</button>
           </div>
         </div>
         <div className="hotels-currency">
           <CurrencyConverter />
         </div>
+
       </div>
     </div>
   );

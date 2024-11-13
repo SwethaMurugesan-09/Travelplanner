@@ -15,6 +15,9 @@ exports.signup = async (req, res) => {
             name: req.body.username,
             email: req.body.email,
             password: req.body.password,
+            age:req.body.age,
+            dob:req.body.dob,
+            number:req.body.number,
         });
 
         // Save the new user to the database
@@ -54,6 +57,68 @@ exports.login = async (req, res) => {
         res.json({ success: true, token });
     } catch (err) {
         console.error('Error during login:', err);
+        res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+    }
+};
+
+
+exports.getUserProfile = async (req, res) => {
+    try {
+        // Extract token from headers
+        const token = req.headers['authorization'].split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ success: false, message: 'Access Denied. No token provided.' });
+        }
+
+        const decoded = jwt.verify(token, 'travelplanner');
+        const userId = decoded.user.id;
+
+        const user = await User.findById(userId).select('-password');
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        res.json({ success: true, user });
+    } catch (err) {
+        console.error('Error fetching user profile:', err);
+        res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+    }
+};
+
+exports.updateUserProfile = async (req, res) => {
+    try {
+        // Extract token from headers
+        const token = req.headers['authorization'].split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ success: false, message: 'Access Denied. No token provided.' });
+        }
+
+        // Verify token and extract user ID
+        const decoded = jwt.verify(token, 'travelplanner');
+        const userId = decoded.user.id;
+
+        // Define the fields that can be updated
+        const updatedData = {};
+        if (req.body.username) updatedData.name = req.body.username;
+        if (req.body.email) updatedData.email = req.body.email;
+        if (req.body.age) updatedData.age = req.body.age;
+        if (req.body.dob) updatedData.dob = req.body.dob;
+        if (req.body.number) updatedData.number = req.body.number;
+
+        // Update user in the database
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { $set: updatedData },
+            { new: true, runValidators: true } // Return the updated user
+        ).select('-password'); // Exclude password from the response
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        res.json({ success: true, message: 'Profile updated successfully', user });
+    } catch (err) {
+        console.error('Error updating user profile:', err);
         res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
     }
 };
