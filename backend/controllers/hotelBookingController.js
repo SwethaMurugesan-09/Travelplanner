@@ -1,6 +1,6 @@
 const HotelBooking = require('../models/HotelBooking');
 const SpecificPlace = require('../models/SpecificPlace');
-const User = require('../models/Users'); // Assuming you have a User model
+const Users = require('../models/Users');
 
 const HotelBookingController = {
 
@@ -10,13 +10,11 @@ const HotelBookingController = {
       console.log(email, hotelId);
       console.log('Request Body:', req.body);
 
-      // Find user by email
-      const user = await User.findOne({ email });
+      const user = await Users.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      // Validate hotel existence within SpecificPlace
       const specificPlace = await SpecificPlace.findOne({ "hotels._id": hotelId });
       if (!specificPlace) {
         return res.status(404).json({ message: 'Hotel not found' });

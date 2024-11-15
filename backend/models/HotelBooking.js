@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const bookingsSchema = new mongoose.Schema({
     email: {  
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',  
         required: true,
     },
     hotelId: {  
