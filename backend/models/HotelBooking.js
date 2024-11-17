@@ -1,18 +1,12 @@
 const mongoose = require('mongoose');
 
 const hotelBookingSchema = new mongoose.Schema({
-    email: { type: String, required: true },
-    hotelId: { type: mongoose.Types.ObjectId, required: true },
-    bookingDate: { type: Date, required: true },
-    numberOfPersons: { type: Number, required: true },
-    numberOfDays: { type: Number, required: true },
-    personsDetails: [
-        {
-            age: { type: Number, required: true },
-            foodPreference: { type: String, required: true },
-            acPreference: { type: String, required: true }
-        }
-    ]
+  email: { type: String, required: true },
+  hotelId: { type: mongoose.Schema.Types.ObjectId, ref: 'SpecificPlace', required: true }, // Reference to SpecificPlace
+  bookingDate: { type: Date, required: true },
+  numberOfPersons: { type: Number, required: true },
+  numberOfDays: { type: Number, required: true },
+  personsDetails: [{ age: Number, foodPreference: String, acPreference: Boolean }]
 });
 
 module.exports = mongoose.model('HotelBooking', hotelBookingSchema);

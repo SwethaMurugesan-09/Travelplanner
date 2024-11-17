@@ -56,22 +56,28 @@ const HotelBookingController = {
     }
   },
 
-  async getBookingsByUser(req, res) {
+
+  async getBookingsByEmail(req, res) {
     try {
-      const email = req.user.email;
-
+      const { email } = req.query;
+      if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+      }
+  
       const bookings = await HotelBooking.find({ email }).populate('hotelId');
-
+  
+      console.log("Bookings with populated hotelId:", bookings);
+  
       if (!bookings.length) {
         return res.status(404).json({ message: 'No bookings found' });
       }
-
+  
       return res.status(200).json({ bookings });
     } catch (error) {
       return res.status(500).json({ message: 'Server error', error: error.message });
     }
-  },
-
+  }
+,  
   async updateBookingStatus(req, res) {
     try {
       const bookingId = req.params.id;
