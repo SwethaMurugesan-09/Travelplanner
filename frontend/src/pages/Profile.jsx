@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import '../components/PersonDetials/PersonDetials'
 const Profile = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [updatedUser, setUpdatedUser] = useState({
@@ -41,6 +43,10 @@ const Profile = () => {
         const { name, value } = e.target;
         setUpdatedUser({ ...updatedUser, [name]: value });
     };
+
+    const bookedHotels=()=>{
+        navigate(`/PersonDetials`);
+    }
 
     const updateProfile = async () => {
         const token = localStorage.getItem('auth-token');
@@ -131,6 +137,9 @@ const Profile = () => {
                     <button onClick={() => setIsEditing(true)}>Edit</button>
                 </>
             )}
+            <div>
+                <button onClick={bookedHotels}>View your booked hotels</button>
+            </div>
         </div>
     );
 };

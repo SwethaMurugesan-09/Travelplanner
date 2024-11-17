@@ -15,6 +15,7 @@ import { AuthProvider } from './context/AuthContext';
 import Packages from './pages/Packages';
 import Profile from './pages/Profile';
 import HotelBookingForm from './components/Booking/Booking';
+import PersonDetials from './components/PersonDetials/PersonDetials';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/booking' element={<HotelBookingForm/>}/>
+          <Route path='/personDetials' element={<PersonDetials/>}/>
         </Route>
       </Routes>
     </>

@@ -13,9 +13,15 @@ const HotelBookingForm = ({ hotelId, email }) => {
       setMessage('Please fill all the required fields.');
       return;
     }
-
+    const isValidFoodPreference = personsDetails.every(person => 
+      ['Veg', 'Non-Veg'].includes(person.foodPreference)
+    );
+    if (!isValidFoodPreference) {
+      setMessage('Invalid or missing food preference for one or more persons');
+      return;
+    }  
     const formData = {
-      email, // Include email in booking data
+      email, 
       hotelId,
       numberOfPersons,
       numberOfDays,
@@ -24,7 +30,7 @@ const HotelBookingForm = ({ hotelId, email }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/book-hotel/', {
+      const response = await fetch('http://localhost:5000/api/book-hotel', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +40,7 @@ const HotelBookingForm = ({ hotelId, email }) => {
       });
 
       const data = await response.json();
-      if (data.success) {
+      if (data.message === 'Booking successful') {
         setMessage('Booking successful!');
       } else {
         setMessage(data.message || 'Error during booking');
@@ -55,15 +61,16 @@ const HotelBookingForm = ({ hotelId, email }) => {
     }));
     setPersonsDetails(newPersonsDetails);
   };
-
   const handlePersonDetailChange = (index, field, value) => {
     const updatedDetails = [...personsDetails];
     if (field === 'age' && value !== '' && (isNaN(value) || value <= 0)) {
-      return; // Prevent invalid age
+      return; 
     }
-    updatedDetails[index][field] = value;
+    // Parse age as a number
+    updatedDetails[index][field] = field === 'age' ? parseInt(value, 10) : value;
     setPersonsDetails(updatedDetails);
-  };
+};
+
 
   return (
     <form onSubmit={handleSubmit}>

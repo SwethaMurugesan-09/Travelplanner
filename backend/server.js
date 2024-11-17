@@ -10,7 +10,7 @@ const fs = require('fs');
 const userRouter = require('./routes/userRoutes');
 const specificRoutes = require('./routes/specificRoutes');
 const packagesrouter = require('./routes/packagesRoutes');
-const hotelrouter = require('./routes/hotelBookingRoutes');
+const hotelrouter = require('./routes/hotelRouter');
 
 dotenv.config();
 
@@ -34,6 +34,7 @@ const corsOption = {
   credentials: true,
 }
 
+connectDB();
 
 app.use(cors());
 
@@ -84,11 +85,7 @@ app.post("/upload", upload.single('Travel'), (req, res) => {
   });
 });
 
-
-
 app.use('/images', express.static('upload/images'));
-
-connectDB();
 
 app.use((err, req, res, next) => {
   console.error(err.stack); 
@@ -100,7 +97,6 @@ app.use('/api', placesRoutes );
 app.use('/signup' ,userRouter);
 app.use('/api/specificplace', specificRoutes);
 app.use('/api', hotelrouter);
-
 app.use('/package',packagesrouter);
 
 const PORT = process.env.PORT || 5000;

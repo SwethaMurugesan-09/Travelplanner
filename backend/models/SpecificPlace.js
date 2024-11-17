@@ -9,28 +9,27 @@ const specificPlaceSchema = mongoose.Schema(
     },
     hotels: [
       {
-        name: { type: String, required: true }, // Hotel name
-        imageUrl: [{ type: String, required: true }], // Hotel image
-        ratings: { type: Number, required: true }, // Hotel ratings
-        details:{type:String,required:true},
-        amount:{type:String,required:true},
+        name: { type: String, required: true },
+        imageUrl: [{ type: String, required: true }],
+        ratings: { type: Number, required: true },
+        details: { type: String, required: true },
+        amount: { type: String, required: true },
       },
     ],
     tripplaces: [
       {
-        name: { type: String, required: true }, // Trip place name
-        imageUrl:[ { type: String, required: true }], // Trip place image
-        details: { type: String, required: true }, // Trip place details
-        details:{type:String,required:true},
+        name: { type: String, required: true },
+        imageUrl: [{ type: String, required: true }],
+        details: { type: String, required: true },
       },
     ],
     restaurant: [
       {
-        name: { type: String, required: true }, // Restaurant name
-        imageUrl: [{ type: String, required: true }], // Restaurant image
-        ratings: { type: Number, required: true }, // Restaurant ratings
-        details:{type:String,required:true},
-        amount:{type:String,required:true},
+        name: { type: String, required: true },
+        imageUrl: [{ type: String, required: true }],
+        ratings: { type: Number, required: true },
+        details: { type: String, required: true },
+        amount: { type: String, required: true },
       },
     ],
   },

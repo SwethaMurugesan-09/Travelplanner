@@ -1,51 +1,46 @@
+const mongoose = require('mongoose');
 const HotelBooking = require('../models/HotelBooking');
 const SpecificPlace = require('../models/SpecificPlace');
 const Users = require('../models/Users');
 
+
 const HotelBookingController = {
-
   async createBooking(req, res) {
-    try {
-      const { email, hotelId, bookingDate, numberOfPersons, numberOfDays, personsDetails } = req.body;
-      console.log(email, hotelId);
-      console.log('Request Body:', req.body);
-
-      const user = await Users.findOne({ email });
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+      try {
+          // Log the entire request body for debugging
+          console.log("Received Request Body:", req.body);
+  
+          // Extract fields from request body
+          const { email, hotelId, bookingDate, numberOfPersons, numberOfDays, personsDetails } = req.body;
+  
+          // Check for required fields
+          if (!email || !hotelId || !bookingDate || !numberOfPersons || !numberOfDays) {
+              return res.status(400).json({ message: 'Missing required fields' });
+          }
+  
+          // Proceed with creating the booking
+          const hotelIdObject = new mongoose.Types.ObjectId(hotelId);
+  
+          const newBooking = new HotelBooking({
+              email,
+              hotelId: hotelIdObject,
+              bookingDate,
+              numberOfPersons,
+              numberOfDays,
+              personsDetails,
+              // foodPreference,
+              // acPreference
+          });
+  
+          // Save the booking to the database
+          await newBooking.save();
+          res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
+      } catch (error) {
+          console.error("Error:", error);
+          res.status(500).json({ message: 'Server error', error: error.message });
       }
-
-      const specificPlace = await SpecificPlace.findOne({ "hotels._id": hotelId });
-      if (!specificPlace) {
-        return res.status(404).json({ message: 'Hotel not found' });
-      }
-
-      // Find the hotel details to calculate the total amount
-      const hotel = specificPlace.hotels.id(hotelId);
-      const totalAmount = hotel.amount * numberOfDays * numberOfPersons;
-
-      // Create new booking
-      const newBooking = new HotelBooking({
-        email,  // Use email in the booking model
-        hotelId,
-        bookingDate,
-        numberOfPersons,
-        numberOfDays,
-        personsDetails,
-        amountPaid: totalAmount,
-        status: 'pending',
-      });
-
-      // Save booking to the database
-      await newBooking.save();
-
-      return res.status(201).json({ message: 'Booking successful', booking: newBooking });
-    } catch (error) {
-      return res.status(500).json({ message: 'Server error', error: error.message });
-    }
   },
 
-  // Get booking by ID
   async getBookingById(req, res) {
     try {
       const bookingId = req.params.id;
@@ -61,10 +56,9 @@ const HotelBookingController = {
     }
   },
 
-  // Get all bookings for a specific user by email
   async getBookingsByUser(req, res) {
     try {
-      const email = req.user.email; // Assuming user is authenticated with a middleware
+      const email = req.user.email;
 
       const bookings = await HotelBooking.find({ email }).populate('hotelId');
 
@@ -78,7 +72,6 @@ const HotelBookingController = {
     }
   },
 
-  // Update booking status
   async updateBookingStatus(req, res) {
     try {
       const bookingId = req.params.id;
@@ -104,7 +97,6 @@ const HotelBookingController = {
     }
   },
 
-  // Delete a booking by ID
   async deleteBooking(req, res) {
     try {
       const bookingId = req.params.id;
