@@ -16,7 +16,6 @@ const createPackage = async (req, res) => {
             rate
         });
 
-        // Save the package to the database
         const savedPackage = await newPackage.save();
         res.status(201).json(savedPackage);
     } catch (error) {

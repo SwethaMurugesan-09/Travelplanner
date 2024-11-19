@@ -1,5 +1,7 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
+const Packages = require('../models/Packages'); // Adjust path as necessary
+const mongoose = require('mongoose');
 
 exports.signup = async (req, res) => {
     try {
@@ -147,5 +149,37 @@ exports.addToFavourites = async (req, res) => {
       console.error('Error adding package to favourites:', err.message);
       res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
+  };
+  
+
+  exports.getFavourites = async (req, res) => {
+      try {
+          const { userId } = req.query;
+  
+          // Validate userId
+          if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+              return res.status(400).json({ 
+                  success: false, 
+                  message: 'Invalid or missing userId' 
+              });
+          }
+  
+          const user = await User.findById(userId).populate('favourites');
+          if (!user) {
+              return res.status(404).json({ 
+                  success: false, 
+                  message: 'User not found' 
+              });
+          }
+  
+          res.json({ success: true, packages: user.favourites });
+      } catch (error) {
+          console.error('Error fetching favourites:', error);
+          res.status(500).json({ 
+              success: false, 
+              message: 'Internal Server Error', 
+              error: error.message 
+          });
+      }
   };
   

@@ -25,10 +25,12 @@ const usersSchema = new mongoose.Schema({
     dob:{
         type: String,
     }, 
-    favourites: {
-        type: [String],
+    favourites: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Packages',
         default: [],
-      },
+    }],
+    
 }, {
     timestamps: true, 
 });

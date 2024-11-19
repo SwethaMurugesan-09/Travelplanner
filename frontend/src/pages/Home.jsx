@@ -72,8 +72,8 @@ function Home() {
       alert(response.data.message);
       alert("added");
     } catch (error) {
-      console.error('Error adding to favourites:', error.response?.data || error.message);
-      alert('There was an error adding this package to favourites.');
+      // console.error('Error adding to favourites:', error.response?.data || error.message);
+      alert('Already in favourites');
     }
   };
 
