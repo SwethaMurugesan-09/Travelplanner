@@ -6,7 +6,7 @@ const hotelBookingSchema = new mongoose.Schema({
   bookingDate: { type: Date, required: true },
   numberOfPersons: { type: Number, required: true },
   numberOfDays: { type: Number, required: true },
-  personsDetails: [{ age: Number, foodPreference: String, acPreference: Boolean }]
+  personsDetails: [{ age: Number, foodPreference: String, acPreference: String}]
 });
 
 module.exports = mongoose.model('HotelBooking', hotelBookingSchema);
