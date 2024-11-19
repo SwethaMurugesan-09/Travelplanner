@@ -64,21 +64,27 @@ const HotelBookingForm = ({ hotelId, email }) => {
   const handlePersonDetailChange = (index, field, value) => {
     const updatedDetails = [...personsDetails];
     if (field === 'age' && value !== '' && (isNaN(value) || value <= 0)) {
-      return; 
+      return;
     }
-    // Parse age as a number
+    // For 'age', ensure the value is parsed as a number, otherwise keep it as a string
     updatedDetails[index][field] = field === 'age' ? parseInt(value, 10) : value;
     setPersonsDetails(updatedDetails);
-};
+  };
 
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Book Hotel</h2>
       <label>
-        Booking Date:
-        <input type="date" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
-      </label>
+  Booking Date:
+  <input
+    type="date"
+    value={bookingDate}
+    onChange={(e) => setBookingDate(e.target.value)}
+    min={new Date().toISOString().split('T')[0]} // Set the min date to today
+  />
+</label>
+
 
       <label>
         Number of Persons:
@@ -93,6 +99,15 @@ const HotelBookingForm = ({ hotelId, email }) => {
       {personsDetails.map((person, index) => (
         <div key={index} style={{ marginBottom: '15px' }}>
           <h3>Person {index + 1} Details</h3>
+          <label>
+            Name:
+            <input
+              type="text" // Change input type to 'text' for name
+              value={person.name}
+              onChange={(e) => handlePersonDetailChange(index, 'name', e.target.value)}
+            />
+
+          </label>
           <label>
             Age:
             <input
