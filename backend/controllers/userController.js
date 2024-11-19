@@ -1,10 +1,8 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
-// Signup Controller
 exports.signup = async (req, res) => {
     try {
-        // Check if user already exists
         let existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
             return res.status(400).json({ success: false, errors: 'User already exists' });
@@ -18,6 +16,7 @@ exports.signup = async (req, res) => {
             age:req.body.age,
             dob:req.body.dob,
             number:req.body.number,
+            favourites: [], 
         });
 
         // Save the new user to the database
@@ -122,3 +121,31 @@ exports.updateUserProfile = async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
     }
 };
+
+exports.addToFavourites = async (req, res) => {
+    const { userId, packageId } = req.body;
+  
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+  
+      if (!user.favourites) {
+        user.favourites = [];
+      }
+  
+      if (user.favourites.includes(packageId)) {
+        return res.status(400).json({ success: false, message: 'Package already in favourites' });
+      }
+  
+      user.favourites.push(packageId);
+      await user.save();
+  
+      res.json({ success: true, message: 'Package added to favourites' });
+    } catch (err) {
+      console.error('Error adding package to favourites:', err.message);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  };
+  

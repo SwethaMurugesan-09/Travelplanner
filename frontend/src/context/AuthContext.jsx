@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       if (data.success) {
         setEmail(data.user.email);
-        setUserId(data.user.id);
+        setUserId(data.user._id);
         return data.user;
       }
     } catch (error) {

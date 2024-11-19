@@ -24,20 +24,11 @@ const usersSchema = new mongoose.Schema({
     },
     dob:{
         type: String,
-    },
-    hotels: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'SpecificPlace',
-        }
-    ],
-    bookingId: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'HotelBooking',
-        }
-    ]    
-    
+    }, 
+    favourites: {
+        type: [String],
+        default: [],
+      },
 }, {
     timestamps: true, 
 });

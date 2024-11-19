@@ -117,16 +117,13 @@ const HotelBookingController = {
         return res.status(400).json({ message: 'Invalid person index' });
       }
   
-      // Remove the specific person from the personsDetails array
       booking.personsDetails.splice(personIndex, 1);
   
-      // If no persons remain, delete the entire booking
       if (booking.personsDetails.length === 0) {
         await HotelBooking.findByIdAndDelete(bookingId);
         return res.status(200).json({ message: 'Booking deleted as no persons are left' });
       }
   
-      // Save the updated booking
       await booking.save();
   
       return res.status(200).json({ message: 'Person removed from booking successfully', booking });
@@ -149,7 +146,7 @@ const HotelBookingController = {
       res.status(500).json({ message: 'Server error', error: error.message });
     }
   }
-  
+
 };
 
 module.exports = HotelBookingController;

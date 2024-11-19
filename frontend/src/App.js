@@ -8,7 +8,7 @@ import Explore from './pages/Explore';
 import Hotels from './pages/Hotels';
 import Restaurants from './pages/Restaurants';
 import TripPlaces from './pages/TripPlaces';
-import Contact from './components/Contact/Contact';
+import Favourites from './components/Favourites/Favourites';
 import About from './components/About/About';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
@@ -46,7 +46,7 @@ const AppRoutes = () => {
         <Route path="/tripplaces/:id" element={<TripPlaces />} />
         <Route path="/packages/:id" element={<Packages />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/favourites" element={<Favourites />} />
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/booking' element={<HotelBookingForm/>}/>
           <Route path='/personDetials' element={<PersonDetials/>}/>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
-import img1 from '../components/travel_assets/login-img.jpg';
-import img2 from '../components/travel_assets/signup-img.jpg';
 import { useAuth } from '../context/AuthContext'; // Ensure you import useAuth
 
 const Login = () => {
@@ -120,18 +118,12 @@ const Login = () => {
                                         Don't have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up here</a>
                                     </span>
                                 </div>
-                                <div className="login-img">
-                                    <img src={img2} alt="Login visual" />
-                                </div>
                             </div>
                         </>
                     ) : (
                         <>
                             <h2 className="login-heading">Sign Up</h2>
                             <div className="login-container">
-                                <div className="login-img">
-                                    <img src={img1} alt="Signup visual" />
-                                </div>
                                 <div className="login-content">
                                     <form onSubmit={handleSignup}>
                                         <div className="login-inputGroup">
