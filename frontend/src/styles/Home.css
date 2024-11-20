@@ -2,17 +2,85 @@
   padding: 3rem 5%;
 }
 
-.background-image{
+.background-image {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  position: relative;
 }
+
+.Home-container {
+  margin-top: 1.3rem;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 20%;
+  left: 12%;
+  transform: translateX(-50%);
+  color: rgb(34, 34, 34);
+  text-align: center;
+  color:#044D56;
+}
+.overlay-content1 {
+  position: absolute;
+  top: 68%;
+  left: 21.5%;
+  transform: translateX(-50%);
+  color: rgb(34, 34, 34);
+  max-width: 500px;
+}
+.overlay-content h4 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.overlay-content p {
+  font-size: 16px;
+  margin: 5px 0 0;
+}
+
+.form-content {
+  margin-top: 20px;
+  position: absolute;
+  top: 68%;
+  left: 13%;
+  height: 60px;
+  transform: translateX(-50%);
+  color: rgb(34, 34, 34);
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-content button {
+  padding: 10px;
+  background-color: #07D2D8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 42px;
+  margin-top: -8px;
+}
+
+.form-content button:hover {
+  background-color: #081729;
+}
+
 
 /* .background-image {
   width: 100%;
@@ -23,7 +91,7 @@
   z-index: 1;
 } */
 
-
+/* 
 
 .home-form-text{
   color: #000000;
@@ -50,7 +118,7 @@
 
 .form-overlay button:hover {
   background-color: #081729;
-}
+} */
 .famous-places-grid {
   display: flex;
   flex-direction: row;
@@ -143,10 +211,27 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .home-package-button{
-  background-color: #ffd900;
+  /* background-color: #ffd900; */
+  background-color: #07D2D8;
   padding: 7px 30px; 
    border: none;
    border-radius: 0.3rem;
    margin-bottom: 20px;
    margin-left: 15px;
+}
+.home-package-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.home-package-button1{
+  /* background-color: #ffd900; */
+  background-color: #081729;
+  color: aliceblue;
+  padding: 7px 30px; 
+   border: none;
+   border-radius: 0.3rem;
+   margin-bottom: 20px;
+   margin-right: 9px;
 }

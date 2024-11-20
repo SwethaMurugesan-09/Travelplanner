@@ -1,129 +1,95 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* font-family: 'Poppins', sans-serif;  */
-}
-
-/* Page Background */
-.auth-total-container {
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #e9ecef;
-  padding: 20px;
-}
-
-/* Main Container */
-.auth-container {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Modern shadow for depth */
-  max-width: 400px;
   width: 100%;
-  padding: 40px;
-  transition: transform 0.3s ease;
+  height: 130vh; /* Full viewport height */
+  background-image: url('../components/travel_assets/loginimg1.jpg'); /* Use your image path */
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents repeating */
 }
 
-.auth-container:hover {
-  transform: translateY(-5px); /* Subtle lift effect on hover */
-}
 
-.authContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.login-container{
+  margin-left: 700px;
 }
-
-.login-heading {
+.login-heading{
+  margin-top: 30px;
   text-align: center;
-  font-size: 1.8rem;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 20px;
+  color: #007bff;
 }
-
-/* Form Elements */
+.login-heading1{
+  margin-top: 80px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #007bff;
+}
 .login-inputGroup {
-  width: 100%;
   margin-bottom: 20px;
 }
 
 .login-label {
-  font-size: 0.9rem;
-  color: #6c757d;
-  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
   display: block;
-  font-weight: 500;
+  margin-bottom: 8px; 
 }
 
 .login-input {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background-color: #f8f9fa;
+  padding: 10px 15px; 
+  font-size: 14px;
+  border: 1px solid #ccc; 
+  border-radius: 5px; /* Rounded input edges */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
 }
 
 .login-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
   outline: none;
+  border-color: #007bff; /* Highlight border on focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
 }
 
-/* Button Styles */
 .login-button {
-  background-color: #007bff;
-  color: #fff;
+  width: 50%;
+  margin-left: 60px;
+  margin-bottom: 20px;
+  padding: 12px 20px; /* Button size */
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* White text */
+  background-color: #007bff; /* Primary blue */
   border: none;
-  padding: 12px;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  width: 100%;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth effects */
 }
 
 .login-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+  background-color: #007bff;
+  cursor: not-allowed; 
 }
 
-.login-button:hover:enabled {
-  background-color: #0056b3;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+.login-button:hover:not(:disabled) {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
 }
 
-/* Footer Links */
 .login-footer {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin-top: 15px;
+  margin-top: 20px; /* Space above the footer */
   text-align: center;
+  font-size: 14px;
+  color: #666; /* Medium gray */
 }
 
 .login-footer a {
-  color: #007bff;
+  color: #007bff; /* Match button color */
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
+  font-weight: bold;
 }
 
 .login-footer a:hover {
-  color: #0056b3;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .auth-container {
-    padding: 20px;
-  }
-
-  .login-heading {
-    font-size: 1.5rem;
-  }
+  text-decoration: underline; /* Underline on hover */
 }

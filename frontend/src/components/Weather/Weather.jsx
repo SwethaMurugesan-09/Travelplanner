@@ -5,7 +5,7 @@ import rain from '../travel_assets/heavy-rain.png';
 import sunny from '../travel_assets/sunny.png';
 import cloudy from '../travel_assets/cloudy.png';
 import snowy from '../travel_assets/snowy.png';
-import weatherBackground from '../travel_assets/weather-background.jpg';const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
+import weatherBackground from '../travel_assets/weather.jpg';const KEY = "eb6e9c2e1c2f566a14b671788daf3355";
 const Weather = ({ city: initialCity, days: initialDays }) => {
     const [city, setCity] = useState(initialCity || "");
     const [days, setDays] = useState(initialDays || 1);

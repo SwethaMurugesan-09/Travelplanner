@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Footer.css';
 import { FaInstagram, FaLinkedin } from "react-icons/fa6";
-
+import img from '../travel_assets/footer.jpg'
 const Footer = () => {
   const [scrolled, setScrolled] = useState(false);
 

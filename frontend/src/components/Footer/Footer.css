@@ -1,16 +1,21 @@
-.footer{
+.footer {
     display: flex;
     flex-direction: row;
-    background-color: rgb(246, 246, 246);
+    background-color: #f7f7f7;    /* background-image: url('../travel_assets/footer.jpg'); Add the image URL */
+    background-size: cover; /* Makes the background cover the entire footer */
+    background-position: center; /* Centers the image */
     gap: 200px;
-    margin-bottom: 10px;
     max-height: 500px;
 }
+
 .footer-service{
     display: flex;
     flex-direction: column;
     margin: 40px;
     max-width: 500px;
+}
+.footer-service h2{
+    color: #07D2D8;
 }
 .footer-content{
     display: flex;
@@ -18,6 +23,30 @@
     margin: 40px;
     max-width:300px;
     margin-left: 100px;
+}
+.footer-content h2{
+    color: #07D2D8;
+}
+.footer-contact h2{
+    color: #07D2D8;
+}
+.footer-contact p{
+    margin-top: 13px;
+    color: #081729;
+    font-weight:800px;
+    font-size: 18px;
+}
+.footer-content p{
+    margin-top: 13px;
+    color: #081729;
+    font-weight:800px;
+    font-size: 18px;
+}
+.service{
+    margin-top: 13px;
+    color: #081729;
+    font-weight:800px;
+    font-size: 18px;
 }
 .footer-contact{
     margin: 40px;

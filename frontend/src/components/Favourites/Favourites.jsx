@@ -46,9 +46,10 @@ const Favourites = () => {
     return (
         <>
             <div className="favourites-page-container">
-                <Navbar />
+                <Navbar /><div>
+                    <h3 className='fav-txt'>Your Favourite</h3></div>
                 <div className="favourites-content">
-                    <h3>Your Favourite Packages</h3>
+                    
                     {isLoading ? (
                         <p>Loading your favourites...</p>
                     ) : favouritePackages.length > 0 ? (

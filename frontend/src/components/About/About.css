@@ -13,25 +13,31 @@
 .about-travey-img img{
     width: 500px;
     height: auto;
+    margin-top: -70px;
+    margin-bottom: 80px;
 }
 .about-travey-text{
     margin-bottom: 80px;
 }
 .about-container h2{
     margin-bottom: 20px;
+    /* color: #07D2D8; */
+    font-size: 34px;
+    font-weight:bolder;
 }
+
 .about-travey-text h2{
     margin-bottom: 20px;
 }
 .about-container span{
-    color: #e0be00;
+ color: #081729;
     font-size: 18px;
     font-weight: bold;
   /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4); Shadow effect */
 
 }
 .about-travey-text span{
-    color:#e0be00;
+    color: #081729;
     font-size: 18px;
     font-weight: bold;
 }

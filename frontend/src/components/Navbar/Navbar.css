@@ -2,7 +2,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 60px !important;
+  padding: 3px 60px !important;
   background: transparent; /* Transparent when at the top of the page */
   z-index: 3;
   position: fixed !important;

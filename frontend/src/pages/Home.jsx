@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import '../styles/Home.css';
-import home from '../components/travel_assets/image2.jpg';
+import home from '../components/travel_assets/home.jpg';
 
 function Home() {
   const { isAuthenticated, userId } = useAuth(); // Access AuthContext
@@ -115,97 +115,86 @@ function Home() {
   return (
     <>
       <div className="Home-container">
-        <div
-          className="form-image-container background-image"
-          style={{ backgroundImage: `url(${home})` }}
-        >
-          <Navbar />
-          <form onSubmit={handleSubmit} className="form-overlay">
-            <h1 className="home-form-text">Explore the world</h1>
-            <label>
-              <select
-                name="state"
-                value={formData.state}
-                onChange={handleInputChange}
-              >
-                <option value="">Select State</option>
-                {states.length > 0 ? (
-                  states.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))
-                ) : (
-                  <option disabled>Loading states...</option>
-                )}
-              </select>
-            </label>
-
-            <button type="submit">Start Journey</button>
-          </form>
-        </div>
-
-        <div className="famous-places">
-          <h3>Famous Places</h3>
-          <div className="famous-places-grid">
-            {randomStates.length > 0 ? (
-              randomStates.map((state) => (
-                <div
-                  key={state._id}
-                  className="famous-place-card"
-                  onClick={() => handlePlaceClick(state)}
-                >
-                  <img src={state.imageUrl} alt={state._id} />
-                  <div className="famous-place-flex">
-                    <h4>{state._id}</h4>
-                    <div className="home-ratings">{renderStars(state.ratings)}</div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>Loading recommended places...</p>
-            )}
-          </div>
-        </div>
-
-        <div className="home-packages">
-          <h3>Packages</h3>
-          <div className="home-packages-container">
-            {packages.length > 0 ? (
-              packages.map((pkg) => (
-                <div key={pkg._id} className="home-package-card">
-                  <img
-                    src={pkg.imageUrl[0]}
-                    alt={pkg.city}
-                    className="home-package-img"
-                  />
-                  <div className="home-package-details">
-                    <div>
-                      <h4 className="home-package-city">{pkg.city}</h4>
-                    </div>
-                    <div>
-                      <h4 className="home-package-rate">₹{pkg.rate}</h4>
-                    </div>
-                  </div>
-                  <button
-                    className="home-package-button"
-                    onClick={() => handleExploreClick(pkg._id)}
-                  >
-                    Explore
-                  </button>
-                  <button onClick={() => handleAddToFavourites(pkg._id)}>
-                    Add to Favourites
-                  </button>
-                </div>
-              ))
-            ) : (
-              <p>Loading packages...</p>
-            )}
-          </div>
-        </div>
+  <div className="form-image-container background-image" style={{ backgroundImage: `url(${home})` }}>
+    <Navbar />
+    <div className="overlay-content">
+      <h4>Welcome to Travey!!</h4>
       </div>
 
-      <Footer />
+      <div  className="overlay-content1">
+      <p>Discover your next adventure with us, where every journey is crafted for unforgettable memories. From serene beaches to majestic mountains, let us take you on the ultimate travel experience.</p>
+    </div>
+  </div>
+
+  <form onSubmit={handleSubmit} className="form-content">
+    <label>
+      <select name="state" value={formData.state} onChange={handleInputChange}>
+        <option value="">Select State</option>
+        {states.length > 0 ? (
+          states.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))
+        ) : (
+          <option disabled>Loading states...</option>
+        )}
+      </select>
+    </label>
+    <button type="submit">Start Journey</button>
+  </form>
+
+  <div className="famous-places">
+    <h3>Famous Places</h3>
+    <div className="famous-places-grid">
+      {randomStates.length > 0 ? (
+        randomStates.map((state) => (
+          <div key={state._id} className="famous-place-card" onClick={() => handlePlaceClick(state)}>
+            <img src={state.imageUrl} alt={state._id} />
+            <div className="famous-place-flex">
+              <h4>{state._id}</h4>
+              <div className="home-ratings">{renderStars(state.ratings)}</div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>Loading recommended places...</p>
+      )}
+    </div>
+  </div>
+
+  <div className="home-packages">
+    <h3>Packages</h3>
+    <div className="home-packages-container">
+      {packages.length > 0 ? (
+        packages.map((pkg) => (
+          <div key={pkg._id} className="home-package-card">
+            <img src={pkg.imageUrl[0]} alt={pkg.city} className="home-package-img" />
+            <div className="home-package-details">
+              <div>
+                <h4 className="home-package-city">{pkg.city}</h4>
+              </div>
+              <div>
+                <h4 className="home-package-rate">₹{pkg.rate}</h4>
+              </div>
+            </div>
+            <div className='home-package-btn'>
+            <button className="home-package-button" onClick={() => handleExploreClick(pkg._id)}>
+              Explore
+            </button>
+            <button className="home-package-button1" onClick={() => handleAddToFavourites(pkg._id)}>Add to Favo</button>
+          </div>
+          </div>
+        ))
+      ) : (
+        <p>Loading packages...</p>
+      )}
+    </div>
+  </div>
+
+  <Footer />
+</div>
+
     </>
   );
 }

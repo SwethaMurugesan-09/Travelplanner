@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { useAuth } from '../context/AuthContext'; // Ensure you import useAuth
-
+import Navbar from '../components/Navbar/Navbar';
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
@@ -80,12 +80,15 @@ const Login = () => {
 
     return (
         <div className="auth-total-container">
+            <div className="login-navbar">
+                <Navbar/>
+            </div>
             <div className="auth-container">
                 <div className="authContainer">
                     {isLogin ? (
                         <>
-                            <h2 className="login-heading">Login</h2>
                             <div className="login-container">
+                            <h2 className="login-heading">Login</h2>
                                 <div className="login-content">
                                     <form onSubmit={handleLogin}>
                                         <div className="login-inputGroup">
@@ -122,8 +125,9 @@ const Login = () => {
                         </>
                     ) : (
                         <>
-                            <h2 className="login-heading">Sign Up</h2>
+                            
                             <div className="login-container">
+                                <h2 className="login-heading1">Sign Up</h2>
                                 <div className="login-content">
                                     <form onSubmit={handleSignup}>
                                         <div className="login-inputGroup">
