@@ -20,8 +20,9 @@
 .explore-sidebar h3 {
   margin-top: 20px;
   margin-bottom: 20px;
-  font-size: 20px;
-  color: #6446b8;
+  font-size: 18px;
+  color: #07D2D8;
+  font-weight: bold;
 }
 
 .explore-sidebar input[type="checkbox"] {
@@ -66,6 +67,7 @@
 .explore-hotel-name {
   text-align: center;
   margin-bottom: 15px;
+  color: #07D2D8;
 }
 
 .explore-trip-name {

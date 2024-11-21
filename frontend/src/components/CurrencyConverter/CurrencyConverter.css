@@ -9,10 +9,11 @@
     margin-top: -50px;
   }
   .converter h1 {
-    text-align: center;
-    color: #333;
+    font-weight: bolder;
     font-size: 30px;
-    margin-bottom: 30px;
+    color:#081729 ;
+    text-align: center;
+   font-family: math;
   }
   
   /* Input Section */
@@ -55,7 +56,7 @@
     margin-left: 85px;
     padding: 12px;
     margin-top: 20px;
-    background-color: #c99510;
+    background-color: #07D2D8;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -65,7 +66,7 @@
   }
   
   .convert-btn:hover {
-    background-color: #dfd43c;
+    background-color: #07D2D8;
   }
   
   .converter-text {

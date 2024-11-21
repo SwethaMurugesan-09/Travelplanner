@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import Navbar from '../Navbar/Navbar';
+import './PersonDetials.css';
 
 const PersonDetails = () => {
   const { email } = useAuth();
@@ -45,10 +47,8 @@ const PersonDetails = () => {
     fetchBookings();
   }, [email]);
 
-  // Function to delete a specific person from a booking
   const deletePerson = async (bookingId, personIndex) => {
     const userConfirmation = window.confirm("Are you sure you want to remove this person from the booking?");
-
     if (userConfirmation) {
       try {
         const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}/person/${personIndex}`, {
@@ -60,9 +60,8 @@ const PersonDetails = () => {
 
         if (response.ok) {
           alert("Person removed from booking successfully!");
-          // Refresh bookings after deletion
-          setBookings(prevBookings => 
-            prevBookings.map(booking => 
+          setBookings(prevBookings =>
+            prevBookings.map(booking =>
               booking._id === bookingId
                 ? { ...booking, personsDetails: booking.personsDetails.filter((_, index) => index !== personIndex) }
                 : booking
@@ -76,15 +75,11 @@ const PersonDetails = () => {
         console.error("Error removing person from booking:", error);
         alert("An error occurred while removing the person from the booking.");
       }
-    } else {
-      alert("Person removal cancelled.");
     }
   };
 
-  // Function to delete the entire booking
   const deleteBooking = async (bookingId) => {
     const userConfirmation = window.confirm("Are you sure you want to cancel the entire booking?");
-
     if (userConfirmation) {
       try {
         const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
@@ -96,7 +91,6 @@ const PersonDetails = () => {
 
         if (response.ok) {
           alert("Booking cancelled successfully!");
-          // Refresh bookings after deletion
           setBookings(prevBookings => prevBookings.filter(booking => booking._id !== bookingId));
         } else {
           const errorData = await response.json();
@@ -106,8 +100,6 @@ const PersonDetails = () => {
         console.error("Error cancelling booking:", error);
         alert("An error occurred while cancelling the booking.");
       }
-    } else {
-      alert("Booking cancellation cancelled.");
     }
   };
 
@@ -117,33 +109,50 @@ const PersonDetails = () => {
 
   return (
     <div>
-      <h2>Your Bookings</h2>
-      {error && <p>{error}</p>}
-      
-      {bookings.length > 0 ? (
-        <ul>
-          {bookings.map((booking) => (
-            <li key={booking._id}>
-              <h3>Hotel: {booking.hotelName}</h3>
-              <p>Booking Date: {new Date(booking.bookingDate).toLocaleDateString()}</p>
-              <p>Number of Persons: {booking.numberOfPersons}</p>
-              <p>Number of Days: {booking.numberOfDays}</p>
-              <p>Persons Details:</p>
-              <ul>
-                {booking.personsDetails.map((person, index) => (
-                  <li key={index}>
-                    Age: {person.age}, Food Preference: {person.foodPreference}, AC Preference: {person.acPreference}
-                    <button onClick={() => deletePerson(booking._id, index)}>Remove Person</button>
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => deleteBooking(booking._id)}>Cancel Entire Booking</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No bookings found.</p>
-      )}
+      <div className="person-navbar">
+        <Navbar />
+      </div>
+      <div className="person-container">
+        <h2>Your Bookings</h2>
+        <div className="person-details">
+          {error && <p className="error-message">{error}</p>}
+          {bookings.length > 0 ? (
+            bookings.map((booking) => (
+              <div key={booking._id} className="person-booking">
+                <h5> {booking.hotelName} Hotel</h5>
+                <p>Booked Date: {new Date(booking.bookingDate).toLocaleDateString()}</p>
+                <p>Number of Persons: {booking.numberOfPersons}</p>
+                <p>Number of Days: {booking.numberOfDays}</p>
+                <div className="person-details-list">
+                  <h6>Persons Details</h6>
+                  {booking.personsDetails.map((person, index) => (
+                    <div key={index} className="person-detail-item">
+                      <p>Name: {person.name}, Age: {person.age}, Food Preference: {person.foodPreference}, AC Preference: {person.acPreference}</p>
+                      <button
+                        className="person-remove-button"
+                        onClick={() => deletePerson(booking._id, index)}
+                      >
+                        Remove 
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="person-actions">
+                  <button
+                    className="person-delete-button"
+                    onClick={() => deleteBooking(booking._id)}
+                  >
+                    Cancel Entire Booking
+                  </button>
+                </div>
+
+              </div>
+            ))
+          ) : (
+            <p>No bookings found.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

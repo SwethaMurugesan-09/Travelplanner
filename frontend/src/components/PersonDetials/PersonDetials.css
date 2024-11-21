@@ -1,0 +1,94 @@
+.person-navbar{
+    margin-bottom: 80px;
+}
+.person-container h2{
+    font-weight: bolder;
+    font-size: 40px;
+    margin-bottom: 60px;
+    color:#081729 ;
+    text-align: center;
+   font-family: math;
+
+}
+.person-details {
+    display: flex;
+    flex-direction:row; /* Stack bookings vertically */
+    gap: 100px; 
+    padding: 3*0px;
+    margin-top: -30px!important;
+    margin:  0px 10%;
+}
+
+.person-booking {
+    border: 1px solid #ccc; /* Light border around each booking */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.person-booking h5 {
+    font-weight: bolder;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    color: #081729 !important;
+    font-family: math;
+    text-align: center;
+}
+
+.person-remove-button {
+    background-color: #081729;
+    border: none;
+    margin-top: -36px;
+    padding: 7px 20px;
+    color: aliceblue;
+    border-radius: 5px !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+.person-remove-button:hover {
+    background-color: #074b6c; 
+}
+
+.person-delete-button {
+    margin-top: -15px;
+    background-color: #07D2D8;
+    border: none;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px !important;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.person-delete-button:hover {
+    background-color: #049ca0; /* Darker shade on hover */
+}
+
+
+.person-details-list {
+    display: flex;
+    flex-direction: column; /* Stack person details vertically */
+    gap: 10px;
+}
+.person-details-list h6{
+    font-size: 24px;
+    color:#081729 ;
+    text-align: center;
+    margin-bottom: -2px;
+}
+
+.person-actions {
+    display: flex;
+    justify-content: flex-start; /* Align the cancel button to the left */
+    margin-top: 15px; /* Add some space above the cancel button */
+}
+
+.person-detail-item {
+    display: flex;
+    justify-content: space-between; /* Space between person detail and remove button */
+    align-items: center;
+}

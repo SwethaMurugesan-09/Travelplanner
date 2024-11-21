@@ -4,6 +4,9 @@ const usersSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    image:{
+        type:String,
+    },
     email: {
         type: String,
         required: [true, 'Email is required'],

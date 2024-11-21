@@ -1,7 +1,7 @@
 .footer {
     display: flex;
     flex-direction: row;
-    background-color: #f7f7f7;    /* background-image: url('../travel_assets/footer.jpg'); Add the image URL */
+    background-color: #f8f8f8;    /* background-image: url('../travel_assets/footer.jpg'); Add the image URL */
     background-size: cover; /* Makes the background cover the entire footer */
     background-position: center; /* Centers the image */
     gap: 200px;

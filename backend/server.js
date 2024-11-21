@@ -56,9 +56,9 @@ const storage = multer.diskStorage({
     cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
   }
 });
-
 const upload = multer({
   storage: storage,
+  limits: { fileSize: 500 * 1024 * 1024 }, 
   fileFilter: (req, file, cb) => {
     const isImage = file.mimetype.startsWith("image/");
 
@@ -69,6 +69,7 @@ const upload = multer({
     }
   }
 });
+
 
 
 app.post("/upload", upload.single('Travel'), (req, res) => {
@@ -86,6 +87,44 @@ app.post("/upload", upload.single('Travel'), (req, res) => {
 });
 
 app.use('/images', express.static('upload/images'));
+
+
+
+app.post('/upload/profile-image', upload.single('Users'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
+    }
+
+    const userId = req.body.userId;
+    if (!userId) {
+      return res.status(400).json({ success: false, message: 'User ID is required' });
+    }
+
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    user.image = imageUrl;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Profile image uploaded successfully',
+      image_url: imageUrl,
+    });
+  } catch (err) {
+    console.error('Error uploading profile image:', err);
+    if (err instanceof multer.MulterError && err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ success: false, message: 'File size is too large' });
+    }
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack); 

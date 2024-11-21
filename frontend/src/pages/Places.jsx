@@ -80,7 +80,7 @@ const Places = () => {
         <FontAwesomeIcon
           key={i}
           icon={faStar}
-          color={i <= rating ? '#FFD700' : '#ccc'}
+          color={i <= rating ? '#081729' : '#ccc'}
         />
       );
     }

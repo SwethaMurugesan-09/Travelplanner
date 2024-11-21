@@ -1,0 +1,141 @@
+.profile-navbar{
+    margin-bottom: 80px;
+}
+.profile-container1 h2{
+    font-weight: bolder;
+  font-size: 40px;
+  color:#081729 ;
+  text-align: center;
+ font-family: math;
+}
+.profile-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 50px auto;
+    margin-top: 40px !important;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-image-section {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+.profile-image-section img {
+    max-width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.profile-img{
+    margin-bottom: 20px;
+    max-width: 120px;
+}
+
+.profile-image-section h2 {
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-image-section button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #07D2D8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.profile-image-section button:hover {
+    background-color: #07D2D8;
+}
+
+.profile-details-section {
+    flex: 2;
+    padding-left: 20px;
+    margin-top: 40px;
+}
+
+.profile-details-section h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #081729;
+}
+
+.profile-details-section p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #444;
+}
+
+.profile-details-section strong {
+    color: #081729;
+}
+
+.profile-details-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-details-section input[type="file"] {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.profile-details-section .buttons {
+    margin-top: 20px;
+}
+
+.profile-details-section .buttons button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    font-size: 17px;
+    background-color: #07D2D8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-details-section .buttons button:hover {
+    background-color: #07D2D8;
+}
+
+.image-preview img {
+    margin-top: 10px;
+    max-width: 120px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .profile-image-section {
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .profile-details-section {
+        padding-left: 0;
+    }
+}

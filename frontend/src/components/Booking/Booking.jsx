@@ -29,7 +29,6 @@ const Booking = () => {
 
   return (
     <div>
-      <h1>Hotel Booking</h1>
       <HotelBookingForm hotelId={hotel} email={email} />
     </div>
   );

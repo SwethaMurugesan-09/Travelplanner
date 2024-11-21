@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './HotelBooking.css';
+import Navbar from '../Navbar/Navbar';
 
 const HotelBookingForm = ({ hotelId, email }) => {
   const [numberOfPersons, setNumberOfPersons] = useState(1);
@@ -13,15 +15,17 @@ const HotelBookingForm = ({ hotelId, email }) => {
       setMessage('Please fill all the required fields.');
       return;
     }
-    const isValidFoodPreference = personsDetails.every(person => 
+
+    const isValidFoodPreference = personsDetails.every(person =>
       ['Veg', 'Non-Veg'].includes(person.foodPreference)
     );
     if (!isValidFoodPreference) {
       setMessage('Invalid or missing food preference for one or more persons');
       return;
-    }  
+    }
+
     const formData = {
-      email, 
+      email,
       hotelId,
       numberOfPersons,
       numberOfDays,
@@ -61,100 +65,108 @@ const HotelBookingForm = ({ hotelId, email }) => {
     }));
     setPersonsDetails(newPersonsDetails);
   };
+
   const handlePersonDetailChange = (index, field, value) => {
     const updatedDetails = [...personsDetails];
     if (field === 'age' && value !== '' && (isNaN(value) || value <= 0)) {
       return;
     }
-    // For 'age', ensure the value is parsed as a number, otherwise keep it as a string
     updatedDetails[index][field] = field === 'age' ? parseInt(value, 10) : value;
     setPersonsDetails(updatedDetails);
   };
 
-
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Book Hotel</h2>
-      <label>
-  Booking Date:
-  <input
-    type="date"
-    value={bookingDate}
-    onChange={(e) => setBookingDate(e.target.value)}
-    min={new Date().toISOString().split('T')[0]} // Set the min date to today
-  />
-</label>
+    <div className="hotelbooking-main">
+      <div className="hotelbooking-navbar">
+        <Navbar />
+      </div>
+
+      <div className="hotelbooking-container">
+  <form onSubmit={handleSubmit} className="hotelbooking-form">
+    <h2 className="hotelbooking-title">Book the Hotel</h2>
+    <label className="hotelbooking-label">
+      Booking Date:
+      <input
+        type="date"
+        value={bookingDate}
+        onChange={(e) => setBookingDate(e.target.value)}
+        min={new Date().toISOString().split('T')[0]}
+        className="hotelbooking-input"
+      />
+    </label>
+    <label className="hotelbooking-label">
+      Number of Persons:
+      <input
+        type="number"
+        value={numberOfPersons}
+        onChange={handleNumberOfPersonsChange}
+        min="1"
+        className="hotelbooking-input"
+      />
+    </label>
+    {personsDetails.map((person, index) => (
+      <div key={index} className="hotelbooking-person-details">
+        <h3 className="hotelbooking-person-title">Person {index + 1} Details</h3>
+        <label className="hotelbooking-label">
+          Name:
+          <input
+            type="text"
+            value={person.name}
+            onChange={(e) => handlePersonDetailChange(index, 'name', e.target.value)}
+            className="hotelbooking-input"
+          />
+        </label>
+        <label className="hotelbooking-label">
+          Age:
+          <input
+            type="number"
+            value={person.age}
+            onChange={(e) => handlePersonDetailChange(index, 'age', e.target.value)}
+            min="1"
+            className="hotelbooking-input"
+          />
+        </label>
+        <label className="hotelbooking-label">
+          Food Preference:
+          <select
+            value={person.foodPreference}
+            onChange={(e) => handlePersonDetailChange(index, 'foodPreference', e.target.value)}
+            className="hotelbooking-input"
+          >
+            <option value="Veg">Veg</option>
+            <option value="Non-Veg">Non-Veg</option>
+          </select>
+        </label>
+        <label className="hotelbooking-label">
+          AC Preference:
+          <select
+            value={person.acPreference}
+            onChange={(e) => handlePersonDetailChange(index, 'acPreference', e.target.value)}
+            className="hotelbooking-input"
+          >
+            <option value="AC">AC</option>
+            <option value="Non-AC">Non-AC</option>
+          </select>
+        </label>
+      </div>
+    ))}
+    <label className="hotelbooking-label">
+      Number of Days:
+      <input
+        type="number"
+        value={numberOfDays}
+        onChange={(e) => setNumberOfDays(e.target.value)}
+        min="1"
+        className="hotelbooking-input"
+      />
+    </label>
+    <button type="submit" className="hotelbooking-button">Book Now</button>
+    <p className="hotelbooking-message">{message}</p>
+  </form>
+</div>
 
 
-      <label>
-        Number of Persons:
-        <input
-          type="number"
-          value={numberOfPersons}
-          onChange={handleNumberOfPersonsChange}
-          min="1"
-        />
-      </label>
-
-      {personsDetails.map((person, index) => (
-        <div key={index} style={{ marginBottom: '15px' }}>
-          <h3>Person {index + 1} Details</h3>
-          <label>
-            Name:
-            <input
-              type="text" // Change input type to 'text' for name
-              value={person.name}
-              onChange={(e) => handlePersonDetailChange(index, 'name', e.target.value)}
-            />
-
-          </label>
-          <label>
-            Age:
-            <input
-              type="number"
-              value={person.age}
-              onChange={(e) => handlePersonDetailChange(index, 'age', e.target.value)}
-              min="1"
-            />
-          </label>
-
-          <label>
-            Food Preference:
-            <select
-              value={person.foodPreference}
-              onChange={(e) => handlePersonDetailChange(index, 'foodPreference', e.target.value)}
-            >
-              <option value="Veg">Veg</option>
-              <option value="Non-Veg">Non-Veg</option>
-            </select>
-          </label>
-
-          <label>
-            AC Preference:
-            <select
-              value={person.acPreference}
-              onChange={(e) => handlePersonDetailChange(index, 'acPreference', e.target.value)}
-            >
-              <option value="AC">AC</option>
-              <option value="Non-AC">Non-AC</option>
-            </select>
-          </label>
-        </div>
-      ))}
-
-      <label>
-        Number of Days:
-        <input
-          type="number"
-          value={numberOfDays}
-          onChange={(e) => setNumberOfDays(e.target.value)}
-          min="1"
-        />
-      </label>
-
-      <button type="submit">Book Now</button>
-      <p>{message}</p>
-    </form>
+    </div>
   );
 };
 

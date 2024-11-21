@@ -20,7 +20,6 @@ const Weather = ({ city: initialCity, days: initialDays }) => {
                 setWeatherData(response.data);
             } catch (err) {
                 console.error('Error fetching data:', err);
-                alert('Error fetching data');
             } finally {
                 setLoading(false);
             }
@@ -49,7 +48,7 @@ const Weather = ({ city: initialCity, days: initialDays }) => {
                     {weatherData.list.map((day, index) => (
                         <div className="weather-output" key={index}>
                             <img src={getWeatherImage(day.weather[0].description)} alt={day.weather[0].description} />
-                            <h3>Day {index + 1}</h3>
+                            <h6>Day {index + 1}</h6>
                             <p><strong>Temperature:</strong> {day.main.temp}°C</p>
                             <p><strong>Weather:</strong> {day.weather[0].description}</p>
                         </div>

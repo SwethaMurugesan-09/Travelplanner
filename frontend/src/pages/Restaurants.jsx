@@ -6,6 +6,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carous
 import '../styles/Restaurants.css'; // Import your custom styles
 import Navbar from '../components/Navbar/Navbar';
 import CurrencyConverter from '../components/CurrencyConverter/CurrencyConverter';
+import Footer from '../components/Footer/Footer';
 
 const Restaurants = () => {
   const { id } = useParams(); // Get the restaurant ID from the URL
@@ -34,38 +35,56 @@ const Restaurants = () => {
   }
 
   return (
+    <div>
     <div className="restaurants-total-container">
       <Navbar />
       <h2>{restaurant.name}</h2>
 
       <div className="restaurants-container">
-      <div className="restaurants-container-flex">
-        {restaurant.imageUrl && restaurant.imageUrl.length > 0 && (
-      <Carousel 
-               showThumbs={true} 
-           showArrows={false} 
-             autoPlay 
-               interval={2000} 
-             infiniteLoop 
-                              showStatus={false} 
-            dynamicHeight={true}>
-            {restaurant.imageUrl.map((image, index) => (
-              <div key={index}>
-                <img src={image} alt={`Restaurant ${index}`} className="restaurants-img" />
-              </div>
-            ))}
-          </Carousel>
-        )}
+        <div className="restaurants-container-flex">
+          {restaurant.imageUrl && restaurant.imageUrl.length > 0 && (
+            <Carousel
+              showThumbs={false} // Disable thumbnail previews
+              showArrows={false}
+              autoPlay
+              interval={2000}
+              infiniteLoop
+              showStatus={false}
+              dynamicHeight={true}
+            >
+              {restaurant.imageUrl.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt={`Restaurant ${index}`} className="restaurants-img" />
+                </div>
+              ))}
+            </Carousel>
+          )}
           <div className="restaurants-details">
-        <p><span>Ratings: </span>{restaurant.ratings}</p>
-        <p><span>Details: </span>{restaurant.details}</p>
-        </div>
+            <div className="restaurants-details-flex">
+              <div>
+                <p>
+                  <span>Amount:</span> ₹{restaurant.amount}
+                </p>
+              </div>
+              <div>
+                <p>
+                  <span>Ratings:</span> {restaurant.ratings}
+                </p>
+              </div>
+            </div>
+            <p>
+              <span>Details:</span> {restaurant.details}
+            </p>
+          </div>
         </div>
         <div className="restaurants-currency">
-        <CurrencyConverter/>
+          <CurrencyConverter />
+        </div>
       </div>
-      </div>
-    </div>
+      
+    </div><div>
+        <Footer/>
+      </div></div>
   );
 };
 
