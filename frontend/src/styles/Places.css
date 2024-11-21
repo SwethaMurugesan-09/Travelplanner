@@ -52,8 +52,12 @@
 }
 
 .places-container h1 {
+  font-weight: bolder;
+  font-size: 33px;
+  color:#081729 ;
   text-align: center;
-  margin-top: 80px;
+ font-family: math;
+   margin-top: 80px;
 }
 
 .places-search-input {

@@ -13,9 +13,6 @@ const Favourites = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('userId:', userId);
-        console.log('isAuthenticated:', isAuthenticated);
-
         if (!isAuthenticated) {
             alert('Please log in to view your favourites.');
             navigate('/login'); // Redirect to login page if not authenticated
@@ -39,6 +36,21 @@ const Favourites = () => {
         if (userId) fetchFavourites(); // Fetch favourites only if userId is available
     }, [userId, isAuthenticated, navigate]);
 
+    const handleRemoveFavourite = async (packageId) => {
+        try {
+            const response = await axios.delete('http://localhost:5000/signup/removefromfav', {
+                data: { userId, packageId }, // Use `data` to send the body with a DELETE request
+            });
+            alert(response.data.message); // Optional: show success message
+            // Remove the package from the local state
+            setFavouritePackages(prev => prev.filter(pkg => pkg._id !== packageId));
+        } catch (error) {
+            console.error('Error removing package from favourites:', error.response?.data || error.message);
+            alert('Failed to remove package from favourites.');
+        }
+    };
+    
+
     const handleExploreClick = (packageId) => {
         navigate(`/packages/${packageId}`);
     };
@@ -46,10 +58,11 @@ const Favourites = () => {
     return (
         <>
             <div className="favourites-page-container">
-                <Navbar /><div>
-                    <h3 className='fav-txt'>Your Favourite</h3></div>
+                <Navbar />
+                <div>
+                    <h3 className="fav-txt">Your Favourites</h3>
+                </div>
                 <div className="favourites-content">
-                    
                     {isLoading ? (
                         <p>Loading your favourites...</p>
                     ) : favouritePackages.length > 0 ? (
@@ -71,12 +84,21 @@ const Favourites = () => {
                                         <h4>{pkg.city || 'Unknown City'}</h4>
                                         <h4>₹{pkg.rate || 'N/A'}</h4>
                                     </div>
+
+
+                                    <div className="favourite-remove-fav">
+                                    <div>
                                     <button
                                         className="favourites-button"
                                         onClick={() => handleExploreClick(pkg._id)}
                                     >
                                         Explore
                                     </button>
+                                    </div>
+                                    <div>
+                                    <button className='fav-remove' onClick={() => handleRemoveFavourite(pkg._id)}>Remove Favourite</button>
+
+                                    </div></div>
                                 </div>
                             ))}
                         </div>

@@ -1,160 +1,162 @@
-.explore-total-container {
-  min-height: 100vh;
-}
+  .explore-total-container {
+    min-height: 100vh;
+  }
 
-.explore-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 90px;
-}
-
-.explore-sidebar {
-  width: 250px;
-  padding: 50px;
-  border-right: 1px solid #ddd;
-  height: calc(100vh - 90px); /* Full height sidebar minus margin */
-  /* position: fixed; */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.explore-sidebar h3 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #07D2D8;
-  font-weight: bold;
-}
-
-.explore-sidebar input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-.explore-sidebar div {
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.explore-main-content {
-  flex: 1;
-  padding: 20px;
-  margin-left: 20px;
-  overflow-y: auto;
-}
-
-.explore-main-content h3 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding-left: 35%;
-}
-
-.explore-main-content h2 {
-  font-size: 22px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-  color: #000000;
-}
-
-.explore-item-card {
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
-  text-decoration: none !important; 
-}
-
-.explore-hotel-name {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #07D2D8;
-}
-
-.explore-trip-name {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.explore-item-image {
-  width: 375px;
-  height: 220px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.explore-main-hotels-container,
-.explore-main-restaurants-container,
-.explore-main-tripplaces-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.explore-main-hotels,
-.explore-main-restaurants,
-.explore-main-tripplaces {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  overflow-x: hidden; /* Hide the scrollbar */
-  padding-bottom: 15px;
-  scroll-behavior: smooth;
-  width: 100%;
-}
-.explore-info{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0px 10px 0px 10px;
-}
-.scroll-button {
-  font-size: 2rem;
-  color: #6b6b6b;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.scroll-button.left {
-  left: -20px;
-}
-
-.scroll-button.right {
-  right: -20px;
-}
-
-.explore-main-content .star {
-  color: yellow; 
-  font-size: 25px; 
-}
-
-.star {
-  color: rgb(19, 19, 19); 
-  font-size: 1.2em; 
-  border-radius: 6px;}
-
-@media (max-width: 768px) {
   .explore-container {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    margin-top: 90px;
   }
 
   .explore-sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    border-right: none;
+    width: 250px;
+    padding: 50px;
+    border-right: 1px solid #ddd;
+    height: calc(100vh - 90px); /* Full height sidebar minus margin */
+    /* position: fixed; */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .explore-sidebar h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #07D2D8;
+    font-weight: bold;
+  }
+
+  .explore-sidebar input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .explore-sidebar div {
+    margin-bottom: 15px;
+    font-size: 16px;
   }
 
   .explore-main-content {
-    padding: 10px;
-    margin-left: 0;
+    flex: 1;
+    padding: 20px;
+    margin-left: 20px;
+    overflow-y: auto;
+  }
+
+  .explore-main-content h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:#081729 ;
+  font-family: math;
+    padding-left: 30%;
+  }
+
+  .explore-main-content h2 {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    color:#081729 ;
+  }
+
+  .explore-item-card {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none !important; 
+  }
+
+  .explore-hotel-name {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #07D2D8;
+  }
+
+  .explore-trip-name {
+    text-align: center;
+    margin-bottom: 20px;
   }
 
   .explore-item-image {
-    width: 100%;
-    height: auto;
+    width: 375px;
+    height: 220px;
+    object-fit: cover;
     margin-bottom: 10px;
   }
-}
+
+  .explore-main-hotels-container,
+  .explore-main-restaurants-container,
+  .explore-main-tripplaces-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .explore-main-hotels,
+  .explore-main-restaurants,
+  .explore-main-tripplaces {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    overflow-x: hidden; /* Hide the scrollbar */
+    padding-bottom: 15px;
+    scroll-behavior: smooth;
+    width: 100%;
+  }
+  .explore-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 10px 0px 10px;
+  }
+  .scroll-button {
+    font-size: 2rem;
+    color: #6b6b6b;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .scroll-button.left {
+    left: -20px;
+  }
+
+  .scroll-button.right {
+    right: -20px;
+  }
+
+  .explore-main-content .star {
+    color: yellow; 
+    font-size: 25px; 
+  }
+
+  .star {
+    color: rgb(19, 19, 19); 
+    font-size: 1.2em; 
+    border-radius: 6px;}
+
+  @media (max-width: 768px) {
+    .explore-container {
+      flex-direction: column;
+    }
+
+    .explore-sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      border-right: none;
+    }
+
+    .explore-main-content {
+      padding: 10px;
+      margin-left: 0;
+    }
+
+    .explore-item-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  }

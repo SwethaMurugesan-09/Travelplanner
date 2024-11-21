@@ -177,3 +177,33 @@ exports.addToFavourites = async (req, res) => {
       }
   };
   
+  exports.removeFromFavourites = async (req, res) => {
+    const { userId, packageId } = req.body;
+
+    try {
+        // Validate user ID and package ID
+        if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(packageId)) {
+            return res.status(400).json({ success: false, message: 'Invalid userId or packageId' });
+        }
+
+        // Find the user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Check if the package is in the user's favorites
+        if (!user.favourites.includes(packageId)) {
+            return res.status(400).json({ success: false, message: 'Package not found in favourites' });
+        }
+
+        // Remove the package from favorites
+        user.favourites = user.favourites.filter(id => id.toString() !== packageId);
+        await user.save();
+
+        res.json({ success: true, message: 'Package removed from favourites' });
+    } catch (err) {
+        console.error('Error removing package from favourites:', err.message);
+        res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+    }
+};

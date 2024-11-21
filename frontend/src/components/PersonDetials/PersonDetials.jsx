@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../Navbar/Navbar';
 import './PersonDetials.css';
+import Footer from '../Footer/Footer';
 
 const PersonDetails = () => {
   const { email } = useAuth();
@@ -152,6 +153,9 @@ const PersonDetails = () => {
             <p>No bookings found.</p>
           )}
         </div>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
