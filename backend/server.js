@@ -16,23 +16,23 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-    'https://travey.onrender.com/',
-  ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
-]
+// const allowedOrigins = [
+//     'https://travey.onrender.com/',
+//   ...Array.from({length: 65535}, (_, i)=>`http://localhost:${i+1}`)
+// ]
 
-const corsOption = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    }
-    else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET','POST','PUT','DELETE'],
-  credentials: true,
-}
+// const corsOption = {
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     }
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: ['GET','POST','PUT','DELETE'],
+//   credentials: true,
+// }
 
 connectDB();
 
